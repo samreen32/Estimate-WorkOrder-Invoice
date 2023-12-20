@@ -1031,3 +1031,14 @@ a:focus {
   background-color: #1f9fc6;
   padding: 1.5%;
 }
+
+
+.check-row {
+  font-size: 18px;
+}
+
+.check-main-table {
+  border: 7px grey solid;
+  box-shadow: 3px 2px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+}

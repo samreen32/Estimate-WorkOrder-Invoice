@@ -40,11 +40,11 @@ export default function Invoicemain() {
                     role="button"
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
-                    style={{color: "#FFF"}}
+                    style={{ color: "#FFF" }}
                   >
                     <b style={{ color: "#FFF" }}>Generate Invoice</b>
                   </Link>
-                  <ul class="dropdown-menu" style={{ height: "90px" }}>
+                  <ul class="dropdown-menu" style={{ height: "120px" }}>
                     <li>
                       <Link className="dropdown-item" to="/estimate_invoice">
                         Estimate Invoice
@@ -53,6 +53,11 @@ export default function Invoicemain() {
                     <li>
                       <Link className="dropdown-item" to="/work_order_invoice">
                         Work Order Requisition
+                      </Link>
+                    </li>
+                    <li>
+                      <Link className="dropdown-item" to="/check">
+                        Gegenrate Check
                       </Link>
                     </li>
                   </ul>
