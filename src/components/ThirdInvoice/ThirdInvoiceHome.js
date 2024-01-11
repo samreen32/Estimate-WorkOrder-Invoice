@@ -151,7 +151,7 @@ function ThirdInvoiceHome() {
             <i class="fa fa-chevron-left fa-1x" aria-hidden="true"></i>
           </span>
           <span style={{ cursor: "pointer", marginLeft: "40%" }}>
-            Please Enter your Invoice details
+          <b>Please Enter your Invoice details</b>  
           </span>
         </h2>
       </div>

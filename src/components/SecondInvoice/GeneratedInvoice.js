@@ -1,29 +1,33 @@
-import React from "react";
-import jsPDF from "jspdf";
-import html2canvas from "html2canvas";
+import React, { useRef } from "react";
 import { UserLogin } from "../../context/AuthContext";
 import logo from "../../assets/img/logoSecond.png";
 import { useNavigate } from "react-router";
+import generatePDF from "react-to-pdf";
 
 function GeneratedInvoice() {
   let navigate = useNavigate();
-  const { estimateData } = UserLogin();
+  const { estimateData, setEstimateData, generateRandomNumber } = UserLogin();
+  const targetRef = useRef();
 
-  const generatePDF = () => {
-    const pdf = new jsPDF();
-    const pdfContent = document.getElementById("pdf");
-    const contentHeight = pdfContent.clientHeight;
-    const contentWidth = pdfContent.clientWidth;
-    pdf.internal.pageSize.height = contentHeight;
-    pdf.internal.pageSize.width = contentWidth;
-
-    html2canvas(pdfContent, { scale: 1 }).then((canvas) => {
-      const contentDataURL = canvas.toDataURL("image/png");
-      pdf.addImage(contentDataURL, "PNG", 0, 0, contentWidth, contentHeight);
-      pdf.save(`invoice.pdf`);
-      pdf.internal.pageSize.height = 297;
-      pdf.internal.pageSize.width = 210;
+  const handleGenerateNew = () => {
+    setEstimateData({
+      estimate_no: generateRandomNumber(),
+      estimate_address: [""],
+      estimate_date: "",
+      estimate_project: "",
+      items: [
+        {
+          estimate_item: "",
+          estimate_description: "",
+          estimate_quantity: "",
+          estimate_cost: "",
+        },
+      ],
+      estimate_invoice: {
+        estimate_total: null,
+      },
     });
+    navigate("/estimate_invoice");
   };
 
   return (
@@ -31,12 +35,7 @@ function GeneratedInvoice() {
       <div className="row">
         <div className="col-4" style={{ marginTop: "40px" }}>
           <div className="add-container">
-            <span
-              onClick={() => {
-                navigate("/estimate_invoice");
-              }}
-              className="new-invoice-btn"
-            >
+            <span onClick={handleGenerateNew} className="new-invoice-btn">
               Generate new invoice
             </span>
           </div>
@@ -45,13 +44,20 @@ function GeneratedInvoice() {
           <h2>Invoice Details</h2>
         </div>
         <div className="col-4" style={{ marginTop: "50px" }}>
-          <span onClick={generatePDF} className="new-invoice-btn">
+          <span
+            onClick={() => generatePDF(targetRef, { filename: "invoice.pdf" })}
+            className="new-invoice-btn"
+          >
             Save the PDF
           </span>
         </div>
       </div>
 
-      <div className="container px-5 py-5" style={{ width: "100%" }}>
+      <div
+        className="container px-5 py-5"
+        style={{ width: "100%" }}
+        ref={targetRef}
+      >
         <div id="pdf">
           <div className="row">
             <div className="invoice-first-div col-10 px-5">

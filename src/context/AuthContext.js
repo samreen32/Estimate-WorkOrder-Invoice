@@ -53,6 +53,7 @@ const AuthProvider = ({ children }) => {
         estimateData,
         setEstimateData,
         workOrderData,
+        generateRandomNumber,
         setWorkOrderData,
       }}
     >

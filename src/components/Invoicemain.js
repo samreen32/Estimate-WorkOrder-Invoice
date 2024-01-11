@@ -57,7 +57,7 @@ export default function Invoicemain() {
                     </li>
                     <li>
                       <Link className="dropdown-item" to="/check">
-                        Gegenrate Check
+                        Generate Check
                       </Link>
                     </li>
                   </ul>

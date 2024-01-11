@@ -9,7 +9,7 @@ import { CREATE_ESTIMATE_INVOICE } from "../../Auth_API";
 
 function HomeForm() {
   let navigate = useNavigate();
-  const { estimateData, setEstimateData } = UserLogin();
+  const { estimateData, setEstimateData, generateRandomNumber } = UserLogin();
   const [visibleAddressFields, setVisibleAddressFields] = useState(1);
   const [focusedField, setFocusedField] = useState(null);
 
@@ -133,6 +133,27 @@ function HomeForm() {
     }
   }, [focusedField]);
 
+  const handleGenerateNew = () => {
+    setEstimateData({
+      estimate_no: generateRandomNumber(),
+      estimate_address: [""],
+      estimate_date: "",
+      estimate_project: "",
+      items: [
+        {
+          estimate_item: "",
+          estimate_description: "",
+          estimate_quantity: "",
+          estimate_cost: "",
+        },
+      ],
+      estimate_invoice: {
+        estimate_total: null,
+      },
+    });
+    navigate("/");
+  };
+
   return (
     <div id="invoice-generated">
       <div className="row justify-content-center text-align-center">
@@ -140,15 +161,13 @@ function HomeForm() {
           <div style={{ display: "flex" }}>
             <h2>
               <span
-                onClick={() => {
-                  navigate("/");
-                }}
+                onClick={handleGenerateNew}
                 style={{ cursor: "pointer", marginLeft: "-40%" }}
               >
                 <i class="fa fa-chevron-left fa-1x" aria-hidden="true"></i>
               </span>
               <span style={{ cursor: "pointer", marginLeft: "40%" }}>
-                Please Enter your Invoice details
+              <b>Please Enter your Invoice details</b>  
               </span>
             </h2>
           </div>

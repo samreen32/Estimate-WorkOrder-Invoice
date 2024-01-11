@@ -1,36 +1,22 @@
-import React from "react";
+import React, { useRef } from "react";
 import checkLogo from "../../assets/img/checkLogo.png";
 import checkMemo from "../../assets/img/check_memo.png";
 import checkDesign from "../../assets/img/bg-card.png";
 import { useNavigate } from "react-router";
 import TextField from "@mui/material/TextField";
 import "./check.css";
-import jsPDF from "jspdf";
-import html2canvas from "html2canvas";
+import generatePDF from "react-to-pdf";
 
 export default function CheckHome() {
   let navigate = useNavigate();
+  const targetRef = useRef();
 
   const generateRandomNumber = () => {
     return Math.floor(10000 + Math.random() * 90000);
   };
 
-  const generatePDF = () => {
-    // window.print();
-    const pdf = new jsPDF();
-    const pdfContent = document.getElementById("pdf");
-    const contentHeight = pdfContent.clientHeight;
-    const contentWidth = pdfContent.clientWidth;
-    pdf.internal.pageSize.height = contentHeight;
-    pdf.internal.pageSize.width = contentWidth;
-
-    html2canvas(pdfContent, { scale: 1 }).then((canvas) => {
-      const contentDataURL = canvas.toDataURL("image/png");
-      pdf.addImage(contentDataURL, "PNG", 0, 0, contentWidth, contentHeight);
-      pdf.save(`check.pdf`);
-      pdf.internal.pageSize.height = 297;
-      pdf.internal.pageSize.width = 210;
-    });
+  const handleGenerateNew = () => {
+    navigate("/");
   };
 
   return (
@@ -42,9 +28,7 @@ export default function CheckHome() {
         >
           <div className="col-md-4 text-center">
             <span
-              onClick={() => {
-                navigate("/");
-              }}
+              onClick={handleGenerateNew}
               // style={{ cursor: "pointer", marginLeft: "-40%" }}
             >
               <i class="fa fa-chevron-left fa-2x" aria-hidden="true"></i>
@@ -52,12 +36,14 @@ export default function CheckHome() {
           </div>
           <div className="col-md-4 text-center">
             <span style={{ cursor: "pointer" }}>
-              <h4>Create a Check</h4>
+              <h1><b>Generate Check</b></h1>
             </span>
           </div>
           <div className="col-md-4 text-center">
             <button
-              onClick={generatePDF}
+              onClick={() =>
+                generatePDF(targetRef, { filename: "invoice.pdf" })
+              }
               style={{
                 cursor: "pointer",
                 fontSize: "18px",
@@ -72,7 +58,12 @@ export default function CheckHome() {
           </div>
         </div>
 
-        <div className="px-5 py-5" style={{ width: "100%" }} id="pdf">
+        <div
+          className="px-5 py-5"
+          style={{ width: "100%" }}
+          id="pdf"
+          ref={targetRef}
+        >
           <div class="body dark-background">
             <div class="outer-border">
               <div class="mid-border">
@@ -99,14 +90,14 @@ export default function CheckHome() {
                     <div className="col-md-2">
                       <img src={checkLogo} alt="check logo" width={180} />
                     </div>
-                    <div className="col-md-4">
+                    <div className="col-md-3">
                       <address className="mt-3">
                         <b>H FLOOR COVERING LLC</b> <br />
                         1148 BLAKES FIELD PL <br />
                         HENDERSON NV 89011
                       </address>
                     </div>
-                    <div className="col-md-5">
+                    <div className="col-md-4">
                       <address
                         className="mt-3 px-3"
                         style={{
@@ -119,9 +110,9 @@ export default function CheckHome() {
                         HENDERSON, NV 89014 <br /> 97-7751/3243
                       </address>
                     </div>
-                    <div className="col-md-1">
+                    <div className="col-md-3">
                       <b style={{ fontSize: "30px" }}>
-                        {generateRandomNumber()}
+                        {/* {generateRandomNumber()} */}
                       </b>
                     </div>
                   </div>

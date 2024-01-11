@@ -521,6 +521,7 @@ header
   .background-header .main-nav .nav li:last-child {
     color: #069;
   }
+
   .header-area .main-nav .nav li:nth-child(6),
   .background-header .main-nav .nav li:nth-child(6) {
     padding-right: 0px;
@@ -551,6 +552,7 @@ header
   }
   .header-area {
     background-color: #fff;
+    color: #191a20;
     padding: 0px 15px;
     height: 100px;
     box-shadow: none;
@@ -570,7 +572,7 @@ header
     overflow: hidden;
   }
   .header-area .main-nav .nav {
-    float: none;
+    float: none; 
     width: 100%;
     display: none;
     -webkit-transition: all 0s ease 0s;
@@ -980,7 +982,8 @@ responsive
 
 @media (max-width: 992px) {
   .header-area {
-    background-color: #fff;
+    background-color: #4b8ef1;
+
   }
   .main-banner:after {
     display: none;
