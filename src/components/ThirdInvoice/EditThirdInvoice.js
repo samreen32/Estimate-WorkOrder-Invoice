@@ -1,15 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { UserLogin } from "../../context/AuthContext";
 import logo from "../../assets/img/logoSecond.png";
 import TextField from "@mui/material/TextField";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import axios from "axios";
 import Swal from "sweetalert2";
-import { CREATE_WORKOUT_INVOICE } from "../../Auth_API";
+import {
+  GET_SPECIFIC_WORKOUT_INVOICE,
+  UPDATE_WORKOUT_INVOICE,
+} from "../../Auth_API";
+import generatePDF from "react-to-pdf";
 
-function ThirdInvoiceHome() {
+function EditThirdInvoice() {
   let navigate = useNavigate();
-  const { workOrderData, setWorkOrderData } = UserLogin();
+  const targetRef = useRef();
+  const { state } = useLocation();
+  const { invoiceId } = state;
+  const { workOrderUpdateData, setWorkOrderUpdateData } = UserLogin();
   const [visibleAddressFields, setVisibleAddressFields] = useState(1);
   const [visibleMaterialFields, setVisibleMaterialFields] = useState(1);
   const [focusedField, setFocusedField] = useState(null);
@@ -19,7 +26,7 @@ function ThirdInvoiceHome() {
   const handleInputChange = (index, e) => {
     const { name, value } = e?.target || {};
 
-    setWorkOrderData((prevData) => {
+    setWorkOrderUpdateData((prevData) => {
       if (index !== undefined) {
         const updatedItems = [...prevData.items];
         updatedItems[index] = {
@@ -71,32 +78,73 @@ function ThirdInvoiceHome() {
   };
 
   /* Endpoint integration */
-  const handleCreateInvoice = async () => {
-    try {
-      const response = await axios.post(
-        `${CREATE_WORKOUT_INVOICE}`,
-        workOrderData
-      );
-      console.log("Invoice created successfully:", response.data);
-      setWorkOrderData((prevData) => ({
-        ...prevData,
-        items: [],
-      }));
+  useEffect(() => {
+    const fetchInvoiceDetails = async () => {
+      try {
+        const response = await axios.get(
+          `${GET_SPECIFIC_WORKOUT_INVOICE}/${invoiceId}`
+        );
+        if (response.data.success) {
+          setWorkOrderUpdateData(response.data.invoice);
+          console.log(response.data.invoice);
+        } else {
+          console.error(response.data.message);
+        }
+      } catch (error) {
+        console.error(error.message);
+      }
+    };
+    fetchInvoiceDetails();
+  }, [invoiceId]);
 
-      navigate(`/generated_workout_invoice`);
-      Swal.fire({
-        icon: "success",
-        title: "Success...",
-        text: "Invoice Generated!",
-      });
-      return;
+  /* Update Endpoint integration */
+  const handleUpdateInvoice = async () => {
+    try {
+      const response = await axios.put(
+        `${UPDATE_WORKOUT_INVOICE}/${invoiceId}`,
+        workOrderUpdateData
+      );
+      if (response.data.success) {
+        navigate("/workout_report");
+        Swal.fire({
+          icon: "success",
+          title: "Success!",
+          text: "Invoice updated successfully.",
+        });
+        setWorkOrderUpdateData({
+          cust_id: "",
+          job_name: "",
+          phone: "",
+          work_date: "",
+          work_address: ["", "", ""],
+          city: "",
+          zip: "",
+          special_instruction: "",
+          material_desc: ["", "", ""],
+          tools: "",
+          labor: "",
+          sum_of: "",
+          contractor: "",
+          contractor_auth_sign: "",
+          contractor_date: "",
+          independent_contractor: "",
+          independent_contractor_auth_sign: "",
+          independent_contractor_date: "",
+        });
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: response.data.message || "Failed to update invoice.",
+        });
+      }
     } catch (error) {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "Failed to create invoice. Please try again later.",
+        text: "Failed to update invoice. Please try again later.",
       });
-      console.error("Failed to create invoice:", error.message);
+      console.error("Failed to update invoice:", error.message);
     }
   };
 
@@ -138,33 +186,63 @@ function ThirdInvoiceHome() {
     }
   }, [focusedField, focusedMaterialField]);
 
+  const handleGenerateNew = () => {
+    setWorkOrderUpdateData({
+      cust_id: "",
+      job_name: "",
+      phone: "",
+      work_date: "",
+      work_address: ["", "", ""],
+      city: "",
+      zip: "",
+      special_instruction: "",
+      material_desc: ["", "", ""],
+      tools: "",
+      labor: "",
+      sum_of: "",
+      contractor: "",
+      contractor_auth_sign: "",
+      contractor_date: "",
+      independent_contractor: "",
+      independent_contractor_auth_sign: "",
+      independent_contractor_date: "",
+    });
+    navigate("/workout_report");
+  };
+
   return (
     <div id="invoice-generated">
-      <div style={{ display: "flex" }}>
-        <h2>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          background: "transparent",
+        }}
+        className="container mt-5"
+      >
+        <span onClick={handleGenerateNew} style={{ cursor: "pointer" }}>
+          <i className="fa fa-chevron-left fa-2x" aria-hidden="true"></i>
+        </span>
+
+        <div style={{ display: "flex" }}>
+          <span onClick={handleUpdateInvoice} className="new-invoice-btn mx-3">
+            Update invoice
+          </span>
           <span
-            onClick={() => {
-              navigate("/");
-            }}
-            style={{ cursor: "pointer", marginLeft: "-40%" }}
+            onClick={() => generatePDF(targetRef, { filename: "invoice.pdf" })}
+            className="new-invoice-btn"
+            style={{ background: "gray" }}
           >
-            <i class="fa fa-chevron-left fa-1x" aria-hidden="true"></i>
+            Generate Print
           </span>
-          <span style={{ cursor: "pointer", marginLeft: "40%" }}>
-            <b>Please Enter your Invoice details</b>
-          </span>
-        </h2>
+        </div>
       </div>
+
       <div
         className="container px-5 py-5"
-        style={{ width: "100%", marginTop: "5%" }}
+        style={{ width: "100%", marginTop: "2%" }}
+        ref={targetRef}
       >
-        <i
-          onClick={handleCreateInvoice}
-          style={{ cursor: "pointer", marginLeft: "100%", marginBottom: "2%" }}
-          className="fa fa-chevron-right fa-2x"
-          aria-hidden="true"
-        ></i>
         <div
           className="row justify-content-center text-align-center"
           style={{ background: "#B31312" }}
@@ -189,7 +267,7 @@ function ThirdInvoiceHome() {
                 variant="standard"
                 name="cust_id"
                 style={{ width: "25%" }}
-                value={workOrderData?.cust_id || ""}
+                value={workOrderUpdateData?.cust_id || ""}
                 onChange={(e) => handleInputChange(undefined, e)}
               />
             </div>
@@ -203,7 +281,7 @@ function ThirdInvoiceHome() {
                   type="text"
                   variant="standard"
                   name="job_name"
-                  value={workOrderData?.job_name || ""}
+                  value={workOrderUpdateData?.job_name || ""}
                   onChange={(e) => handleInputChange(undefined, e)}
                 />
               </div>
@@ -215,7 +293,7 @@ function ThirdInvoiceHome() {
                   type="text"
                   variant="standard"
                   name="phone"
-                  value={workOrderData?.phone || ""}
+                  value={workOrderUpdateData?.phone || ""}
                   onChange={(e) => handleInputChange(undefined, e)}
                 />
               </div>
@@ -226,7 +304,7 @@ function ThirdInvoiceHome() {
                   type="date"
                   variant="standard"
                   name="work_date"
-                  value={workOrderData?.work_date || ""}
+                  value={workOrderUpdateData?.work_date || ""}
                   onChange={(e) => handleInputChange(undefined, e)}
                 />
               </div>
@@ -246,7 +324,8 @@ function ThirdInvoiceHome() {
                           name={`work_address_${fieldIndex}`}
                           style={{ width: "100%" }}
                           value={
-                            workOrderData.work_address[fieldIndex - 1] || ""
+                            workOrderUpdateData.work_address[fieldIndex - 1] ||
+                            ""
                           }
                           onChange={(e) => handleInputChange(undefined, e)}
                           onKeyDown={(e) =>
@@ -266,7 +345,7 @@ function ThirdInvoiceHome() {
                   type="text"
                   variant="standard"
                   name="city"
-                  value={workOrderData?.city || ""}
+                  value={workOrderUpdateData?.city || ""}
                   onChange={(e) => handleInputChange(undefined, e)}
                 />
               </div>
@@ -277,7 +356,7 @@ function ThirdInvoiceHome() {
                   type="text"
                   variant="standard"
                   name="zip"
-                  value={workOrderData?.zip || ""}
+                  value={workOrderUpdateData?.zip || ""}
                   onChange={(e) => handleInputChange(undefined, e)}
                 />
               </div>
@@ -293,7 +372,7 @@ function ThirdInvoiceHome() {
                   variant="standard"
                   name="special_instruction"
                   style={{ width: "100%" }}
-                  value={workOrderData?.special_instruction || ""}
+                  value={workOrderUpdateData?.special_instruction || ""}
                   onChange={(e) => handleInputChange(undefined, e)}
                 />
               </div>
@@ -323,7 +402,9 @@ function ThirdInvoiceHome() {
                       variant="standard"
                       name={`material_desc_${fieldIndex}`}
                       style={{ width: "60%" }}
-                      value={workOrderData.material_desc[fieldIndex - 1] || ""}
+                      value={
+                        workOrderUpdateData.material_desc[fieldIndex - 1] || ""
+                      }
                       onChange={(e) => handleInputChange(undefined, e)}
                       onKeyDown={(e) => handleMaterialEnterKey(e, fieldIndex)}
                     />
@@ -343,7 +424,7 @@ function ThirdInvoiceHome() {
               type="text"
               variant="standard"
               name="tools"
-              value={workOrderData?.tools || ""}
+              value={workOrderUpdateData?.tools || ""}
               style={{ width: "100%" }}
               onChange={(e) => handleInputChange(undefined, e)}
             />
@@ -356,7 +437,7 @@ function ThirdInvoiceHome() {
               type="text"
               variant="standard"
               name="labor"
-              value={workOrderData?.labor || ""}
+              value={workOrderUpdateData?.labor || ""}
               style={{ width: "100%" }}
               onChange={(e) => handleInputChange(undefined, e)}
             />
@@ -377,7 +458,7 @@ function ThirdInvoiceHome() {
               type="text"
               variant="standard"
               name="sum_of"
-              value={workOrderData?.sum_of || ""}
+              value={workOrderUpdateData?.sum_of || ""}
               style={{ width: "100%" }}
               onChange={(e) => handleInputChange(undefined, e)}
             />
@@ -421,7 +502,7 @@ function ThirdInvoiceHome() {
               type="text"
               variant="standard"
               name="contractor"
-              value={workOrderData?.contractor || ""}
+              value={workOrderUpdateData?.contractor || ""}
               style={{ width: "100%" }}
               onChange={(e) => handleInputChange(undefined, e)}
             />
@@ -434,7 +515,7 @@ function ThirdInvoiceHome() {
               type="text"
               variant="standard"
               name="independent_contractor"
-              value={workOrderData?.independent_contractor || ""}
+              value={workOrderUpdateData?.independent_contractor || ""}
               style={{ width: "100%" }}
               onChange={(e) => handleInputChange(undefined, e)}
             />
@@ -450,7 +531,7 @@ function ThirdInvoiceHome() {
               type="text"
               variant="standard"
               name="contractor_auth_sign"
-              value={workOrderData?.contractor_auth_sign || ""}
+              value={workOrderUpdateData?.contractor_auth_sign || ""}
               style={{ width: "100%" }}
               onChange={(e) => handleInputChange(undefined, e)}
             />
@@ -463,7 +544,9 @@ function ThirdInvoiceHome() {
               type="text"
               variant="standard"
               name="independent_contractor_auth_sign"
-              value={workOrderData?.independent_contractor_auth_sign || ""}
+              value={
+                workOrderUpdateData?.independent_contractor_auth_sign || ""
+              }
               style={{ width: "100%" }}
               onChange={(e) => handleInputChange(undefined, e)}
             />
@@ -479,7 +562,7 @@ function ThirdInvoiceHome() {
               type="date"
               variant="standard"
               name="contractor_date"
-              value={workOrderData?.contractor_date || ""}
+              value={workOrderUpdateData?.contractor_date || ""}
               style={{ width: "100%" }}
               onChange={(e) => handleInputChange(undefined, e)}
             />
@@ -492,7 +575,7 @@ function ThirdInvoiceHome() {
               type="date"
               variant="standard"
               name="independent_contractor_date"
-              value={workOrderData?.independent_contractor_date || ""}
+              value={workOrderUpdateData?.independent_contractor_date || ""}
               style={{ width: "100%" }}
               onChange={(e) => handleInputChange(undefined, e)}
             />
@@ -503,4 +586,4 @@ function ThirdInvoiceHome() {
   );
 }
 
-export default ThirdInvoiceHome;
+export default EditThirdInvoice;

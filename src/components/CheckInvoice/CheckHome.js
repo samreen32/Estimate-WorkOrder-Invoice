@@ -36,7 +36,9 @@ export default function CheckHome() {
           </div>
           <div className="col-md-4 text-center">
             <span style={{ cursor: "pointer" }}>
-              <h1><b>Generate Check</b></h1>
+              <h1>
+                <b>Generate Check</b>
+              </h1>
             </span>
           </div>
           <div className="col-md-4 text-center">
@@ -140,7 +142,9 @@ export default function CheckHome() {
                   <div className="check-main-table my-5">
                     <div className="row py-3 px-3">
                       <div className="col-md-9" style={{ display: "flex" }}>
-                        PAY TO THE <br /> ORDER OF
+                        <b>
+                          PAY TO THE <br /> ORDER OF
+                        </b>
                         <TextField
                           style={{
                             cursor: "pointer",
@@ -156,7 +160,7 @@ export default function CheckHome() {
                         />
                       </div>
                       <div className="col-md-3">
-                        $
+                        <b>$</b>
                         <TextField
                           style={{
                             cursor: "pointer",
@@ -183,7 +187,7 @@ export default function CheckHome() {
                       <TextField
                         style={{
                           cursor: "pointer",
-                          width: "50%",
+                          width: "92%",
                         }}
                         id="check_dollar"
                         type="text"
@@ -192,7 +196,9 @@ export default function CheckHome() {
                         //   value={checkData.check_dollar}
                         //   onChange={(e) => handleInputChange(undefined, e)}
                       />
-                      DOLLARS
+                      <b style={{ marginTop: "-1%", marginRight: "2%" }}>
+                        DOLLARS
+                      </b>
                     </div>
                   </div>
 
@@ -216,7 +222,9 @@ export default function CheckHome() {
 
                   {/* Signature field */}
                   <div className="row py-3">
-                    <div className="col-md-5 py-3 px-4">MEMO</div>
+                    <div className="col-md-5 py-3 px-4">
+                      <b>MEMO</b>
+                    </div>
                     <div
                       className="col-md-7"
                       style={{

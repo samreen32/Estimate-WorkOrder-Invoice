@@ -6,12 +6,12 @@ import generatePDF from "react-to-pdf";
 
 function GeneratedWorkInvoice() {
   let navigate = useNavigate();
-  const { workOrderData, setWorkOrderData, generateRandomNumber } = UserLogin();
+  const { workOrderData, setWorkOrderData } = UserLogin();
   const targetRef = useRef();
 
   const handleGenerateNew = () => {
     setWorkOrderData({
-      cust_id: generateRandomNumber(),
+      cust_id: "",
       job_name: "",
       phone: "",
       work_date: "",
@@ -82,23 +82,23 @@ function GeneratedWorkInvoice() {
             <div className="row py-5 px-5">
               <div className="col-10">
                 <div className="row px-3">
-                  Customer ID
-                  <br />
+                  <b style={{ marginLeft: "-2%" }}>Customer ID</b>
+
                   {workOrderData.cust_id}
                 </div>
-                <div className="row py-3">
+                <div className="row py-3 mt-3">
                   <div className="col-md-8">
-                    Job Name
+                    <b>Job Name</b>
                     <br />
                     {workOrderData.job_name}
                   </div>
                   <div className="col-md-2">
-                    Phone
+                    <b>Phone</b>
                     <br />
                     {workOrderData.phone}
                   </div>
                   <div className="col-md-2">
-                    Date
+                    <b>Date</b>
                     <br />
                     {workOrderData.work_date}
                   </div>
@@ -106,7 +106,7 @@ function GeneratedWorkInvoice() {
 
                 <div className="row py-3">
                   <div className="col-md-8">
-                    Address <br />
+                    <b>Address</b> <br />
                     {workOrderData.work_address.map((field, index) => (
                       <React.Fragment key={`work_address_${index}`}>
                         {field}
@@ -116,12 +116,12 @@ function GeneratedWorkInvoice() {
                   </div>
 
                   <div className="col-md-2">
-                    City
+                    <b>City</b>
                     <br />
                     {workOrderData.city}
                   </div>
                   <div className="col-md-2">
-                    Zip
+                    <b>Zip</b>
                     <br />
                     {workOrderData.zip}
                   </div>
@@ -129,7 +129,7 @@ function GeneratedWorkInvoice() {
 
                 <div className="row py-3">
                   <div className="col">
-                    Special Instructions
+                    <b>Special Instructions</b>
                     <br />
                     {workOrderData.special_instruction}
                   </div>
@@ -152,9 +152,9 @@ function GeneratedWorkInvoice() {
           <div className="blue-bar"></div>
 
           <>
-            <div className="row py-5 px-5">
+            <div className="row mt-3 px-5">
               <div className="col">
-                Material Description <br />
+                <b>Material Description</b> <br />
                 {workOrderData.material_desc.map((field, index) => (
                   <React.Fragment key={`material_desc_${index}`}>
                     {field}
@@ -168,12 +168,12 @@ function GeneratedWorkInvoice() {
           <>
             <div className="row py-3 px-5">
               <div className="col-md-8">
-                Tools or Suppliers
+                <b>Tools or Suppliers</b>
                 <br />
                 {workOrderData.tools}
               </div>
               <div className="col-md-4">
-                Labor ####
+                <b>Labor ####</b>
                 <br />
                 {workOrderData.labor}
               </div>
@@ -182,11 +182,13 @@ function GeneratedWorkInvoice() {
 
           <>
             <div className="row py-3 px-5">
-              <div className="col-md-12">Materials Expenses Supplies</div>
+              <div className="col-md-12">
+                <b>Materials Expenses Supplies</b>
+              </div>
               <br />
               <br />
               <div className="col-md-12">
-                For the Sum of X
+                <b>For the Sum of X</b>
                 <br />
                 {workOrderData.sum_of}
               </div>
@@ -227,12 +229,12 @@ function GeneratedWorkInvoice() {
             {/* Contractor */}
             <div className="row py-3 px-5">
               <div className="col-md-6">
-                Contractor X
+                <b>Contractor X</b>
                 <br />
                 {workOrderData.contractor}
               </div>
               <div className="col-md-6">
-                Independent Contractor X
+                <b>Independent Contractor X</b>
                 <br />
                 {workOrderData.independent_contractor}
               </div>
@@ -240,12 +242,12 @@ function GeneratedWorkInvoice() {
 
             <div className="row py-3 px-5">
               <div className="col-md-6">
-                Authorized Signagure X
+                <b>Authorized Signagure X</b>
                 <br />
                 {workOrderData.contractor_auth_sign}
               </div>
               <div className="col-md-6">
-                Authorized Signagure X
+                <b>Authorized Signagure X</b>
                 <br />
                 {workOrderData.independent_contractor_auth_sign}
               </div>
@@ -253,12 +255,12 @@ function GeneratedWorkInvoice() {
 
             <div className="row py-3 px-5">
               <div className="col-md-6">
-                Date
+                <b>Date</b>
                 <br />
                 {workOrderData.contractor_date}
               </div>
               <div className="col-md-6">
-                Date
+                <b>Date</b>
                 <br />
                 {workOrderData.independent_contractor_date}
               </div>

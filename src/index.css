@@ -117,6 +117,8 @@ h3 {
 
 .invoice-first-div {
   display: flex;
+  font-size: 19px;
+  font-weight: 600;
 }
 
 .invoice-first-div img {
@@ -129,10 +131,25 @@ h3 {
   font-size: 3em;
 }
 
+
 .bill_to_div,
 .estimate_address_div,
 .po_details_div {
-  margin-top: 7%;
+  margin-top: 8%;
+
+}
+
+.estimate_address_div p {
+  font-weight: 550;
+}
+
+.estimate_details_div p,
+.item_details_div p {
+  font-weight: 550;
+}
+
+.css-1x51dt5-MuiInputBase-input-MuiInput-input {
+  font-size: 18px !important;
 }
 
 .line {
@@ -1038,4 +1055,13 @@ a:focus {
   border: 7px grey solid;
   box-shadow: 3px 2px 5px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
+}
+
+.css-y8ay40-MuiTableCell-root {
+  text-align: center !important;
+  font-weight: 600 !important;
+}
+
+.css-1ex1afd-MuiTableCell-root {
+  text-align: center !important;
 }
