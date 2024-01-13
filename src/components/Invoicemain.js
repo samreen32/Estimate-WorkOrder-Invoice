@@ -42,37 +42,52 @@ export default function Invoicemain() {
                     aria-expanded="false"
                     style={{ color: "#FFF" }}
                   >
-                    <b style={{ color: "#FFF" }}>Generate Invoice</b>
+                    <b style={{ color: "#FFF", fontSize: "20px" }}>
+                      Generate Invoice
+                    </b>
                   </Link>
-                  <ul class="dropdown-menu" style={{ height: "300px" }}>
+                  <ul
+                    className="dropdown-menu"
+                    style={{
+                      height: "350px",
+                      width: "300px",
+                      marginLeft: "-120px",
+                      fontSize: "20px",
+                    }}
+                  >
                     <li>
                       <Link className="dropdown-item" to="/estimate_invoice">
                         Estimate Invoice
                       </Link>
+                      <br />
+                      <hr style={{ margin: 0 }} />
                     </li>
-                    <br />
                     <li>
                       <Link className="dropdown-item" to="/estimate_report">
                         Estimate Report
                       </Link>
+                      <br />
+                      <hr style={{ margin: 0 }} />
                     </li>
-                    <br />
                     <li>
                       <Link className="dropdown-item" to="/work_order_invoice">
                         Work Order Requisition
                       </Link>
+                      <br />
+                      <hr style={{ margin: 0 }} />
                     </li>
-                    <br />
                     <li>
                       <Link className="dropdown-item" to="/workout_report">
                         Work Order Report
                       </Link>
+                      <br />
+                      <hr style={{ margin: 0 }} />
                     </li>
-                    <br />
                     <li>
                       <Link className="dropdown-item" to="/check">
                         Generate Check
                       </Link>
+                      <br />
                     </li>
                   </ul>
                 </li>

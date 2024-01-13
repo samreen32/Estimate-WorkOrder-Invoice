@@ -79,20 +79,19 @@ function GeneratedWorkInvoice() {
           </>
           {/* after top */}
           <>
-            <div className="row py-5 px-5">
+            <div className="row py-5 px-5" style={{ fontSize: "23px" }}>
               <div className="col-10">
-                <div className="row px-3">
-                  <b style={{ marginLeft: "-2%" }}>Customer ID</b>
-
-                  {workOrderData.cust_id}
+                <div className="row">
+                  <b>Customer ID</b>
+                  &nbsp;&nbsp;{workOrderData.cust_id}
                 </div>
-                <div className="row py-3 mt-3">
-                  <div className="col-md-8">
+                <div className="row mt-3">
+                  <div className="col-md-6">
                     <b>Job Name</b>
                     <br />
                     {workOrderData.job_name}
                   </div>
-                  <div className="col-md-2">
+                  <div className="col-md-4">
                     <b>Phone</b>
                     <br />
                     {workOrderData.phone}
@@ -104,9 +103,9 @@ function GeneratedWorkInvoice() {
                   </div>
                 </div>
 
-                <div className="row py-3">
+                <div className="row mt-3">
                   <div className="col-md-8">
-                    <b>Address</b> <br />
+                  <b>Address</b>   <br />
                     {workOrderData.work_address.map((field, index) => (
                       <React.Fragment key={`work_address_${index}`}>
                         {field}
@@ -116,20 +115,20 @@ function GeneratedWorkInvoice() {
                   </div>
 
                   <div className="col-md-2">
-                    <b>City</b>
+                   <b>City</b> 
                     <br />
                     {workOrderData.city}
                   </div>
                   <div className="col-md-2">
-                    <b>Zip</b>
+                   <b>Zip</b> 
                     <br />
                     {workOrderData.zip}
                   </div>
                 </div>
 
-                <div className="row py-3">
+                <div className="row" style={{ fontSize: "23px" }}>
                   <div className="col">
-                    <b>Special Instructions</b>
+                   <b>Special Instructions</b> 
                     <br />
                     {workOrderData.special_instruction}
                   </div>
@@ -138,12 +137,12 @@ function GeneratedWorkInvoice() {
 
               <div className="col-2">
                 <div>
-                  <h4 style={{ textAlign: "center" }}>
+                  <h4 style={{ textAlign: "center", fontSize: "30px" }}>
                     <em>
                       <b>Invoice</b>
                     </em>
                   </h4>
-                  <img src={logo} alt="logo tub" />
+                  <img src={logo} alt="logo tub" width={180} />
                 </div>
               </div>
             </div>
@@ -152,7 +151,7 @@ function GeneratedWorkInvoice() {
           <div className="blue-bar"></div>
 
           <>
-            <div className="row mt-3 px-5">
+            <div className="row px-5 mt-1" style={{ fontSize: "23px" }}>
               <div className="col">
                 <b>Material Description</b> <br />
                 {workOrderData.material_desc.map((field, index) => (
@@ -166,7 +165,7 @@ function GeneratedWorkInvoice() {
           </>
 
           <>
-            <div className="row py-3 px-5">
+            <div className="row py-3 px-5" style={{ fontSize: "23px" }}>
               <div className="col-md-8">
                 <b>Tools or Suppliers</b>
                 <br />
@@ -181,14 +180,12 @@ function GeneratedWorkInvoice() {
           </>
 
           <>
-            <div className="row py-3 px-5">
+            <div className="row mt-2 px-5" style={{ fontSize: "23px" }}>
               <div className="col-md-12">
                 <b>Materials Expenses Supplies</b>
               </div>
-              <br />
-              <br />
               <div className="col-md-12">
-                <b>For the Sum of X</b>
+                For the Sum of X
                 <br />
                 {workOrderData.sum_of}
               </div>
@@ -197,7 +194,7 @@ function GeneratedWorkInvoice() {
 
           <>
             {/* Theory */}
-            <div className="row py-3 px-5">
+            <div className="row py-3 px-5" style={{ fontSize: "19px" }}>
               <p>
                 The above specified project s to be completed in trict
                 conformance with all specifications relating to this agreement.
@@ -227,40 +224,40 @@ function GeneratedWorkInvoice() {
 
           <>
             {/* Contractor */}
-            <div className="row py-3 px-5">
+            <div className="row px-5" style={{ fontSize: "23px" }}>
               <div className="col-md-6">
                 <b>Contractor X</b>
                 <br />
                 {workOrderData.contractor}
               </div>
               <div className="col-md-6">
-                <b>Independent Contractor X</b>
+               <b>Independent Contractor X</b> 
                 <br />
                 {workOrderData.independent_contractor}
               </div>
             </div>
 
-            <div className="row py-3 px-5">
+            <div className="row px-5 mt-3" style={{ fontSize: "23px" }}>
               <div className="col-md-6">
                 <b>Authorized Signagure X</b>
                 <br />
                 {workOrderData.contractor_auth_sign}
               </div>
               <div className="col-md-6">
-                <b>Authorized Signagure X</b>
+               <b>Authorized Signagure X</b> 
                 <br />
                 {workOrderData.independent_contractor_auth_sign}
               </div>
             </div>
 
-            <div className="row py-3 px-5">
+            <div className="row mt-3 px-5" style={{ fontSize: "23px" }}>
               <div className="col-md-6">
-                <b>Date</b>
+               <b>Date</b> 
                 <br />
                 {workOrderData.contractor_date}
               </div>
               <div className="col-md-6">
-                <b>Date</b>
+              <b>Date</b> 
                 <br />
                 {workOrderData.independent_contractor_date}
               </div>

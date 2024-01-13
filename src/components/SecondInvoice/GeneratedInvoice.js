@@ -68,12 +68,12 @@ function GeneratedInvoice() {
           </div>
           <div className="col-2 mt-5" style={{ display: "flex" }}>
             <div>
-              <h4 style={{ textAlign: "center" }}>
+              <h4 style={{ textAlign: "center", fontSize: "30px" }}>
                 <em>
                   <b>Invoice</b>
                 </em>
               </h4>
-              <img src={logo} alt="logo tub" />
+              <img src={logo} alt="logo tub" width={180} />
             </div>
           </div>
         </div>
@@ -90,23 +90,23 @@ function GeneratedInvoice() {
           className="row estimate_details_div px-5 "
           style={{ marginTop: "10%" }}
         >
-          <div className="col">
+          <div className="col" style={{ fontSize: "22px" }}>
             <p>Date</p>
 
             {estimateData.estimate_date}
           </div>
-          <div className="col">
+          <div className="col" style={{ fontSize: "22px" }}>
             <p>Estimate No.</p>
             {estimateData.estimate_no}
           </div>
-          <div className="col">
+          <div className="col" style={{ fontSize: "22px" }}>
             <p>Project</p>
             {estimateData.estimate_project}
           </div>
         </div>
         <div className="line mt-3"></div>
         <div className="row item_details_div px-5">
-          <div className="col">
+          <div className="col" style={{ fontSize: "22px" }}>
             <p>Item</p>
 
             {estimateData.items.map((item, index) => (
@@ -116,7 +116,7 @@ function GeneratedInvoice() {
               </span>
             ))}
           </div>
-          <div className="col">
+          <div className="col" style={{ fontSize: "22px" }}>
             <p>Description</p>
 
             {estimateData.items.map((item, index) => (
@@ -126,7 +126,7 @@ function GeneratedInvoice() {
               </span>
             ))}
           </div>
-          <div className="col">
+          <div className="col" style={{ fontSize: "22px" }}>
             <p>Quantity</p>
 
             {estimateData.items.map((item, index) => (
@@ -136,7 +136,7 @@ function GeneratedInvoice() {
               </span>
             ))}
           </div>
-          <div className="col">
+          <div className="col" style={{ fontSize: "22px" }}>
             <p>Cost</p>
             {estimateData.items.map((item, index) => (
               <span key={index}>
@@ -145,7 +145,7 @@ function GeneratedInvoice() {
               </span>
             ))}
           </div>
-          <div className="col">
+          <div className="col" style={{ fontSize: "22px" }}>
             <p>Amount</p>
             {estimateData.items.map((item, index) => (
               <span key={index}>
@@ -157,18 +157,18 @@ function GeneratedInvoice() {
             ))}
           </div>
         </div>
-        <div className="invoice-last-div px-5" style={{ marginBottom: "10%" }}>
+        <div className="invoice-last-div px-5" style={{ marginTop: "60%" }}>
           <div className="row">
             <div className="col-md-9">
-              <span>
-                <b>All jobs are completely guaranteed</b>
+              <span style={{ fontSize: "30px" }}>
+               All jobs are completely guaranteed
               </span>
             </div>
             <div className="col-md-3">
-              <span style={{ marginLeft: "-26%", fontWeight: "600" }}>
+              <span style={{ marginLeft: "-26%", fontWeight: "500", fontSize: "30px" }}>
                 Total{" "}
               </span>
-              &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; ${" "}
+              &nbsp; &nbsp;  ${" "}
               {estimateData.estimate_total || ""}
             </div>
           </div>

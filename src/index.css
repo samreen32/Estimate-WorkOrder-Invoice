@@ -1,7 +1,7 @@
 body {
   margin: 0;
   background: #e2e2e2;
-  font-family: sans-serif;
+  font-family: "Times New Roman";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -117,8 +117,8 @@ h3 {
 
 .invoice-first-div {
   display: flex;
-  font-size: 19px;
-  font-weight: 600;
+  font-size: 25px;
+  font-weight: 550;
 }
 
 .invoice-first-div img {
@@ -139,17 +139,16 @@ h3 {
 
 }
 
-.estimate_address_div p {
-  font-weight: 550;
-}
-
+.estimate_address_div p,
 .estimate_details_div p,
-.item_details_div p {
-  font-weight: 550;
+.item_details_div p,
+.items-span {
+  font-size: 30px;
+  /* font-weight: 550; */
 }
 
 .css-1x51dt5-MuiInputBase-input-MuiInput-input {
-  font-size: 18px !important;
+  font-size: 22px !important;
 }
 
 .line {
@@ -165,6 +164,7 @@ h3 {
 
 .invoice-last-div {
   margin-top: 30%;
+  font-size: 30px;
 }
 
 .invoice-last-div p {
@@ -231,6 +231,7 @@ h3 {
   background-color: #673ab7;
   color: white;
   padding: 12px;
+  font-size: 20px;
 }
 
 .css-mnn31 {
@@ -1040,6 +1041,13 @@ a:focus {
     max-width: 1170px;
   }
 }
+
+.css-y8ay40-MuiTableCell-root,
+.css-1ex1afd-MuiTableCell-root {
+  font-size: 1rem !important;
+}
+
+
 
 /* Third invoice */
 .blue-bar {

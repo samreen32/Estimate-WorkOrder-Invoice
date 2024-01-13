@@ -25,6 +25,7 @@ export default function TableThirdInvoice() {
   const [searchQuery, setSearchQuery] = useState("");
   const [isExpanded, setIsExpanded] = useState(false);
   const searchWords = searchQuery.split(" ");
+  const [totalAmount, setTotalAmount] = useState(0);
 
   /* Endpoint integration for get all the invoices */
   useEffect(() => {
@@ -34,8 +35,7 @@ export default function TableThirdInvoice() {
 
         if (response.data.success) {
           const estimateInvoices = response.data.invoices;
-          setInvoices(response.data.invoices);
-          console.log(estimateInvoices);
+          setInvoices(estimateInvoices);
         } else {
           console.error(`Request failed with status: ${response.status}`);
         }
@@ -46,6 +46,14 @@ export default function TableThirdInvoice() {
 
     fetchAllInvoices();
   }, []);
+
+  useEffect(() => {
+    const totalSum = invoices.reduce(
+      (sum, invoice) => sum + parseFloat(invoice.sum_of),
+      0
+    );
+    setTotalAmount(totalSum);
+  }, [invoices]);
 
   /* Endpoint integration for delete invoice */
   const handleDeleteClick = async (invoiceId) => {
@@ -73,14 +81,14 @@ export default function TableThirdInvoice() {
   };
 
   const columns = [
-    { id: "id", label: "#", minWidth: 170 },
-    { id: "cust_id", label: "Customer No", minWidth: 170 },
-    { id: "job_name", label: "Job Name", minWidth: 170 },
-    { id: "phone", label: "Phone", minWidth: 170 },
-    { id: "work_date", label: "Date", minWidth: 170 },
-    { id: "sum_of", label: "Total", minWidth: 170 },
-    { id: "edit", label: "Edit", minWidth: 170 },
-    { id: "delete", label: "Delete", minWidth: 170 },
+    { id: "id", label: "#", minWidth: 100 },
+    { id: "cust_id", label: "Customer No", minWidth: 100 },
+    { id: "job_name", label: "Job Name", minWidth: 100 },
+    { id: "phone", label: "Phone", minWidth: 100 },
+    { id: "work_date", label: "Date", minWidth: 100 },
+    { id: "sum_of", label: "Total", minWidth: 100 },
+    { id: "edit", label: "Edit", minWidth: 100 },
+    { id: "delete", label: "Delete", minWidth: 100 },
   ];
 
   /* Table pagination */
@@ -210,6 +218,7 @@ export default function TableThirdInvoice() {
                                 : column.id === "estimate_address"
                                 ? invoice[column.id].join(", ")
                                 : invoice[column.id]}
+                              {column.id === "sum_of" && `$`}
                             </TableCell>
                           ))}
                           <TableCell align="left">
@@ -237,6 +246,20 @@ export default function TableThirdInvoice() {
                   </TableBody>
                 </Table>
               </TableContainer>
+
+              <div
+                className="total_amount_invoices py-4"
+                style={{ fontSize: "18px" }}
+              >
+                <p>
+                  <b>
+                    Total: $
+                    {typeof totalAmount === "number"
+                      ? totalAmount.toFixed(2)
+                      : "N/A"}
+                  </b>
+                </p>
+              </div>
 
               <TablePagination
                 className="table-last-row-audio"

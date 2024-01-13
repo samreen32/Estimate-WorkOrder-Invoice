@@ -256,11 +256,10 @@ function EditThirdInvoice() {
           </div>
         </div>
 
-        <div className="row py-5">
+        <div className="row mt-3" style={{ fontSize: "25px" }}>
           <div className="col-10">
             <div className="row">
               <b>Customer ID</b>
-              <br />
               <TextField
                 id="cust_id"
                 type="text"
@@ -272,8 +271,8 @@ function EditThirdInvoice() {
               />
             </div>
 
-            <div className="row py-3">
-              <div className="col-md-8">
+            <div className="row mt-2">
+              <div className="col-md-6">
                 <b>Job Name</b>
                 <br />
                 <TextField
@@ -281,11 +280,12 @@ function EditThirdInvoice() {
                   type="text"
                   variant="standard"
                   name="job_name"
+                  style={{ width: "100%" }}
                   value={workOrderUpdateData?.job_name || ""}
                   onChange={(e) => handleInputChange(undefined, e)}
                 />
               </div>
-              <div className="col-md-2">
+              <div className="col-md-4">
                 <b>Phone</b>
                 <br />
                 <TextField
@@ -310,7 +310,7 @@ function EditThirdInvoice() {
               </div>
             </div>
 
-            <div className="row py-3">
+            <div className="row mt-2">
               <div className="col-md-8">
                 <b>Address </b> <br />
                 {[1, 2, 3].map(
@@ -362,7 +362,7 @@ function EditThirdInvoice() {
               </div>
             </div>
 
-            <div className="row py-3">
+            <div className="row mt-1">
               <div className="col">
                 <b>Special Instructions</b>
                 <br />
@@ -381,14 +381,14 @@ function EditThirdInvoice() {
 
           <div className="col-2">
             <div>
-              <img src={logo} alt="logo tub" />
+              <img src={logo} alt="logo tub" width={180} />
             </div>
           </div>
         </div>
 
         <div className="blue-bar"></div>
 
-        <div className="row mt-4">
+        <div className="row mt-2" style={{ fontSize: "25px" }}>
           <div className="col">
             <b>Material Description</b>
             <br />
@@ -415,7 +415,7 @@ function EditThirdInvoice() {
           </div>
         </div>
 
-        <div className="row py-3">
+        <div className="row mt-1" style={{ fontSize: "25px" }}>
           <div className="col-md-8">
             <b>Tools or Suppliers</b>
 
@@ -444,15 +444,12 @@ function EditThirdInvoice() {
           </div>
         </div>
 
-        <div className="row py-3">
+        <div className="row mt-1" style={{ fontSize: "25px" }}>
           <div className="col-md-12">
             <b>Materials Expenses Supplies</b>
           </div>
-          <br />
-          <br />
           <div className="col-md-12">
             <b>For the Sum of X</b>
-
             <TextField
               id="sum_of"
               type="text"
@@ -466,7 +463,7 @@ function EditThirdInvoice() {
         </div>
 
         {/* Theory */}
-        <div className="row py-3">
+        <div className="row mt-3" style={{ fontSize: "19px" }}>
           <p>
             The above specified project s to be completed in trict conformance
             with all specifications relating to this agreement. | addition, the
@@ -493,7 +490,7 @@ function EditThirdInvoice() {
         </div>
 
         {/* Contractor */}
-        <div className="row py-3">
+        <div className="row" style={{ fontSize: "25px" }}>
           <div className="col-md-6">
             <b>Contractor X</b>
             <br />
@@ -522,7 +519,7 @@ function EditThirdInvoice() {
           </div>
         </div>
 
-        <div className="row py-3">
+        <div className="row mt-2" style={{ fontSize: "25px" }}>
           <div className="col-md-6">
             <b>Authorized Signagure X</b>
             <br />
@@ -553,7 +550,7 @@ function EditThirdInvoice() {
           </div>
         </div>
 
-        <div className="row py-3">
+        <div className="row mt-2" style={{ fontSize: "25px" }}>
           <div className="col-md-6">
             <b>Date</b>
             <br />

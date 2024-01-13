@@ -189,8 +189,10 @@ function HomeForm() {
             </div>
             <div className="col-2" style={{ display: "flex" }}>
               <div>
-                <h4 style={{ textAlign: "center" }}>Estimate</h4>
-                <img src={logo} alt="logo tub" />
+                <h4 style={{ textAlign: "center", fontSize: "30px" }}>
+                  Estimate
+                </h4>
+                <img src={logo} alt="logo tub" width={150} />
               </div>
               <i
                 onClick={handleCreateInvoice}
@@ -279,9 +281,9 @@ function HomeForm() {
             <div className="row item_details_div px-5">
               <div className="col-md-2">
                 <span className="plus-icon" onClick={handleAddItem}>
-                  <i className="fas fa-plus-circle"></i>
+                  <i className="fas fa-plus-circle fa-xl"></i>
+                  &nbsp;<span className="items-span">Item</span>
                 </span>
-                &nbsp; Item
               </div>
               <div className="col-md-4">
                 {" "}

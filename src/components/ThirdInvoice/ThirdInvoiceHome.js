@@ -9,11 +9,13 @@ import { CREATE_WORKOUT_INVOICE } from "../../Auth_API";
 
 function ThirdInvoiceHome() {
   let navigate = useNavigate();
-  const { workOrderData, setWorkOrderData } = UserLogin();
+  const { workOrderData, setWorkOrderData, formatPhoneNumber, formatPhone } =
+    UserLogin();
   const [visibleAddressFields, setVisibleAddressFields] = useState(1);
   const [visibleMaterialFields, setVisibleMaterialFields] = useState(1);
   const [focusedField, setFocusedField] = useState(null);
   const [focusedMaterialField, setFocusedMaterialField] = useState(null);
+  const [rawPhone, setRawPhone] = useState(workOrderData?.phone || "");
 
   /* Input field validation */
   const handleInputChange = (index, e) => {
@@ -57,7 +59,7 @@ function ThirdInvoiceHome() {
 
           return {
             ...prevData,
-            work_address: [...prevData.work_address], // Keep work_address unchanged
+            work_address: [...prevData.work_address],
             material_desc: updatedMaterial,
           };
         } else {
@@ -67,6 +69,19 @@ function ThirdInvoiceHome() {
           };
         }
       }
+    });
+  };
+
+  const handlePhoneChange = (e) => {
+    const { value } = e.target;
+
+    // Format the phone number and update the state
+    const formattedPhone = formatPhoneNumber(value);
+    setRawPhone(value);
+
+    // Update the workOrderData state
+    handleInputChange(undefined, {
+      target: { name: "phone", value: formattedPhone },
     });
   };
 
@@ -151,7 +166,7 @@ function ThirdInvoiceHome() {
             <i class="fa fa-chevron-left fa-1x" aria-hidden="true"></i>
           </span>
           <span style={{ cursor: "pointer", marginLeft: "40%" }}>
-            <b>Please Enter your Invoice details</b>
+            Please Enter your Invoice details
           </span>
         </h2>
       </div>
@@ -178,11 +193,11 @@ function ThirdInvoiceHome() {
           </div>
         </div>
 
-        <div className="row py-5">
+        <div className="row py-5" style={{ fontSize: "25px" }}>
           <div className="col-10">
             <div className="row">
-              <b>Customer ID</b>
-              <br />
+              <p>Customer ID</p>
+
               <TextField
                 id="cust_id"
                 type="text"
@@ -195,32 +210,33 @@ function ThirdInvoiceHome() {
             </div>
 
             <div className="row py-3">
-              <div className="col-md-8">
-                <b>Job Name</b>
+              <div className="col-md-6">
+                Job Name
                 <br />
                 <TextField
                   id="job_name"
                   type="text"
                   variant="standard"
+                  style={{ width: "100%" }}
                   name="job_name"
                   value={workOrderData?.job_name || ""}
                   onChange={(e) => handleInputChange(undefined, e)}
                 />
               </div>
-              <div className="col-md-2">
-                <b>Phone</b>
+              <div className="col-md-4">
+                Phone
                 <br />
                 <TextField
                   id="phone"
                   type="text"
                   variant="standard"
                   name="phone"
-                  value={workOrderData?.phone || ""}
-                  onChange={(e) => handleInputChange(undefined, e)}
+                  value={formatPhone(rawPhone)}
+                  onChange={handlePhoneChange}
                 />
               </div>
               <div className="col-md-2">
-                <b>Date</b> <br />
+                Date <br />
                 <TextField
                   id="work_date"
                   type="date"
@@ -234,7 +250,7 @@ function ThirdInvoiceHome() {
 
             <div className="row py-3">
               <div className="col-md-8">
-                <b>Address </b> <br />
+                Address <br />
                 {[1, 2, 3].map(
                   (fieldIndex) =>
                     fieldIndex <= visibleAddressFields && (
@@ -260,7 +276,7 @@ function ThirdInvoiceHome() {
               </div>
 
               <div className="col-md-2">
-                <b>City</b> <br />
+                City <br />
                 <TextField
                   id="city"
                   type="text"
@@ -271,7 +287,7 @@ function ThirdInvoiceHome() {
                 />
               </div>
               <div className="col-md-2">
-                <b>Zip</b> <br />
+                Zip <br />
                 <TextField
                   id="zip"
                   type="text"
@@ -285,7 +301,7 @@ function ThirdInvoiceHome() {
 
             <div className="row py-3">
               <div className="col">
-                <b>Special Instructions</b>
+                Special Instructions
                 <br />
                 <TextField
                   id="special_instruction"
@@ -302,16 +318,16 @@ function ThirdInvoiceHome() {
 
           <div className="col-2">
             <div>
-              <img src={logo} alt="logo tub" />
+              <img src={logo} alt="logo tub" width={180} />
             </div>
           </div>
         </div>
 
         <div className="blue-bar"></div>
 
-        <div className="row mt-4">
+        <div className="row mt-4" style={{ fontSize: "25px" }}>
           <div className="col">
-            <b>Material Description</b>
+            Material Description
             <br />
             {[1, 2, 3].map(
               (fieldIndex) =>
@@ -334,10 +350,9 @@ function ThirdInvoiceHome() {
           </div>
         </div>
 
-        <div className="row py-3">
+        <div className="row py-3" style={{ fontSize: "25px" }}>
           <div className="col-md-8">
-            <b>Tools or Suppliers</b>
-
+            Tools or Suppliers
             <TextField
               id="tools"
               type="text"
@@ -349,8 +364,7 @@ function ThirdInvoiceHome() {
             />
           </div>
           <div className="col-md-4">
-            <b>Labor ####</b>
-
+            Labor ####
             <TextField
               id="labor"
               type="text"
@@ -363,15 +377,12 @@ function ThirdInvoiceHome() {
           </div>
         </div>
 
-        <div className="row py-3">
-          <div className="col-md-12">
-            <b>Materials Expenses Supplies</b>
-          </div>
+        <div className="row py-3" style={{ fontSize: "25px" }}>
+          <div className="col-md-12">Materials Expenses Supplies</div>
           <br />
           <br />
           <div className="col-md-12">
-            <b>For the Sum of X</b>
-
+            For the Sum of X
             <TextField
               id="sum_of"
               type="text"
@@ -412,9 +423,9 @@ function ThirdInvoiceHome() {
         </div>
 
         {/* Contractor */}
-        <div className="row py-3">
+        <div className="row py-3" style={{ fontSize: "25px" }}>
           <div className="col-md-6">
-            <b>Contractor X</b>
+            Contractor X
             <br />
             <TextField
               id="contractor"
@@ -427,7 +438,7 @@ function ThirdInvoiceHome() {
             />
           </div>
           <div className="col-md-6">
-            <b>Independent Contractor X</b>
+            Independent Contractor X
             <br />
             <TextField
               id="independent_contractor"
@@ -441,9 +452,9 @@ function ThirdInvoiceHome() {
           </div>
         </div>
 
-        <div className="row py-3">
+        <div className="row py-3" style={{ fontSize: "25px" }}>
           <div className="col-md-6">
-            <b>Authorized Signagure X</b>
+            Authorized Signagure X
             <br />
             <TextField
               id="contractor_auth_sign"
@@ -456,7 +467,7 @@ function ThirdInvoiceHome() {
             />
           </div>
           <div className="col-md-6">
-            <b>Authorized Signagure X</b>
+            Authorized Signagure X
             <br />
             <TextField
               id="independent_contractor_auth_sign"
@@ -470,9 +481,9 @@ function ThirdInvoiceHome() {
           </div>
         </div>
 
-        <div className="row py-3">
+        <div className="row py-3" style={{ fontSize: "25px" }}>
           <div className="col-md-6">
-            <b>Date</b>
+            Date
             <br />
             <TextField
               id="contractor_date"
@@ -485,7 +496,7 @@ function ThirdInvoiceHome() {
             />
           </div>
           <div className="col-md-6">
-            <b>Date</b>
+            Date
             <br />
             <TextField
               id="independent_contractor_date"

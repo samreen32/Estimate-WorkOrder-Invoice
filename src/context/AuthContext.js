@@ -87,9 +87,34 @@ const AuthProvider = ({ children }) => {
     independent_contractor_date: "",
   });
 
+  const formatPhoneNumber = (phoneNumber) => {
+    const cleaned = `${phoneNumber}`.replace(/\D/g, "");
+    const match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
+    if (match) {
+      return `${match[1]}-${match[2]}-${match[3]}`;
+    }
+    return phoneNumber;
+  };
+
+  const formatPhone = (inputPhone) => {
+    const cleanedInput = inputPhone.replace(/\D/g, "");
+    if (cleanedInput.length >= 3) {
+      return (
+        cleanedInput.slice(0, 3) +
+        "-" +
+        cleanedInput.slice(3, 6) +
+        (cleanedInput.length > 6 ? "-" + cleanedInput.slice(6) : "")
+      );
+    } else {
+      return cleanedInput;
+    }
+  };
+
   return (
     <AuthContext.Provider
       value={{
+        formatPhoneNumber,
+        formatPhone,
         estimateData,
         setEstimateData,
         estimateUpdateData,
