@@ -11,6 +11,9 @@ import TableInvoices from "./components/SecondInvoice/TableInvoices";
 import EditInvoice from "./components/SecondInvoice/EditInvoice";
 import TableThirdInvoice from "./components/ThirdInvoice/TableThirdInvoice";
 import EditThirdInvoice from "./components/ThirdInvoice/EditThirdInvoice";
+import EditInvoice2 from "./components/SecondInvoice/EditInvoice2";
+import GenerateCheck from "./components/CheckInvoice/GenerateCheck";
+import TableEstimate from "./components/SecondInvoice/TableEstimate";
 
 
 function App() {
@@ -20,8 +23,10 @@ function App() {
         <Routes>
         <Route exact path="/" element={<Invoicemain />} />
           <Route exact path="/work_order_invoice" element={<ThirdInvoiceHome />} />
-          <Route exact path="/estimate_report" element={<TableInvoices />} />
+          <Route exact path="/estimate_report" element={<TableEstimate />} />
+          <Route exact path="/invoice_report" element={<TableInvoices />} />
           <Route exact path="/modify_estimate_report" element={<EditInvoice />} />
+          <Route exact path="/modify_invoice_report" element={<EditInvoice2 />} />
           <Route exact path="/estimate_invoice" element={<HomeForm />} />
           <Route
             exact
@@ -47,6 +52,11 @@ function App() {
             exact
             path="/check"
             element={<CheckHome  />}
+          />
+          <Route
+            exact
+            path="/generate_check"
+            element={<GenerateCheck  />}
           />
         </Routes>
       </Router>

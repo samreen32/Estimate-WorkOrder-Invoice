@@ -1,35 +1,32 @@
-import React, { useRef } from "react";
+import React from "react";
 import checkLogo from "../../assets/img/checkLogo.png";
 import checkMemo from "../../assets/img/check_memo.png";
 import checkDesign from "../../assets/img/bg-card.png";
 import { useNavigate } from "react-router";
 import TextField from "@mui/material/TextField";
 import "./check.css";
-import generatePDF from "react-to-pdf";
+import { UserLogin } from "../../context/AuthContext";
 
 export default function CheckHome() {
   let navigate = useNavigate();
-  const targetRef = useRef();
-
-  const generateRandomNumber = () => {
-    return Math.floor(10000 + Math.random() * 90000);
-  };
+  const { checkData, setCheckData, handleCheckChange } = UserLogin();
 
   const handleGenerateNew = () => {
-    navigate("/");
+    navigate("/generate_check");
   };
 
   return (
     <>
-      <div id="invoice-generated">
+      <div id="invoice-generated" style={{ overflowX: "hidden" }}>
         <div
           className="row justify-content-center text-align-center"
           style={{ marginTop: "5%" }}
         >
           <div className="col-md-4 text-center">
             <span
-              onClick={handleGenerateNew}
-              // style={{ cursor: "pointer", marginLeft: "-40%" }}
+              onClick={() => {
+                navigate("/");
+              }}
             >
               <i class="fa fa-chevron-left fa-2x" aria-hidden="true"></i>
             </span>
@@ -43,9 +40,7 @@ export default function CheckHome() {
           </div>
           <div className="col-md-4 text-center">
             <button
-              onClick={() =>
-                generatePDF(targetRef, { filename: "invoice.pdf" })
-              }
+              onClick={handleGenerateNew}
               style={{
                 cursor: "pointer",
                 fontSize: "18px",
@@ -55,21 +50,16 @@ export default function CheckHome() {
                 border: "none",
               }}
             >
-              Generate PDF
+              Generate Print
             </button>
           </div>
         </div>
 
-        <div
-          className="px-5 py-5"
-          style={{ width: "100%" }}
-          id="pdf"
-          ref={targetRef}
-        >
+        <div className="px-5 py-5" style={{ width: "100%" }} id="pdf">
           <div class="body dark-background">
             <div class="outer-border">
               <div class="mid-border">
-                <div class="inner-border px-5 py-5">
+                <div class="inner-border">
                   <img
                     class="corner-decoration corner-left-top"
                     src={checkDesign}
@@ -88,7 +78,7 @@ export default function CheckHome() {
                   ></img>
 
                   {/* Top */}
-                  <div className="row check-row">
+                  <div className="row check-row mt-5 px-5">
                     <div className="col-md-2">
                       <img src={checkLogo} alt="check logo" width={180} />
                     </div>
@@ -119,91 +109,124 @@ export default function CheckHome() {
                     </div>
                   </div>
 
-                  {/* Date */}
-                  <div className="row">
-                    <TextField
-                      style={{
-                        cursor: "pointer",
-                        width: "30%",
-                        justifyContent: "end",
-                        marginLeft: "auto",
-                        textAlign: "right",
-                      }}
-                      id="check_date"
-                      type="date"
-                      variant="standard"
-                      name="check_date"
-                      //   value={checkData.check_date}
-                      //   onChange={(e) => handleInputChange(undefined, e)}
-                    />
-                  </div>
-
-                  {/* Table main */}
-                  <div className="check-main-table my-5">
-                    <div className="row py-3 px-3">
-                      <div className="col-md-9" style={{ display: "flex" }}>
-                        <b>
-                          PAY TO THE <br /> ORDER OF
-                        </b>
+                  <>
+                    <div className="py-5 px-5">
+                      {/* Date */}
+                      <div className="row mt-3">
                         <TextField
                           style={{
                             cursor: "pointer",
-                            marginLeft: "5%",
-                            width: "80%",
+                            width: "30%",
+                            justifyContent: "end",
+                            marginLeft: "auto",
+                            textAlign: "right",
                           }}
-                          id="check_amount_words"
-                          type="text"
+                          id="check_date"
+                          type="date"
                           variant="standard"
-                          name="check_amount_words"
-                          //   value={checkData.check_amount_words}
-                          //   onChange={(e) => handleInputChange(undefined, e)}
+                          name="check_date"
+                          value={checkData.check_date}
+                          onChange={handleCheckChange}
                         />
                       </div>
-                      <div className="col-md-3">
-                        <b>$</b>
-                        <TextField
-                          style={{
-                            cursor: "pointer",
-                            marginLeft: "8%",
-                            width: "85%",
-                          }}
-                          id="check_amount_dollar"
-                          type="text"
-                          variant="standard"
-                          name="check_amount_dollar"
-                          //   value={checkData.check_amount_dollar}
-                          //   onChange={(e) => handleInputChange(undefined, e)}
-                        />
-                      </div>
-                    </div>
 
-                    <div
-                      className="row py-3 px-5"
-                      style={{
-                        display: "flex",
-                        justifyContent: "end",
-                      }}
-                    >
-                      <TextField
-                        style={{
-                          cursor: "pointer",
-                          width: "92%",
-                        }}
-                        id="check_dollar"
-                        type="text"
-                        variant="standard"
-                        name="check_dollar"
-                        //   value={checkData.check_dollar}
-                        //   onChange={(e) => handleInputChange(undefined, e)}
-                      />
-                      <b style={{ marginTop: "-1%", marginRight: "2%" }}>
-                        DOLLARS
-                      </b>
+                      {/* Table main */}
+                      <div className="check-main-table my-5">
+                        <div className="row mt-5 px-3">
+                          <div
+                            className="col-md-9"
+                            style={{ display: "flex", fontSize: "23px" }}
+                          >
+                            <b>
+                              PAY TO THE <br /> ORDER OF
+                            </b>
+                            <TextField
+                              style={{
+                                cursor: "pointer",
+                                marginLeft: "5%",
+                                width: "80%",
+                                fontSize: "25px",
+                              }}
+                              id="check_payTo"
+                              type="text"
+                              variant="standard"
+                              name="check_payTo"
+                              value={checkData.check_payTo}
+                              onChange={handleCheckChange}
+                            />
+                          </div>
+                          <div className="col-md-3">
+                            <span
+                              style={{ fontWeight: "bold", fontSize: "30px" }}
+                            >
+                              $
+                            </span>
+                            <TextField
+                              style={{
+                                cursor: "pointer",
+                                marginLeft: "5%",
+                                width: "85%",
+                                fontSize: "25px",
+                              }}
+                              id="check_dollar_symbol"
+                              type="text"
+                              variant="standard"
+                              name="check_dollar_symbol"
+                              value={checkData.check_dollar_symbol}
+                              onChange={handleCheckChange}
+                            />
+                            {/* <TextField
+                              style={{
+                                cursor: "pointer",
+                                marginLeft: "8%",
+                                width: "85%",
+                              }}
+                              id="check_dollar_symbol"
+                              type="text"
+                              variant="standard"
+                              name=" check_dollar_symbol"
+                              value={checkData.check_dollar_symbol}
+                              onChange={handleCheckChange}
+                            /> */}
+                          </div>
+                        </div>
+
+                        <div
+                          className="row py-5 px-5"
+                          style={{
+                            display: "flex",
+                            // justifyContent: "end",
+                          }}
+                        >
+                          <TextField
+                            style={{
+                              cursor: "pointer",
+                              width: "80%",
+                              marginLeft: "185px",
+                            }}
+                            id="check_dollar"
+                            type="text"
+                            variant="standard"
+                            name="check_dollar"
+                            value={checkData.check_dollar}
+                            onChange={handleCheckChange}
+                          />
+                          <b
+                            style={{
+                              marginTop: "-3%",
+                              marginLeft: "92%",
+                              fontSize: "23px",
+                            }}
+                          >
+                            DOLLARS
+                          </b>
+                        </div>
+                      </div>
                     </div>
-                  </div>
+                  </>
 
                   {/* Memo images */}
-                  <div className="row">
+                  <div className="row px-5" style={{ marginTop: "-5%" }}>
                     <div className="col-md-2">
                       <img src={checkMemo} alt="check memo" width={100} />
                     </div>
@@ -221,9 +244,9 @@ export default function CheckHome() {
                   </div>
 
                   {/* Signature field */}
-                  <div className="row py-3">
+                  <div className="row px-5" style={{ marginBottom: "5%" }}>
                     <div className="col-md-5 py-3 px-4">
-                      <b>MEMO</b>
+                      <b>&nbsp;&nbsp;MEMO</b>
                     </div>
                     <div
                       className="col-md-7"
@@ -243,7 +266,7 @@ export default function CheckHome() {
                         variant="standard"
                         name="check_signature"
                         //   value={checkData.check_signature}
-                        //   onChange={(e) => handleInputChange(undefined, e)}
+                        //   onChange={(e) => handleCheckChange(undefined, e)}
                       />
                     </div>
                   </div>

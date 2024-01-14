@@ -110,9 +110,27 @@ const AuthProvider = ({ children }) => {
     }
   };
 
+  const [checkData, setCheckData] = useState({
+    check_date: "",
+    check_payTo: "",
+    check_dollar_symbol: "",
+    check_dollar: "",
+  });
+
+  const handleCheckChange = (e) => {
+    const { name, value } = e.target;
+    setCheckData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
   return (
     <AuthContext.Provider
       value={{
+        handleCheckChange,
+        checkData,
+        setCheckData,
         formatPhoneNumber,
         formatPhone,
         estimateData,
@@ -126,7 +144,8 @@ const AuthProvider = ({ children }) => {
         setWorkOrderData,
         invoiceDetails,
         setInvoiceDetails,
-        workOrderUpdateData, setWorkOrderUpdateData,
+        workOrderUpdateData,
+        setWorkOrderUpdateData,
       }}
     >
       {children}

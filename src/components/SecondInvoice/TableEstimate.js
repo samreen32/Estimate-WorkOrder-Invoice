@@ -13,7 +13,7 @@ import { useNavigate } from "react-router";
 import { UserLogin } from "../../context/AuthContext";
 import { DELETE_SPECIFIC_INVOICE, GET_All_INVOICES } from "../../Auth_API";
 
-export default function TableInvoices() {
+export default function TableEstimate() {
   let navigate = useNavigate();
   const [invoices, setInvoices] = useState([]);
   const { setInvoiceDetails } = UserLogin();
@@ -82,7 +82,7 @@ export default function TableInvoices() {
   };
   const columns = [
     { id: "id", label: "#", minWidth: 100 },
-    { id: "estimate_no", label: "Invoice No", minWidth: 100 },
+    { id: "estimate_no", label: "Estimate No", minWidth: 100 },
     { id: "estimate_project", label: "Project", minWidth: 100 },
     { id: "estimate_address", label: "Address", minWidth: 100 },
     { id: "estimate_date", label: "Date", minWidth: 100 },
@@ -147,7 +147,7 @@ export default function TableInvoices() {
                 <i class="fa fa-chevron-left fa-1x" aria-hidden="true"></i>
               </span>
               <span style={{ cursor: "pointer", marginLeft: "35%" }}>
-                Invoice Report
+                Estimate Report
               </span>
             </h2>
 
@@ -225,12 +225,10 @@ export default function TableInvoices() {
                             <Button
                               variant="contained"
                               color="primary"
-                              onClick={() =>
-                                handleEditInvoiceClick(invoice._id)
-                              }
-                              style={{ cursor: "pointer", padding: "6px 22px" }}
+                              onClick={() => handleEditNextClick(invoice._id)}
+                              style={{ cursor: "pointer" }}
                             >
-                              invoice
+                              estimate
                             </Button>
                           </TableCell>
 

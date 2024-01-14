@@ -143,11 +143,12 @@ h3 {
 .estimate_details_div p,
 .item_details_div p,
 .items-span {
-  font-size: 30px;
+  font-size: 24px;
   /* font-weight: 550; */
 }
 
-.css-1x51dt5-MuiInputBase-input-MuiInput-input {
+.css-1x51dt5-MuiInputBase-input-MuiInput-input,
+.css-mnn31 {
   font-size: 22px !important;
 }
 
@@ -396,7 +397,7 @@ h3 {
 
 .total_amount_invoices {
   text-align: right;
-  margin-right: 6%;
+  margin-right: 5%;
 }
 
 /* Search field styling */
@@ -1072,4 +1073,12 @@ a:focus {
 
 .css-1ex1afd-MuiTableCell-root {
   text-align: center !important;
+}
+
+/* .check-field input{
+font-size: 25px !important;
+} */
+
+.check-field .row.check-field {
+  page-break-before: always;
 }

@@ -82,7 +82,7 @@ function HomeForm() {
         Swal.fire({
           icon: "success",
           title: "Success...",
-          text: "Invoice Generated!",
+          text: "Estimate Generated!",
         });
         return;
       }
@@ -158,25 +158,34 @@ function HomeForm() {
     <div id="invoice-generated">
       <div className="row justify-content-center text-align-center">
         <div className="col-md-8 text-center">
-          <div style={{ display: "flex" }}>
-            <h2>
+          <div className="row">
+            <div className="col-md-2">
               <span
                 onClick={handleGenerateNew}
-                style={{ cursor: "pointer", marginLeft: "-40%" }}
+                style={{ cursor: "pointer", }}
               >
-                <i class="fa fa-chevron-left fa-1x" aria-hidden="true"></i>
+                <i class="fa fa-chevron-left fa-2x mt-5" aria-hidden="true"></i>
               </span>
-              <span style={{ cursor: "pointer", marginLeft: "40%" }}>
-                <b>Please Enter your Invoice details</b>
+            </div>
+            <div className="col-md-8">
+              <h2>
+                <span style={{ cursor: "pointer", }}>
+                  <b>Enter your Estimate details</b>
+                </span>
+              </h2>
+            </div>
+            <div className="col-md-2 mt-5">
+              <span onClick={handleCreateInvoice} className="new-invoice-btn">
+                Save Estimate
               </span>
-            </h2>
+            </div>
           </div>
         </div>
       </div>
 
       <div
         className="container px-5 py-5"
-        style={{ width: "100%", marginTop: "5%" }}
+        style={{ width: "100%", marginTop: "2%" }}
       >
         <>
           <div className="row">
@@ -194,12 +203,6 @@ function HomeForm() {
                 </h4>
                 <img src={logo} alt="logo tub" width={150} />
               </div>
-              <i
-                onClick={handleCreateInvoice}
-                style={{ cursor: "pointer", marginTop: "-20%" }}
-                className="fa fa-chevron-right fa-2x"
-                aria-hidden="true"
-              ></i>
             </div>
           </div>
 
@@ -235,7 +238,7 @@ function HomeForm() {
             <br />
 
             <div className="row estimate_details_div px-5 ">
-              <div className="col">
+              <div className="col-md-5">
                 <p>Date</p>
                 <TextField
                   style={{ cursor: "pointer" }}
@@ -249,7 +252,7 @@ function HomeForm() {
                   placeholder="MM/DD/YY"
                 />
               </div>
-              <div className="col">
+              <div className="col-md-5">
                 <p>Estimate No.</p>
                 <TextField
                   id="estimate_no"
@@ -261,7 +264,7 @@ function HomeForm() {
                   onChange={(e) => handleInputChange(undefined, e)}
                 />
               </div>
-              <div className="col">
+              <div className="col-md-2">
                 <p>Project</p>
                 <TextField
                   id="estimate_project"
@@ -353,7 +356,7 @@ function HomeForm() {
                         type="text"
                         InputProps={{ disableUnderline: true }}
                         readonly
-                        value={`${"    "}$ ${
+                        value={`${" "}$ ${
                           (item.estimate_quantity || 0) *
                           (item.estimate_cost || 0)
                         }`}
@@ -364,13 +367,13 @@ function HomeForm() {
                 <br />
               </React.Fragment>
 
-              <div className="invoice-last-div">
+              <div className="invoice-last-div ">
                 <div className="row">
-                  <div className="col-md-10">
+                  <div className="col-md-9">
                     <span>All jobs are completely guaranteed</span>
                   </div>
-                  <div className="col-md-2">
-                    <span>Total </span>${estimateData.estimate_total || ""}
+                  <div className="col-md-3 px-5">
+                    <span>Total </span> ${estimateData.estimate_total || ""}
                   </div>
                 </div>
               </div>

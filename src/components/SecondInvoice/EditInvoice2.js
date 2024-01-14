@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 import { GET_ESTIMATE_INVOICE, UPDATE_ESTIMATE_INVOICE } from "../../Auth_API";
 import generatePDF from "react-to-pdf";
 
-function EditInvoice() {
+function EditInvoice2() {
   let navigate = useNavigate();
   const { estimateUpdateData, setEstimateUpdateData } = UserLogin();
   const [visibleAddressFields, setVisibleAddressFields] = useState(1);
@@ -187,7 +187,7 @@ function EditInvoice() {
         estimate_total: null,
       },
     });
-    navigate("/estimate_report");
+    navigate("/invoice_report");
   };
 
   return (
@@ -206,7 +206,7 @@ function EditInvoice() {
 
         <div style={{ display: "flex" }}>
           <span onClick={handleUpdateInvoice} className="new-invoice-btn mx-3">
-            Update Estimate
+            Update Invoice
           </span>
           <span
             onClick={() => generatePDF(targetRef, { filename: "invoice.pdf" })}
@@ -235,7 +235,7 @@ function EditInvoice() {
             <div className="col-2" style={{ display: "flex" }}>
               <div>
                 <h4 style={{ textAlign: "center", fontSize: "30px" }}>
-                  Estimate
+                  Invoice
                 </h4>
                 <img src={logo} alt="logo tub" width={150} />
               </div>
@@ -298,7 +298,7 @@ function EditInvoice() {
                 />
               </div>
               <div className="col-md-5">
-                <p>Estimate No.</p>
+                <p>Invoice No.</p>
                 <TextField
                   id="estimate_no"
                   type="text"
@@ -431,4 +431,4 @@ function EditInvoice() {
   );
 }
 
-export default EditInvoice;
+export default EditInvoice2;

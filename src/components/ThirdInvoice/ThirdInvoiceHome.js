@@ -166,13 +166,13 @@ function ThirdInvoiceHome() {
             <i class="fa fa-chevron-left fa-1x" aria-hidden="true"></i>
           </span>
           <span style={{ cursor: "pointer", marginLeft: "40%" }}>
-            Please Enter your Invoice details
+            Please Enter details
           </span>
         </h2>
       </div>
       <div
         className="container px-5 py-5"
-        style={{ width: "100%", marginTop: "5%" }}
+        style={{ width: "100%", marginTop: "2%" }}
       >
         <i
           onClick={handleCreateInvoice}
