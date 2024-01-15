@@ -27,7 +27,7 @@ function GeneratedInvoice() {
         estimate_total: null,
       },
     });
-    navigate("/estimate_invoice");
+    navigate("/generate_estimate");
   };
 
   return (
@@ -41,7 +41,7 @@ function GeneratedInvoice() {
           </div>
         </div>
         <div className="col-4">
-          <h2>Invoice Details</h2>
+          <h2>Estimate Details</h2>
         </div>
         <div className="col-4" style={{ marginTop: "50px" }}>
           <span
@@ -70,7 +70,7 @@ function GeneratedInvoice() {
             <div>
               <h4 style={{ textAlign: "center", fontSize: "30px" }}>
                 <em>
-                  <b>Invoice</b>
+                  <b>Estimate</b>
                 </em>
               </h4>
               <img src={logo} alt="logo tub" width={180} />

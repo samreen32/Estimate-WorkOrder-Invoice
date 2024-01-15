@@ -395,6 +395,24 @@ h3 {
   margin-right: 14.1%;
 }
 
+@media (max-width: 1432px) {
+  .new-invoice-btn{
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 1022px) {
+  .new-invoice-btn{
+    font-size: 8px;
+  }
+}
+
+@media (max-width: 817px) {
+  .new-invoice-btn{
+    font-size: 6px !important;
+  }
+}
+
 .total_amount_invoices {
   text-align: right;
   margin-right: 5%;

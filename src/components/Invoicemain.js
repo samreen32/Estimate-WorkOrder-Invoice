@@ -42,30 +42,40 @@ export default function Invoicemain() {
                     aria-expanded="false"
                     style={{ color: "#FFF" }}
                   >
-                    <b style={{ color: "#FFF", fontSize: "20px" }}>
-                      Actions 
-                    </b>
+                    <b style={{ color: "#FFF", fontSize: "20px" }}>Actions</b>
                   </Link>
                   <ul
                     className="dropdown-menu"
                     style={{
-                      height: "420px",
+                      height: "500px",
                       width: "300px",
                       marginLeft: "-200px",
                       fontSize: "20px",
                     }}
                   >
                     <li>
-                      <Link className="dropdown-item" to="/estimate_invoice">
+                      <Link className="dropdown-item" to="/generate_estimate">
                         Generate Estimate
                       </Link>
                       <hr />
                     </li>
                     <li>
-                      <Link className="dropdown-item my-3" to="/estimate_report">
+                      <Link
+                        className="dropdown-item my-3"
+                        to="/estimate_report"
+                      >
                         Estimate Report
                       </Link>
                       <hr style={{ margin: 0 }} />
+                    </li>
+                    <li>
+                      <Link
+                        className="dropdown-item mt-3"
+                        to="/generate_invoice"
+                      >
+                        Generate Invoice
+                      </Link>
+                      <hr />
                     </li>
                     <li>
                       <Link className="dropdown-item my-3" to="/invoice_report">
@@ -74,7 +84,10 @@ export default function Invoicemain() {
                       <hr style={{ margin: 0 }} />
                     </li>
                     <li>
-                      <Link className="dropdown-item my-3" to="/work_order_invoice">
+                      <Link
+                        className="dropdown-item my-3"
+                        to="/work_order_invoice"
+                      >
                         Work Order Requisition
                       </Link>
                       <hr style={{ margin: 0 }} />

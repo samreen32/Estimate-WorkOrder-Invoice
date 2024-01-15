@@ -13,7 +13,7 @@ import { useNavigate } from "react-router";
 import { UserLogin } from "../../context/AuthContext";
 import { DELETE_SPECIFIC_INVOICE, GET_All_INVOICES } from "../../Auth_API";
 
-export default function TableInvoices() {
+export default function HomeForm2() {
   let navigate = useNavigate();
   const [invoices, setInvoices] = useState([]);
   const { setInvoiceDetails } = UserLogin();
@@ -33,12 +33,12 @@ export default function TableInvoices() {
         if (response.data.success) {
           const estimateInvoices = response.data.estimate_invoices;
           setInvoices(estimateInvoices);
+          console.log(estimateInvoices)
           if (estimateInvoices) {
             const totalSum = estimateInvoices.reduce(
               (sum, invoice) => sum + invoice.estimate_total,
               0
             );
-            console.log(totalSum, "total sum");
             setTotalAmount(totalSum);
           }
         } else {
@@ -73,17 +73,19 @@ export default function TableInvoices() {
   };
 
   /* Function to move to next for edit */
-  const handleEditInvoiceClick = (invoiceId) => {
-    navigate(`/modify_invoice_report`, { state: { invoiceId } });
+  const handleEditNextClick = (invoiceId) => {
+    navigate(`/edit_invoice`, { state: { invoiceId } });
   };
+
+
   const columns = [
     { id: "id", label: "#", minWidth: 100 },
     { id: "estimate_no", label: "Invoice No", minWidth: 100 },
     { id: "estimate_project", label: "Project", minWidth: 100 },
     { id: "estimate_address", label: "Address", minWidth: 100 },
-    { id: "invoice_date", label: "Date", minWidth: 100 },
+    { id: "invoice_date", label: "Invoice Date", minWidth: 100 },
     { id: "estimate_total", label: "Total", minWidth: 100 },
-    { id: "edit", label: "Edit", minWidth: 100 },
+    { id: "edit", label: "Generate Invoice", minWidth: 100 },
     { id: "delete", label: "Delete", minWidth: 100 },
   ];
 
@@ -138,12 +140,12 @@ export default function TableInvoices() {
                 onClick={() => {
                   navigate("/");
                 }}
-                style={{ cursor: "pointer", marginLeft: "-35%" }}
+                style={{ cursor: "pointer", marginLeft: "-25%" }}
               >
                 <i class="fa fa-chevron-left fa-1x" aria-hidden="true"></i>
               </span>
-              <span style={{ cursor: "pointer", marginLeft: "35%" }}>
-                Invoice Report
+              <span style={{ cursor: "pointer", marginLeft: "25%" }}>
+                Generate Invoice Report
               </span>
             </h2>
 
@@ -206,30 +208,24 @@ export default function TableInvoices() {
                         >
                           <TableCell align="left">{index + 1}</TableCell>
                           {columns.slice(1, -2).map((column) => (
-                            <TableCell key={column.id} align="left">
-                              {column.id === "invoice_date"
-                                ? invoice[column.id]
-                                  ? new Date(
-                                      invoice[column.id]
-                                    ).toLocaleDateString()
-                                  : ""
-                                : column.id === "estimate_address"
-                                ? invoice[column.id].join(", ")
-                                : invoice[column.id]}
-                              {column.id === "estimate_total" && `$`}
-                            </TableCell>
-                          ))}
+  <TableCell key={column.id} align="left">
+    {column.id === "invoice_date" && invoice[column.id]
+      ? new Date(invoice[column.id]).toLocaleDateString()
+      : column.id === "estimate_address"
+      ? invoice[column.id].join(", ")
+      : invoice[column.id]}
+    {column.id === "estimate_total" && `$`}
+  </TableCell>
+))}
 
                           <TableCell align="left" style={{ display: "" }}>
                             <Button
                               variant="contained"
                               color="primary"
-                              onClick={() =>
-                                handleEditInvoiceClick(invoice._id)
-                              }
-                              style={{ cursor: "pointer", padding: "6px 22px" }}
+                              onClick={() => handleEditNextClick(invoice._id)}
+                              style={{ cursor: "pointer" }}
                             >
-                              invoice
+                              generate
                             </Button>
                           </TableCell>
 

@@ -1,23 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { UserLogin } from "../../context/AuthContext";
 import logo from "../../assets/img/logoSecond.png";
 import TextField from "@mui/material/TextField";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import axios from "axios";
 import Swal from "sweetalert2";
-import { CREATE_ESTIMATE_INVOICE } from "../../Auth_API";
+import { GET_ESTIMATE_INVOICE, UPDATE_ESTIMATE_INVOICE } from "../../Auth_API";
+import generatePDF from "react-to-pdf";
 
-function HomeForm() {
+function ModifyInvoiceReport() {
   let navigate = useNavigate();
-  const { estimateData, setEstimateData } = UserLogin();
+  const { estimateUpdateData, setEstimateUpdateData } = UserLogin();
   const [visibleAddressFields, setVisibleAddressFields] = useState(1);
   const [focusedField, setFocusedField] = useState(null);
+  const { state } = useLocation();
+  const { invoiceId } = state;
+  const targetRef = useRef();
 
   /* Input field validation */
   const handleInputChange = (index, e) => {
     const { name, value } = e?.target || {};
 
-    setEstimateData((prevData) => {
+    setEstimateUpdateData((prevData) => {
       if (index !== undefined) {
         const updatedItems = [...prevData.items];
         updatedItems[index] = {
@@ -61,44 +65,76 @@ function HomeForm() {
   };
 
   /* Endpoint integration */
-  const handleCreateInvoice = async () => {
+  useEffect(() => {
+    const fetchInvoiceDetails = async () => {
+      try {
+        const response = await axios.get(
+          `${GET_ESTIMATE_INVOICE}/${invoiceId}`
+        );
+        if (response.data.success) {
+          setEstimateUpdateData(response.data.estimate_invoice);
+          console.log(response.data.estimate_invoice);
+        } else {
+          console.error(response.data.message);
+        }
+      } catch (error) {
+        console.error(error.message);
+      }
+    };
+    fetchInvoiceDetails();
+  }, [invoiceId]);
+
+  /* Update Endpoint integration */
+  const handleUpdateInvoice = async () => {
     try {
-      const response = await axios.post(
-        `${CREATE_ESTIMATE_INVOICE}`,
-        estimateData
+      const response = await axios.put(
+        `${UPDATE_ESTIMATE_INVOICE}/${invoiceId}`,
+        estimateUpdateData
       );
-      console.log("Invoice created successfully:", response.data);
-      setEstimateData((prevData) => ({
-        ...prevData,
-        estimate_invoice: {
-          ...prevData.estimate_invoice,
-          estimate_no: response.data.estimate_invoice.estimate_no,
-          estimate_date: response.data.estimate_invoice.estimate_date,
-          invoice_date: response.data.estimate_invoice.invoice_date,
-          estimate_total: response.data.estimate_invoice.estimate_total,
-        },
-      }));
-      navigate(`/generated_estimate`);
-      {
+      if (response.data.success) {
+        console.log(response.data, "updateddddddddddddd");
+        navigate("/generate_invoice");
         Swal.fire({
           icon: "success",
-          title: "Success...",
-          text: "Estimate Generated!",
+          title: "Success!",
+          text: "Invoice Generated successfully.",
         });
-        return;
+        setEstimateUpdateData({
+          estimate_no: "",
+          estimate_address: [""],
+          invoice_date: "",
+          estimate_project: "",
+          items: [
+            {
+              estimate_item: "",
+              estimate_description: "",
+              estimate_quantity: "",
+              estimate_cost: "",
+            },
+          ],
+          estimate_invoice: {
+            estimate_total: null,
+          },
+        });
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: response.data.message || "Failed to update invoice.",
+        });
       }
     } catch (error) {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "Failed to create invoice. Please try again later.",
+        text: "Failed to update invoice. Please try again later.",
       });
-      console.error("Failed to create invoice:", error.message);
+      console.error("Failed to update invoice:", error.message);
     }
   };
 
   const handleAddItem = () => {
-    setEstimateData((prevData) => ({
+    setEstimateUpdateData((prevData) => ({
       ...prevData,
       items: [
         ...prevData.items,
@@ -135,10 +171,10 @@ function HomeForm() {
   }, [focusedField]);
 
   const handleGenerateNew = () => {
-    setEstimateData({
+    setEstimateUpdateData({
       estimate_no: "",
       estimate_address: [""],
-      estimate_date: "",
+      invoice_date: "",
       estimate_project: "",
       items: [
         {
@@ -152,41 +188,41 @@ function HomeForm() {
         estimate_total: null,
       },
     });
-    navigate("/");
+    navigate("/generate_invoice");
   };
 
   return (
-    <div id="invoice-generated">
-      <div className="row justify-content-center text-align-center">
-        <div className="col-md-8 text-center">
-          <div className="row">
-            <div className="col-md-2">
-              <span
-                onClick={handleGenerateNew}
-                style={{ cursor: "pointer", }}
-              >
-                <i class="fa fa-chevron-left fa-2x mt-5" aria-hidden="true"></i>
-              </span>
-            </div>
-            <div className="col-md-8">
-              <h2>
-                <span style={{ cursor: "pointer", }}>
-                  <b>Enter your Estimate details</b>
-                </span>
-              </h2>
-            </div>
-            <div className="col-md-2 mt-5">
-              <span onClick={handleCreateInvoice} className="new-invoice-btn">
-                Save Estimate
-              </span>
-            </div>
-          </div>
+    <div id="invoice-generated mt-5">
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          background: "transparent",
+        }}
+        className="container mt-5"
+      >
+        <span onClick={handleGenerateNew} style={{ cursor: "pointer" }}>
+          <i className="fa fa-chevron-left fa-2x" aria-hidden="true"></i>
+        </span>
+
+        <div style={{ display: "flex" }}>
+          <span onClick={handleUpdateInvoice} className="new-invoice-btn mx-3">
+            Update Invoice
+          </span>
+          <span
+            onClick={() => generatePDF(targetRef, { filename: "invoice.pdf" })}
+            className="new-invoice-btn"
+            style={{ background: "gray" }}
+          >
+            Generate Print
+          </span>
         </div>
       </div>
 
       <div
         className="container px-5 py-5"
         style={{ width: "100%", marginTop: "2%" }}
+        ref={targetRef}
       >
         <>
           <div className="row">
@@ -200,10 +236,17 @@ function HomeForm() {
             <div className="col-2" style={{ display: "flex" }}>
               <div>
                 <h4 style={{ textAlign: "center", fontSize: "30px" }}>
-                  Estimate
+                  Invoice
                 </h4>
                 <img src={logo} alt="logo tub" width={150} />
               </div>
+
+              {/* <i
+                onClick={handleUpdateInvoice}
+                style={{ cursor: "pointer", marginTop: "-20%" }}
+                className="fa fa-chevron-right fa-2x"
+                aria-hidden="true"
+              ></i> */}
             </div>
           </div>
 
@@ -222,7 +265,9 @@ function HomeForm() {
                           name={`estimate_address_${fieldIndex}`}
                           style={{ width: "60%" }}
                           value={
-                            estimateData.estimate_address[fieldIndex - 1] || ""
+                            estimateUpdateData.estimate_address[
+                              fieldIndex - 1
+                            ] || ""
                           }
                           onChange={(e) => handleInputChange(undefined, e)}
                           onKeyDown={(e) =>
@@ -240,28 +285,28 @@ function HomeForm() {
 
             <div className="row estimate_details_div px-5 ">
               <div className="col-md-5">
-                <p>Date</p>
+                <p>Invoice Date</p>
                 <TextField
                   style={{ cursor: "pointer" }}
-                  id="estimate_date"
+                  id="invoice_date"
                   type="date"
                   variant="standard"
-                  name="estimate_date"
+                  name="invoice_date"
                   InputProps={{ disableUnderline: true }}
-                  value={estimateData.estimate_date}
+                  value={estimateUpdateData.invoice_date}
                   onChange={(e) => handleInputChange(undefined, e)}
                   placeholder="MM/DD/YY"
                 />
               </div>
               <div className="col-md-5">
-                <p>Estimate No.</p>
+                <p>Invoice No.</p>
                 <TextField
                   id="estimate_no"
                   type="text"
                   variant="standard"
                   name="estimate_no"
                   InputProps={{ disableUnderline: true }}
-                  value={estimateData.estimate_no}
+                  value={estimateUpdateData.estimate_no}
                   onChange={(e) => handleInputChange(undefined, e)}
                 />
               </div>
@@ -273,7 +318,7 @@ function HomeForm() {
                   variant="standard"
                   name="estimate_project"
                   InputProps={{ disableUnderline: true }}
-                  value={estimateData.estimate_project}
+                  value={estimateUpdateData.estimate_project}
                   onChange={(e) => handleInputChange(undefined, e)}
                 />
               </div>
@@ -306,7 +351,7 @@ function HomeForm() {
 
             <div className="row item_details_div px-5">
               <React.Fragment>
-                {estimateData.items.map((item, index) => (
+                {estimateUpdateData.items.map((item, index) => (
                   <div className="row" style={{ marginTop: "-25px" }}>
                     <div className="col-md-2">
                       <TextField
@@ -368,13 +413,14 @@ function HomeForm() {
                 <br />
               </React.Fragment>
 
-              <div className="invoice-last-div ">
+              <div className="invoice-last-div" style={{ marginTop: "75%" }}>
                 <div className="row">
                   <div className="col-md-9">
                     <span>All jobs are completely guaranteed</span>
                   </div>
                   <div className="col-md-3 px-5">
-                    <span>Total </span> ${estimateData.estimate_total || ""}
+                    <span>Total </span>$
+                    {estimateUpdateData.estimate_total || ""}
                   </div>
                 </div>
               </div>
@@ -386,4 +432,4 @@ function HomeForm() {
   );
 }
 
-export default HomeForm;
+export default ModifyInvoiceReport;

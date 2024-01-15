@@ -11,6 +11,7 @@ const AuthProvider = ({ children }) => {
     estimate_no: "",
     estimate_address: [""],
     estimate_date: "",
+    invoice_date: "",
     estimate_project: "",
     items: [
       {
@@ -29,6 +30,7 @@ const AuthProvider = ({ children }) => {
     estimate_no: "",
     estimate_address: [""],
     estimate_date: "",
+    invoice_date: "",
     estimate_project: "",
     items: [
       {

@@ -92,7 +92,7 @@ function EditInvoice2() {
         estimateUpdateData
       );
       if (response.data.success) {
-        navigate("/estimate_report");
+        navigate("/invoice_report");
         Swal.fire({
           icon: "success",
           title: "Success!",
@@ -101,7 +101,7 @@ function EditInvoice2() {
         setEstimateUpdateData({
           estimate_no: "",
           estimate_address: [""],
-          estimate_date: "",
+          invoice_date: "",
           estimate_project: "",
           items: [
             {
@@ -287,12 +287,12 @@ function EditInvoice2() {
                 <p>Date</p>
                 <TextField
                   style={{ cursor: "pointer" }}
-                  id="estimate_date"
+                  id="invoice_date"
                   type="date"
                   variant="standard"
-                  name="estimate_date"
+                  name="invoice_date"
                   InputProps={{ disableUnderline: true }}
-                  value={estimateUpdateData.estimate_date}
+                  value={estimateUpdateData.invoice_date}
                   onChange={(e) => handleInputChange(undefined, e)}
                   placeholder="MM/DD/YY"
                 />
