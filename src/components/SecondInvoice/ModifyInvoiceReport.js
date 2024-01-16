@@ -229,8 +229,18 @@ function ModifyInvoiceReport() {
             <div className="invoice-first-div col-10 px-5">
               <address className="mt-3 px-3">
                 H FLOOR COVERING LLC <br />
-                1148 BLAKES FIELD PL <br />
-                HENDERSON NV 89011
+                <span style={{ fontSize: "22px", fontWeight: "500" }}>
+                  {" "}
+                  1148 BLAKES FIELD PL{" "}
+                </span>{" "}
+                <br />
+                <span style={{ fontSize: "22px", fontWeight: "500" }}>
+                  HENDERSON NV 89011
+                </span>{" "}
+                <br />
+                <span style={{ fontSize: "22px", fontWeight: "500" }}>
+                  702-463-2265
+                </span>{" "}
               </address>
             </div>
             <div className="col-2" style={{ display: "flex" }}>
@@ -238,7 +248,7 @@ function ModifyInvoiceReport() {
                 <h4 style={{ textAlign: "center", fontSize: "30px" }}>
                   Invoice
                 </h4>
-                <img src={logo} alt="logo tub" width={150} />
+                <img src={logo} alt="logo tub" width={190} />
               </div>
 
               {/* <i
@@ -352,7 +362,7 @@ function ModifyInvoiceReport() {
             <div className="row item_details_div px-5">
               <React.Fragment>
                 {estimateUpdateData.items.map((item, index) => (
-                  <div className="row" style={{ marginTop: "-25px" }}>
+                  <div className="row" style={{ marginTop: "-5px" }}>
                     <div className="col-md-2">
                       <TextField
                         id="estimate_item"
@@ -395,7 +405,7 @@ function ModifyInvoiceReport() {
                         onChange={(e) => handleInputChange(index, e)}
                       />
                     </div>
-                    <div className="col-md-2 my-2">
+                    <div className="col-md-2 mt-3">
                       <TextField
                         id="estimate_total"
                         variant="standard"
@@ -413,16 +423,43 @@ function ModifyInvoiceReport() {
                 <br />
               </React.Fragment>
 
-              <div className="invoice-last-div" style={{ marginTop: "75%" }}>
+              <div className="invoice-last-div" style={{ marginTop: "32%" }}>
                 <div className="row">
                   <div className="col-md-9">
-                    <span>All jobs are completely guaranteed</span>
+                    {/* <span>All jobs are completely guaranteed</span> */}
                   </div>
                   <div className="col-md-3 px-5">
                     <span>Total </span>$
                     {estimateUpdateData.estimate_total || ""}
                   </div>
                 </div>
+              </div>
+            </div>
+            <div className="row mt-5" style={{ fontSize: "23px" }}>
+              <div className="col-md-7">
+                <span>
+                  <b>
+                    <i>EXCLUSIONS: </i>
+                  </b>
+                  Moving Furniture, Major floor prep, Wax shot blasting,
+                  Moisture barrier, Asbestos abatement, Wall board, track steps,
+                  Unforeseeable conditions that may be discovered after existing
+                  floor covering is removed.
+                  <br /> <br />
+                  <b>
+                    <i>WARRANTY: </i>
+                  </b>
+                  One-year warranty after installation is complete.
+                </span>
+              </div>
+              <div className="col-md-5" style={{ textAlign: "right" }}>
+                <span>
+                  Thank you for considering our Proposal.
+                  <br /> <br />
+                  Estimate valid for 30 days.
+                  <br /> <br />
+                  All jobs are completely guaranteed
+                </span>
               </div>
             </div>
           </form>

@@ -9,11 +9,15 @@ import { UserLogin } from "../../context/AuthContext";
 
 export default function CheckHome() {
   let navigate = useNavigate();
-  const { checkData, setCheckData, handleCheckChange } = UserLogin();
+  const { checkData, handleCheckChange } = UserLogin();
 
   const handleGenerateNew = () => {
     navigate("/generate_check");
   };
+
+  while (checkData.note.length < 3) {
+    checkData.note.push("");
+  }
 
   return (
     <>
@@ -126,7 +130,7 @@ export default function CheckHome() {
                           variant="standard"
                           name="check_date"
                           value={checkData.check_date}
-                          onChange={handleCheckChange}
+                          onChange={(e) => handleCheckChange(undefined, e)}
                         />
                       </div>
 
@@ -152,7 +156,7 @@ export default function CheckHome() {
                               variant="standard"
                               name="check_payTo"
                               value={checkData.check_payTo}
-                              onChange={handleCheckChange}
+                              onChange={(e) => handleCheckChange(undefined, e)}
                             />
                           </div>
                           <div className="col-md-3">
@@ -173,7 +177,7 @@ export default function CheckHome() {
                               variant="standard"
                               name="check_dollar_symbol"
                               value={checkData.check_dollar_symbol}
-                              onChange={handleCheckChange}
+                              onChange={(e) => handleCheckChange(undefined, e)}
                             />
                             {/* <TextField
                               style={{
@@ -186,7 +190,7 @@ export default function CheckHome() {
                               variant="standard"
                               name=" check_dollar_symbol"
                               value={checkData.check_dollar_symbol}
-                              onChange={handleCheckChange}
+                              onChange={(e) => handleCheckChange(undefined, e)}
                             /> */}
                           </div>
                         </div>
@@ -209,7 +213,7 @@ export default function CheckHome() {
                             variant="standard"
                             name="check_dollar"
                             value={checkData.check_dollar}
-                            onChange={handleCheckChange}
+                            onChange={(e) => handleCheckChange(undefined, e)}
                           />
                           <b
                             style={{
@@ -273,6 +277,25 @@ export default function CheckHome() {
                 </div>
               </div>
             </div>
+          </div>
+          <div style={{ marginTop: "500px" }}>
+            {checkData.note.slice(0, 3).map((noteValue, index) => (
+              <div key={index}>
+                <TextField
+                  type="text"
+                  name={`note${index + 1}`}
+                  style={{ width: "100%" }}
+                  value={noteValue}
+                  onChange={(e) => handleCheckChange(index, e)}
+                  label={index === 0 ? "Note" : undefined}
+                  variant="standard"
+                  InputLabelProps={{
+                    style: { fontSize: "40px" },
+                  }}
+                  className="mt-4"
+                />
+              </div>
+            ))}
           </div>
         </div>
       </div>

@@ -195,7 +195,8 @@ h3 {
 }
 
 .css-1x51dt5-MuiInputBase-input-MuiInput-input {
-  height: 2.4375em !important;
+  /* height: 2.3em !important; */
+  padding: 25px 0 0 5px !important;
 }
 
 .invoice-map-details-row {
@@ -1099,4 +1100,15 @@ font-size: 25px !important;
 
 .check-field .row.check-field {
   page-break-before: always;
+}
+
+
+.css-8coetn{
+  font-weight: 600 !important;
+  text-align: center !important;
+}
+
+.css-q34dxg{
+  text-align: center !important;
+  
 }

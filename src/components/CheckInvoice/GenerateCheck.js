@@ -1,20 +1,23 @@
 import React, { useRef } from "react";
-import checkLogo from "../../assets/img/checkLogo.png";
-import checkMemo from "../../assets/img/check_memo.png";
-import checkDesign from "../../assets/img/bg-card.png";
 import { useNavigate } from "react-router";
-import TextField from "@mui/material/TextField";
 import "./check.css";
 import generatePDF from "react-to-pdf";
 import { UserLogin } from "../../context/AuthContext";
+import TextField from "@mui/material/TextField";
 
 export default function GenerateCheck() {
   let navigate = useNavigate();
-  const { checkData, setCheckData, handleCheckChange } = UserLogin();
+  const { checkData } = UserLogin();
   const targetRef = useRef();
 
   const handleGenerateNew = () => {
     navigate("/check");
+  };
+
+  // Function to format date as mm/dd/yy
+  const formatDate = (date) => {
+    const options = { year: "2-digit", month: "2-digit", day: "2-digit" };
+    return new Date(date).toLocaleDateString(undefined, options);
   };
 
   return (
@@ -25,10 +28,7 @@ export default function GenerateCheck() {
           style={{ marginTop: "5%" }}
         >
           <div className="col-md-4 text-center">
-            <span
-              onClick={handleGenerateNew}
-              // style={{ cursor: "pointer", marginLeft: "-40%" }}
-            >
+            <span onClick={handleGenerateNew} style={{ cursor: "pointer" }}>
               <i class="fa fa-chevron-left fa-2x" aria-hidden="true"></i>
             </span>
           </div>
@@ -67,70 +67,49 @@ export default function GenerateCheck() {
                     <div className="mt-5 py-5 px-5">
                       {/* Date */}
                       <div className="row mt-3 check-field">
-                        <TextField
+                        <span
                           style={{
                             cursor: "pointer",
-                            width: "23%",
+                            width: "100%",
                             justifyContent: "end",
                             marginLeft: "auto",
                             textAlign: "right",
+                            fontSize: "28px",
+                            marginLeft: "-160px",
                           }}
-                          id="check_date"
-                          type="text"
-                          variant="standard"
-                          InputProps={{ disableUnderline: true }}
-                          name="check_date"
-                          value={checkData.check_date}
-                        />
+                        >
+                          {formatDate(checkData.check_date)}
+                        </span>
                       </div>
 
                       {/* Table main */}
                       <div className="check-field my-5">
                         <div className="row mt-5 px-3">
-                          <div
-                            className="col-md-9"
-                            style={{ display: "flex", fontSize: "23px" }}
-                          >
-                            <b>
-                              {/* PAY TO THE <br /> ORDER OF */}
-                            </b>
-                            <TextField
+                          <div className="col-md-9" style={{ display: "flex" }}>
+                            <b>{/* PAY TO THE <br /> ORDER OF */}</b>
+                            <span
                               style={{
                                 cursor: "pointer",
                                 marginLeft: "5%",
                                 width: "80%",
-                                fontSize: "25px",
+                                fontSize: "28px",
                               }}
-                              id="check_payTo"
-                              type="text"
-                              
-                          variant="standard"
-                          InputProps={{ disableUnderline: true }}
-                              name="check_payTo"
-                              value={checkData.check_payTo}
-                            />
+                            >
+                              {checkData.check_payTo}
+                            </span>
                           </div>
                           <div className="col-md-3">
+                            <span>{/* $ */}</span>
                             <span
-                              style={{ fontWeight: "bold", fontSize: "30px" }}
-                            >
-                              {/* $ */}
-                            </span>
-                            <TextField
                               style={{
                                 cursor: "pointer",
                                 marginLeft: "8%",
                                 width: "85%",
+                                fontSize: "28px",
                               }}
-                              id="check_dollar_symbol"
-                              type="text"
-                              
-                          variant="standard"
-                          InputProps={{ disableUnderline: true }}
-                              name=" check_dollar_symbol"
-                              value={checkData.check_dollar_symbol}
-                              onChange={handleCheckChange}
-                            />
+                            >
+                              {checkData.check_dollar_symbol}
+                            </span>
                           </div>
                         </div>
 
@@ -141,20 +120,16 @@ export default function GenerateCheck() {
                             justifyContent: "end",
                           }}
                         >
-                          <TextField
+                          <span
                             style={{
                               cursor: "pointer",
-                              width: "97%",
+                              width: "99%",
+                              fontSize: "28px",
                             }}
-                            id="check_dollar"
-                            type="text"
-                          
-                            variant="standard"
-                            InputProps={{ disableUnderline: true }}
-                            name="check_dollar"
-                            value={checkData.check_dollar}
-                            onChange={handleCheckChange}
-                          />
+                          >
+                            {checkData.check_dollar}
+                          </span>
+
                           <b
                             style={{
                               marginTop: "-3%",
@@ -166,6 +141,26 @@ export default function GenerateCheck() {
                           </b>
                         </div>
                       </div>
+                    </div>
+
+                    <div className="px-5 py-3" style={{ marginTop: "1500px" }}>
+                      {checkData.note.slice(0, 3).map((noteValue, index) => (
+                        <div key={index}>
+                          <TextField
+                            type="text"
+                            name={`note${index + 1}`}
+                            style={{ width: "100%" }}
+                            value={noteValue}
+                            // onChange={(e) => handleCheckChange(index, e)}
+                            label={index === 0 ? "Note" : undefined}
+                            variant="standard"
+                            InputLabelProps={{
+                              style: { fontSize: "40px" },
+                            }}
+                            className="mt-4"
+                          />
+                        </div>
+                      ))}
                     </div>
                   </div>
                 </div>

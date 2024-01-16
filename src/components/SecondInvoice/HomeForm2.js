@@ -33,7 +33,7 @@ export default function HomeForm2() {
         if (response.data.success) {
           const estimateInvoices = response.data.estimate_invoices;
           setInvoices(estimateInvoices);
-          console.log(estimateInvoices)
+          console.log(estimateInvoices);
           if (estimateInvoices) {
             const totalSum = estimateInvoices.reduce(
               (sum, invoice) => sum + invoice.estimate_total,
@@ -76,7 +76,6 @@ export default function HomeForm2() {
   const handleEditNextClick = (invoiceId) => {
     navigate(`/edit_invoice`, { state: { invoiceId } });
   };
-
 
   const columns = [
     { id: "id", label: "#", minWidth: 100 },
@@ -208,15 +207,18 @@ export default function HomeForm2() {
                         >
                           <TableCell align="left">{index + 1}</TableCell>
                           {columns.slice(1, -2).map((column) => (
-  <TableCell key={column.id} align="left">
-    {column.id === "invoice_date" && invoice[column.id]
-      ? new Date(invoice[column.id]).toLocaleDateString()
-      : column.id === "estimate_address"
-      ? invoice[column.id].join(", ")
-      : invoice[column.id]}
-    {column.id === "estimate_total" && `$`}
-  </TableCell>
-))}
+                            <TableCell key={column.id} align="left">
+                              {column.id === "invoice_date" &&
+                              invoice[column.id]
+                                ? new Date(
+                                    invoice[column.id]
+                                  ).toLocaleDateString()
+                                : column.id === "estimate_address"
+                                ? invoice[column.id].join(", ")
+                                : invoice[column.id]}
+                              {column.id === "estimate_total" && `$`}
+                            </TableCell>
+                          ))}
 
                           <TableCell align="left" style={{ display: "" }}>
                             <Button

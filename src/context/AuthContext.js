@@ -49,6 +49,7 @@ const AuthProvider = ({ children }) => {
   const [workInvoiceDetails, setWorkInvoiceDetails] = useState(null);
   const [workOrderData, setWorkOrderData] = useState({
     cust_id: "",
+    installer_name: "",
     job_name: "",
     phone: "",
     work_date: "",
@@ -70,6 +71,7 @@ const AuthProvider = ({ children }) => {
 
   const [workOrderUpdateData, setWorkOrderUpdateData] = useState({
     cust_id: "",
+    installer_name: "",
     job_name: "",
     phone: "",
     work_date: "",
@@ -117,14 +119,26 @@ const AuthProvider = ({ children }) => {
     check_payTo: "",
     check_dollar_symbol: "",
     check_dollar: "",
+    note: [""],
   });
 
-  const handleCheckChange = (e) => {
+  const handleCheckChange = (index, e) => {
     const { name, value } = e.target;
-    setCheckData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    if (name.startsWith("note")) {
+      setCheckData((prevData) => {
+        const updatedNote = [...prevData.note];
+        updatedNote[index] = value;
+        return {
+          ...prevData,
+          note: updatedNote,
+        };
+      });
+    } else {
+      setCheckData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
   };
 
   return (

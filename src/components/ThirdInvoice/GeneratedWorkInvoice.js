@@ -12,6 +12,7 @@ function GeneratedWorkInvoice() {
   const handleGenerateNew = () => {
     setWorkOrderData({
       cust_id: "",
+      installer_name: "",
       job_name: "",
       phone: "",
       work_date: "",
@@ -39,12 +40,12 @@ function GeneratedWorkInvoice() {
         <div className="col-4" style={{ marginTop: "40px" }}>
           <div className="add-container">
             <span onClick={handleGenerateNew} className="new-invoice-btn">
-              Generate new invoice
+              Generate new workorder
             </span>
           </div>
         </div>
         <div className="col-4">
-          <h2>Invoice Details</h2>
+          <h2>Work Order Details</h2>
         </div>
         <div className="col-4" style={{ marginTop: "50px" }}>
           <span
@@ -82,10 +83,16 @@ function GeneratedWorkInvoice() {
             <div className="row py-5 px-5" style={{ fontSize: "23px" }}>
               <div className="col-10">
                 <div className="row">
-                  <b>Customer ID</b>
-                  &nbsp;&nbsp;{workOrderData.cust_id}
+                  <div className="col-md-6">
+                    <b>Customer ID</b>
+                    &nbsp;&nbsp;{workOrderData.cust_id}
+                  </div>
+                  <div className="col-md-6">
+                    <b>Installer Name</b>
+                    &nbsp;&nbsp;{workOrderData.installer_name}
+                  </div>
                 </div>
-                <div className="row mt-3">
+                <div className="row mt-4">
                   <div className="col-md-6">
                     <b>Job Name</b>
                     <br />
@@ -103,9 +110,9 @@ function GeneratedWorkInvoice() {
                   </div>
                 </div>
 
-                <div className="row mt-3">
+                <div className="row mt-4">
                   <div className="col-md-8">
-                  <b>Address</b>   <br />
+                    <b>Address</b> <br />
                     {workOrderData.work_address.map((field, index) => (
                       <React.Fragment key={`work_address_${index}`}>
                         {field}
@@ -115,20 +122,23 @@ function GeneratedWorkInvoice() {
                   </div>
 
                   <div className="col-md-2">
-                   <b>City</b> 
+                    <b>City</b>
                     <br />
                     {workOrderData.city}
                   </div>
                   <div className="col-md-2">
-                   <b>Zip</b> 
+                    <b>Zip</b>
                     <br />
                     {workOrderData.zip}
                   </div>
                 </div>
 
-                <div className="row" style={{ fontSize: "23px" }}>
+                <div
+                  className="row"
+                  style={{ fontSize: "23px", marginTop: "-30px" }}
+                >
                   <div className="col">
-                   <b>Special Instructions</b> 
+                    <b>Special Instructions</b>
                     <br />
                     {workOrderData.special_instruction}
                   </div>
@@ -165,7 +175,10 @@ function GeneratedWorkInvoice() {
           </>
 
           <>
-            <div className="row py-3 px-5" style={{ fontSize: "23px" }}>
+            <div
+              className="row py-3 px-5"
+              style={{ fontSize: "23px", marginTop: "-40px" }}
+            >
               <div className="col-md-8">
                 <b>Tools or Suppliers</b>
                 <br />
@@ -231,7 +244,7 @@ function GeneratedWorkInvoice() {
                 {workOrderData.contractor}
               </div>
               <div className="col-md-6">
-               <b>Independent Contractor X</b> 
+                <b>Independent Contractor X</b>
                 <br />
                 {workOrderData.independent_contractor}
               </div>
@@ -244,7 +257,7 @@ function GeneratedWorkInvoice() {
                 {workOrderData.contractor_auth_sign}
               </div>
               <div className="col-md-6">
-               <b>Authorized Signagure X</b> 
+                <b>Authorized Signagure X</b>
                 <br />
                 {workOrderData.independent_contractor_auth_sign}
               </div>
@@ -252,12 +265,12 @@ function GeneratedWorkInvoice() {
 
             <div className="row mt-3 px-5" style={{ fontSize: "23px" }}>
               <div className="col-md-6">
-               <b>Date</b> 
+                <b>Date</b>
                 <br />
                 {workOrderData.contractor_date}
               </div>
               <div className="col-md-6">
-              <b>Date</b> 
+                <b>Date</b>
                 <br />
                 {workOrderData.independent_contractor_date}
               </div>

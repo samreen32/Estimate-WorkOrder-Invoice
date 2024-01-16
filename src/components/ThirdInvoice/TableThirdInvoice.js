@@ -36,6 +36,7 @@ export default function TableThirdInvoice() {
         if (response.data.success) {
           const estimateInvoices = response.data.invoices;
           setInvoices(estimateInvoices);
+          console.log(estimateInvoices)
         } else {
           console.error(`Request failed with status: ${response.status}`);
         }
@@ -48,12 +49,21 @@ export default function TableThirdInvoice() {
   }, []);
 
   useEffect(() => {
-    const totalSum = invoices.reduce(
-      (sum, invoice) => sum + parseFloat(invoice.sum_of),
-      0
-    );
+    const totalSum = invoices.reduce((sum, invoice) => {
+      const laborAmount = parseFloat(invoice.labor);
+  
+      // Check if laborAmount is a valid number
+      if (!isNaN(laborAmount)) {
+        return sum + laborAmount;
+      } else {
+        console.warn(`Skipping invalid labor amount in invoice: ${invoice._id}`);
+        return sum;
+      }
+    }, 0);
+  
     setTotalAmount(totalSum);
   }, [invoices]);
+  
 
   /* Endpoint integration for delete invoice */
   const handleDeleteClick = async (invoiceId) => {
@@ -83,10 +93,11 @@ export default function TableThirdInvoice() {
   const columns = [
     { id: "id", label: "#", minWidth: 100 },
     { id: "cust_id", label: "Customer No", minWidth: 100 },
+    { id: "installer_name", label: "Installer Name", minWidth: 100 },
     { id: "job_name", label: "Job Name", minWidth: 100 },
     { id: "phone", label: "Phone", minWidth: 100 },
     { id: "work_date", label: "Date", minWidth: 100 },
-    { id: "sum_of", label: "Total", minWidth: 100 },
+    { id: "labor", label: "Labor", minWidth: 100 },
     { id: "edit", label: "Edit", minWidth: 100 },
     { id: "delete", label: "Delete", minWidth: 100 },
   ];
@@ -218,7 +229,7 @@ export default function TableThirdInvoice() {
                                 : column.id === "estimate_address"
                                 ? invoice[column.id].join(", ")
                                 : invoice[column.id]}
-                              {column.id === "sum_of" && `$`}
+                              {column.id === "labor" && `$`}
                             </TableCell>
                           ))}
                           <TableCell align="left">

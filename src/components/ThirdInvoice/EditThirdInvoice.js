@@ -109,10 +109,11 @@ function EditThirdInvoice() {
         Swal.fire({
           icon: "success",
           title: "Success!",
-          text: "Invoice updated successfully.",
+          text: "Work Order updated successfully.",
         });
         setWorkOrderUpdateData({
           cust_id: "",
+          installer_name: "",
           job_name: "",
           phone: "",
           work_date: "",
@@ -189,6 +190,7 @@ function EditThirdInvoice() {
   const handleGenerateNew = () => {
     setWorkOrderUpdateData({
       cust_id: "",
+      installer_name: "",
       job_name: "",
       phone: "",
       work_date: "",
@@ -226,7 +228,7 @@ function EditThirdInvoice() {
 
         <div style={{ display: "flex" }}>
           <span onClick={handleUpdateInvoice} className="new-invoice-btn mx-3">
-            Update invoice
+            Update workorder
           </span>
           <span
             onClick={() => generatePDF(targetRef, { filename: "invoice.pdf" })}
@@ -259,19 +261,37 @@ function EditThirdInvoice() {
         <div className="row mt-3" style={{ fontSize: "25px" }}>
           <div className="col-10">
             <div className="row">
-              <b>Customer ID</b>
-              <TextField
-                id="cust_id"
-                type="text"
-                variant="standard"
-                name="cust_id"
-                style={{ width: "25%" }}
-                value={workOrderUpdateData?.cust_id || ""}
-                onChange={(e) => handleInputChange(undefined, e)}
-              />
+              <div className="col-md-2">
+                <b>Customer ID</b>
+              </div>
+              <div className="col-md-4">
+                <TextField
+                  id="cust_id"
+                  type="text"
+                  variant="standard"
+                  name="cust_id"
+                  style={{ width: "100%" }}
+                  value={workOrderUpdateData?.cust_id || ""}
+                  onChange={(e) => handleInputChange(undefined, e)}
+                />
+              </div>
+              <div className="col-md-2">
+                <b>Installer Name</b>
+              </div>
+              <div className="col-md-4">
+                <TextField
+                  id="installer_name"
+                  type="text"
+                  variant="standard"
+                  name="installer_name"
+                  style={{ width: "100%" }}
+                  value={workOrderUpdateData?.installer_name || ""}
+                  onChange={(e) => handleInputChange(undefined, e)}
+                />
+              </div>
             </div>
 
-            <div className="row mt-2">
+            <div className="row mt-4">
               <div className="col-md-6">
                 <b>Job Name</b>
                 <br />
@@ -310,7 +330,7 @@ function EditThirdInvoice() {
               </div>
             </div>
 
-            <div className="row mt-2">
+            <div className="row mt-4">
               <div className="col-md-8">
                 <b>Address </b> <br />
                 {[1, 2, 3].map(
@@ -362,7 +382,7 @@ function EditThirdInvoice() {
               </div>
             </div>
 
-            <div className="row mt-1">
+            <div className="row mt-4">
               <div className="col">
                 <b>Special Instructions</b>
                 <br />
@@ -415,7 +435,7 @@ function EditThirdInvoice() {
           </div>
         </div>
 
-        <div className="row mt-1" style={{ fontSize: "25px" }}>
+        <div className="row mt-4" style={{ fontSize: "25px" }}>
           <div className="col-md-8">
             <b>Tools or Suppliers</b>
 
@@ -430,11 +450,10 @@ function EditThirdInvoice() {
             />
           </div>
           <div className="col-md-4">
-            <b>Labor ####</b>
-
+            <b>Labor</b>
             <TextField
               id="labor"
-              type="text"
+              type="number"
               variant="standard"
               name="labor"
               value={workOrderUpdateData?.labor || ""}
@@ -444,7 +463,7 @@ function EditThirdInvoice() {
           </div>
         </div>
 
-        <div className="row mt-1" style={{ fontSize: "25px" }}>
+        <div className="row mt-3" style={{ fontSize: "25px" }}>
           <div className="col-md-12">
             <b>Materials Expenses Supplies</b>
           </div>

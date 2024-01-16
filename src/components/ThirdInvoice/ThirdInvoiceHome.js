@@ -92,7 +92,6 @@ function ThirdInvoiceHome() {
         `${CREATE_WORKOUT_INVOICE}`,
         workOrderData
       );
-      console.log("Invoice created successfully:", response.data);
       setWorkOrderData((prevData) => ({
         ...prevData,
         items: [],
@@ -102,7 +101,7 @@ function ThirdInvoiceHome() {
       Swal.fire({
         icon: "success",
         title: "Success...",
-        text: "Invoice Generated!",
+        text: "Work Order Generated!",
       });
       return;
     } catch (error) {
@@ -196,20 +195,37 @@ function ThirdInvoiceHome() {
         <div className="row py-5" style={{ fontSize: "25px" }}>
           <div className="col-10">
             <div className="row">
-              <p>Customer ID</p>
-
-              <TextField
-                id="cust_id"
-                type="text"
-                variant="standard"
-                name="cust_id"
-                style={{ width: "25%" }}
-                value={workOrderData?.cust_id || ""}
-                onChange={(e) => handleInputChange(undefined, e)}
-              />
+              <div className="col-md-2">
+                <p>Customer ID</p>
+              </div>
+              <div className="col-md-4">
+                <TextField
+                  id="cust_id"
+                  type="text"
+                  variant="standard"
+                  name="cust_id"
+                  style={{ width: "100%" }}
+                  value={workOrderData?.cust_id || ""}
+                  onChange={(e) => handleInputChange(undefined, e)}
+                />
+              </div>
+              <div className="col-md-2">
+                <p>Installer Name</p>
+              </div>
+              <div className="col-md-4">
+                <TextField
+                  id="installer_name"
+                  type="text"
+                  variant="standard"
+                  name="installer_name"
+                  style={{ width: "100%" }}
+                  value={workOrderData?.installer_name || ""}
+                  onChange={(e) => handleInputChange(undefined, e)}
+                />
+              </div>
             </div>
 
-            <div className="row py-3">
+            <div className="row mt-4">
               <div className="col-md-6">
                 Job Name
                 <br />
@@ -248,7 +264,7 @@ function ThirdInvoiceHome() {
               </div>
             </div>
 
-            <div className="row py-3">
+            <div className="row mt-4">
               <div className="col-md-8">
                 Address <br />
                 {[1, 2, 3].map(
@@ -364,10 +380,10 @@ function ThirdInvoiceHome() {
             />
           </div>
           <div className="col-md-4">
-            Labor ####
+            Labor
             <TextField
               id="labor"
-              type="text"
+              type="number"
               variant="standard"
               name="labor"
               value={workOrderData?.labor || ""}

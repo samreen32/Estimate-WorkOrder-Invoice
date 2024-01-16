@@ -30,6 +30,12 @@ function GeneratedInvoice() {
     navigate("/generate_estimate");
   };
 
+  // Function to format date as mm/dd/yy
+  const formatDate = (date) => {
+    const options = { year: "2-digit", month: "2-digit", day: "2-digit" };
+    return new Date(date).toLocaleDateString(undefined, options);
+  };
+
   return (
     <div id="invoice-generated">
       <div className="row">
@@ -60,10 +66,20 @@ function GeneratedInvoice() {
       >
         <div className="row">
           <div className="invoice-first-div col-10 px-5">
-            <address className="mt-2 px-3">
+            <address className="mt-3 px-3">
               H FLOOR COVERING LLC <br />
-              1148 BLAKES FIELD PL <br />
-              HENDERSON NV 89011
+              <span style={{ fontSize: "22px", fontWeight: "500" }}>
+                {" "}
+                1148 BLAKES FIELD PL{" "}
+              </span>{" "}
+              <br />
+              <span style={{ fontSize: "22px", fontWeight: "500" }}>
+                HENDERSON NV 89011
+              </span>{" "}
+              <br />
+              <span style={{ fontSize: "22px", fontWeight: "500" }}>
+                702-463-2265
+              </span>{" "}
             </address>
           </div>
           <div className="col-2 mt-2" style={{ display: "flex" }}>
@@ -73,7 +89,7 @@ function GeneratedInvoice() {
                   <b>Estimate</b>
                 </em>
               </h4>
-              <img src={logo} alt="logo tub" width={180} />
+              <img src={logo} alt="logo tub" width={190} />
             </div>
           </div>
         </div>
@@ -92,8 +108,7 @@ function GeneratedInvoice() {
         >
           <div className="col-md-5" style={{ fontSize: "22px" }}>
             <p>Date</p>
-
-            {estimateData.estimate_date}
+            {formatDate(estimateData.estimate_date)}
           </div>
           <div className="col-md-5" style={{ fontSize: "22px" }}>
             <p>Estimate No.</p>
@@ -157,14 +172,41 @@ function GeneratedInvoice() {
             ))}
           </div>
         </div>
-        <div className="invoice-last-div" style={{ marginTop: "75%" }}>
+        <div className="invoice-last-div" style={{ marginTop: "41%" }}>
           <div className="row">
             <div className="col-md-9">
-              <span>All jobs are completely guaranteed</span>
+              {/* <span>All jobs are completely guaranteed</span> */}
             </div>
             <div className="col-md-3 px-5">
               <span>Total </span> ${estimateData.estimate_total || ""}
             </div>
+          </div>
+        </div>
+        <div className="row mt-5" style={{ fontSize: "23px" }}>
+          <div className="col-md-7">
+            <span>
+              <b>
+                <i>EXCLUSIONS: </i>
+              </b>
+              Moving Furniture, Major floor prep, Wax shot blasting, Moisture
+              barrier, Asbestos abatement, Wall board, track steps,
+              Unforeseeable conditions that may be discovered after existing
+              floor covering is removed.
+              <br /> <br />
+              <b>
+                <i>WARRANTY: </i>
+              </b>
+              One-year warranty after installation is complete.
+            </span>
+          </div>
+          <div className="col-md-5" style={{ textAlign: "right" }}>
+            <span>
+              Thank you for considering our Proposal.
+              <br /> <br />
+              Estimate valid for 30 days.
+              <br /> <br />
+              All jobs are completely guaranteed
+            </span>
           </div>
         </div>
       </div>
