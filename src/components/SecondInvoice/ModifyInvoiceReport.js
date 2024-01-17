@@ -455,8 +455,7 @@ function ModifyInvoiceReport() {
               <div className="col-md-5" style={{ textAlign: "right" }}>
                 <span>
                   Thank you for considering our Proposal.
-                  <br /> <br />
-                  Estimate valid for 30 days.
+                
                   <br /> <br />
                   All jobs are completely guaranteed
                 </span>

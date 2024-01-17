@@ -283,7 +283,6 @@ function EditInvoice2() {
                             handleAddressEnterKey(e, fieldIndex)
                           }
                         />
-                   
                       </React.Fragment>
                     )
                 )}
@@ -359,7 +358,6 @@ function EditInvoice2() {
             </div>
 
             <div className="row item_details_div px-5">
-              
               <React.Fragment>
                 {estimateUpdateData.items.map((item, index) => (
                   <div className="row" style={{ marginTop: "-5px" }}>
@@ -455,8 +453,6 @@ function EditInvoice2() {
               <div className="col-md-5" style={{ textAlign: "right" }}>
                 <span>
                   Thank you for considering our Proposal.
-                  <br /> <br />
-                  Estimate valid for 30 days.
                   <br /> <br />
                   All jobs are completely guaranteed
                 </span>

@@ -395,17 +395,18 @@ function ThirdInvoiceHome() {
 
         <div className="row py-3" style={{ fontSize: "25px" }}>
           <div className="col-md-12">Materials Expenses Supplies</div>
-          <br />
-          <br />
-          <div className="col-md-12">
-            For the Sum of X
+        </div>
+        <br />
+        <div className="row" style={{ fontSize: "25px" }}>
+          <div className="col-md-3">For the Sum of X</div>
+          <div className="col-md-9">
             <TextField
               id="sum_of"
               type="text"
               variant="standard"
               name="sum_of"
               value={workOrderData?.sum_of || ""}
-              style={{ width: "100%" }}
+              style={{ width: "108%", marginLeft: "-70px" }}
               onChange={(e) => handleInputChange(undefined, e)}
             />
           </div>

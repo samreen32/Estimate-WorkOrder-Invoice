@@ -463,19 +463,20 @@ function EditThirdInvoice() {
           </div>
         </div>
 
-        <div className="row mt-3" style={{ fontSize: "25px" }}>
-          <div className="col-md-12">
-            <b>Materials Expenses Supplies</b>
-          </div>
-          <div className="col-md-12">
-            <b>For the Sum of X</b>
+        <div className="row py-3" style={{ fontSize: "25px" }}>
+          <div className="col-md-12">Materials Expenses Supplies</div>
+        </div>
+        <br />
+        <div className="row" style={{ fontSize: "25px" }}>
+          <div className="col-md-3">For the Sum of X</div>
+          <div className="col-md-9">
             <TextField
               id="sum_of"
               type="text"
               variant="standard"
               name="sum_of"
               value={workOrderUpdateData?.sum_of || ""}
-              style={{ width: "100%" }}
+              style={{ width: "108%", marginLeft: "-70px" }}
               onChange={(e) => handleInputChange(undefined, e)}
             />
           </div>

@@ -198,8 +198,7 @@ function GeneratedWorkInvoice() {
                 <b>Materials Expenses Supplies</b>
               </div>
               <div className="col-md-12">
-                For the Sum of X
-                <br />
+                For the Sum of X: &nbsp; &nbsp;
                 {workOrderData.sum_of}
               </div>
             </div>
