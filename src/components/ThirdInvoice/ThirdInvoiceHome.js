@@ -171,7 +171,7 @@ function ThirdInvoiceHome() {
       </div>
       <div
         className="container px-5 py-5"
-        style={{ width: "100%", marginTop: "2%" }}
+        style={{ width: "100%" }}
       >
         <i
           onClick={handleCreateInvoice}
@@ -192,7 +192,7 @@ function ThirdInvoiceHome() {
           </div>
         </div>
 
-        <div className="row py-5" style={{ fontSize: "25px" }}>
+        <div className="row py-5" style={{ fontSize: "20px" }}>
           <div className="col-10">
             <div className="row">
               <div className="col-md-2">
@@ -341,7 +341,7 @@ function ThirdInvoiceHome() {
 
         <div className="blue-bar"></div>
 
-        <div className="row mt-4" style={{ fontSize: "25px" }}>
+        <div className="row mt-4" style={{ fontSize: "20px" }}>
           <div className="col">
             Material Description
             <br />
@@ -366,7 +366,7 @@ function ThirdInvoiceHome() {
           </div>
         </div>
 
-        <div className="row py-3" style={{ fontSize: "25px" }}>
+        <div className="row py-3" style={{ fontSize: "20px" }}>
           <div className="col-md-8">
             Tools or Suppliers
             <TextField
@@ -393,11 +393,11 @@ function ThirdInvoiceHome() {
           </div>
         </div>
 
-        <div className="row py-3" style={{ fontSize: "25px" }}>
+        <div className="row py-3" style={{ fontSize: "20px" }}>
           <div className="col-md-12">Materials Expenses Supplies</div>
         </div>
         <br />
-        <div className="row" style={{ fontSize: "25px" }}>
+        <div className="row" style={{ fontSize: "20px" }}>
           <div className="col-md-3">For the Sum of X</div>
           <div className="col-md-9">
             <TextField
@@ -440,7 +440,7 @@ function ThirdInvoiceHome() {
         </div>
 
         {/* Contractor */}
-        <div className="row py-3" style={{ fontSize: "25px" }}>
+        <div className="row py-3" style={{ fontSize: "20px" }}>
           <div className="col-md-6">
             Contractor X
             <br />
@@ -469,7 +469,7 @@ function ThirdInvoiceHome() {
           </div>
         </div>
 
-        <div className="row py-3" style={{ fontSize: "25px" }}>
+        <div className="row py-3" style={{ fontSize: "20px" }}>
           <div className="col-md-6">
             Authorized Signagure X
             <br />
@@ -498,7 +498,7 @@ function ThirdInvoiceHome() {
           </div>
         </div>
 
-        <div className="row py-3" style={{ fontSize: "25px" }}>
+        <div className="row py-3" style={{ fontSize: "20px" }}>
           <div className="col-md-6">
             Date
             <br />

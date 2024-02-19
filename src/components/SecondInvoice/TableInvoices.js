@@ -76,6 +76,7 @@ export default function TableInvoices() {
   const handleEditInvoiceClick = (invoiceId) => {
     navigate(`/modify_invoice_report`, { state: { invoiceId } });
   };
+  
   const columns = [
     { id: "id", label: "#", minWidth: 100 },
     { id: "estimate_no", label: "Invoice No", minWidth: 100 },
@@ -214,7 +215,7 @@ export default function TableInvoices() {
                                     ).toLocaleDateString()
                                   : ""
                                 : column.id === "estimate_address"
-                                ? invoice[column.id].join(", ")
+                                ? invoice.estimate_address.length > 0 ? invoice.estimate_address[0] : "-"
                                 : invoice[column.id]}
                               {column.id === "estimate_total" && `$`}
                             </TableCell>

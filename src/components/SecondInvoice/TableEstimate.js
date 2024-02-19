@@ -84,6 +84,7 @@ export default function TableEstimate() {
     { id: "id", label: "#", minWidth: 100 },
     { id: "estimate_no", label: "Estimate No", minWidth: 100 },
     { id: "estimate_project", label: "Project", minWidth: 100 },
+    { id: "estimate_project_manager", label: "Project Manager", minWidth: 100 },
     { id: "estimate_address", label: "Address", minWidth: 100 },
     { id: "estimate_date", label: "Date", minWidth: 100 },
     { id: "estimate_total", label: "Total", minWidth: 100 },
@@ -155,9 +156,8 @@ export default function TableEstimate() {
               <Toolbar className="toolbar-search">
                 <form className="d-flex search-form" role="search">
                   <div
-                    className={`search-container ${
-                      isExpanded ? "expanded" : ""
-                    }`}
+                    className={`search-container ${isExpanded ? "expanded" : ""
+                      }`}
                   >
                     <button
                       onClick={handleSearchClick}
@@ -213,11 +213,11 @@ export default function TableEstimate() {
                             <TableCell key={column.id} align="left">
                               {column.id === "estimate_date"
                                 ? new Date(
-                                    invoice[column.id]
-                                  ).toLocaleDateString()
+                                  invoice[column.id]
+                                ).toLocaleDateString()
                                 : column.id === "estimate_address"
-                                ? invoice[column.id].join(", ")
-                                : invoice[column.id]}
+                                  ? invoice.estimate_address.length > 0 ? invoice.estimate_address[0] : "-"
+                                  : invoice[column.id]}
                               {column.id === "estimate_total" && `$`}
                             </TableCell>
                           ))}

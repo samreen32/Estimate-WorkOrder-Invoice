@@ -12,7 +12,9 @@ function ModifyInvoiceReport() {
   let navigate = useNavigate();
   const { estimateUpdateData, setEstimateUpdateData } = UserLogin();
   const [visibleAddressFields, setVisibleAddressFields] = useState(1);
+  const [visibleContractorFields, setVisibleContractorFields] = useState(1);
   const [focusedField, setFocusedField] = useState(null);
+  const [focusedContractorField, setFocusedContractorField] = useState(null);
   const { state } = useLocation();
   const { invoiceId } = state;
   const targetRef = useRef();
@@ -53,6 +55,19 @@ function ModifyInvoiceReport() {
           return {
             ...prevData,
             estimate_address: updatedAddress,
+          };
+        } else if (
+          name === "estimate_contractor_1" ||
+          name === "estimate_contractor_2" ||
+          name === "estimate_contractor_3"
+        ) {
+          const updatedEstimate = [...prevData.estimate_contractor];
+          const fieldIndex = Number(name.split("_")[2]);
+          updatedEstimate[fieldIndex - 1] = value;
+
+          return {
+            ...prevData,
+            estimate_contractor: updatedEstimate,
           };
         } else {
           return {
@@ -102,8 +117,10 @@ function ModifyInvoiceReport() {
         setEstimateUpdateData({
           estimate_no: "",
           estimate_address: [""],
-          invoice_date: "",
+          estimate_contractor: [""],
+          estimate_date: "",
           estimate_project: "",
+          estimate_project_manager: "",
           items: [
             {
               estimate_item: "",
@@ -159,6 +176,15 @@ function ModifyInvoiceReport() {
     }
   };
 
+  const handleContractorEnterKey = (e, fieldIndex) => {
+    if (e.key === "Enter") {
+      const nextVisibleFields = Math.min(visibleContractorFields + 1, 3);
+      setVisibleContractorFields(nextVisibleFields);
+      setFocusedContractorField(nextVisibleFields - 1);
+      e.preventDefault();
+    }
+  };
+
   useEffect(() => {
     if (focusedField !== null) {
       const inputRef = document.getElementById(
@@ -170,12 +196,26 @@ function ModifyInvoiceReport() {
     }
   }, [focusedField]);
 
+  useEffect(() => {
+    if (focusedContractorField !== null) {
+      const inputRef = document.getElementById(
+        `estimate_contractor_${focusedContractorField + 1}`
+      );
+      if (inputRef) {
+        inputRef.focus();
+      }
+    }
+  }, [focusedContractorField]);
+
   const handleGenerateNew = () => {
     setEstimateUpdateData({
       estimate_no: "",
       estimate_address: [""],
+      estimate_contractor: [""],
+      estimate_date: "",
       invoice_date: "",
       estimate_project: "",
+      estimate_project_manager: "",
       items: [
         {
           estimate_item: "",
@@ -221,80 +261,98 @@ function ModifyInvoiceReport() {
 
       <div
         className="container px-5 py-5"
-        style={{ width: "100%", marginTop: "2%" }}
+        style={{ width: "100%" }}
         ref={targetRef}
       >
         <>
           <div className="row">
             <div className="invoice-first-div col-10 px-5">
-              <address className="mt-3 px-3">
+              <address className="px-3">
                 H FLOOR COVERING LLC <br />
-                <span style={{ fontSize: "22px", fontWeight: "500" }}>
+                <span style={{ fontSize: "20px", fontWeight: "500" }}>
                   {" "}
                   1148 BLAKES FIELD PL{" "}
                 </span>{" "}
                 <br />
-                <span style={{ fontSize: "22px", fontWeight: "500" }}>
+                <span style={{ fontSize: "20px", fontWeight: "500" }}>
                   HENDERSON NV 89011
                 </span>{" "}
                 <br />
-                <span style={{ fontSize: "22px", fontWeight: "500" }}>
+                <span style={{ fontSize: "20px", fontWeight: "500" }}>
                   702-463-2265
                 </span>{" "}
               </address>
             </div>
             <div className="col-2" style={{ display: "flex" }}>
               <div>
-                <h4 style={{ textAlign: "center", fontSize: "30px" }}>
-                  Invoice
+                <h4 style={{ textAlign: "center", fontSize: "25px", fontWeight: 600 }}>
+                  <i>Invoice</i>
                 </h4>
                 <img src={logo} alt="logo tub" width={190} />
               </div>
-
-              {/* <i
-                onClick={handleUpdateInvoice}
-                style={{ cursor: "pointer", marginTop: "-20%" }}
-                className="fa fa-chevron-right fa-2x"
-                aria-hidden="true"
-              ></i> */}
             </div>
           </div>
 
           <form>
-            <div className="estimate_address_div px-5">
-              <p>
-                Name/Address <br />
-                {[1, 2, 3].map(
-                  (fieldIndex) =>
-                    fieldIndex <= visibleAddressFields && (
-                      <React.Fragment key={`estimate_address_${fieldIndex}`}>
-                        <TextField
-                          id={`estimate_address_${fieldIndex}`}
-                          type="text"
-                          variant="standard"
-                          name={`estimate_address_${fieldIndex}`}
-                          style={{ width: "60%" }}
-                          value={
-                            estimateUpdateData.estimate_address[
-                              fieldIndex - 1
-                            ] || ""
-                          }
-                          onChange={(e) => handleInputChange(undefined, e)}
-                          onKeyDown={(e) =>
-                            handleAddressEnterKey(e, fieldIndex)
-                          }
-                        />
-                        <br />
-                      </React.Fragment>
-                    )
-                )}
-              </p>
+            <div className="row estimate_address_div px-5">
+              <div className="col-md-6">
+                <p>
+                  Name/Address <br />
+                  {[1, 2, 3].map(
+                    (fieldIndex) =>
+                      fieldIndex <= visibleAddressFields && (
+                        <React.Fragment key={`estimate_address_${fieldIndex}`}>
+                          <TextField
+                            id={`estimate_address_${fieldIndex}`}
+                            type="text"
+                            variant="standard"
+                            name={`estimate_address_${fieldIndex}`}
+                            style={{ width: "100%" }}
+                            value={
+                              estimateUpdateData.estimate_address[fieldIndex - 1] || ""
+                            }
+                            onChange={(e) => handleInputChange(undefined, e)}
+                            onKeyDown={(e) =>
+                              handleAddressEnterKey(e, fieldIndex)
+                            }
+                          />
+                          <br />
+                        </React.Fragment>
+                      )
+                  )}
+                </p>
+              </div>
+              <div className="col-md-6">
+                <p>
+                  Contractor <br />
+                  {[1, 2, 3].map(
+                    (fieldIndex) =>
+                      fieldIndex <= visibleContractorFields && (
+                        <React.Fragment key={`estimate_contractor_${fieldIndex}`}>
+                          <TextField
+                            id={`estimate_contractor_${fieldIndex}`}
+                            type="text"
+                            variant="standard"
+                            name={`estimate_contractor_${fieldIndex}`}
+                            style={{ width: "100%" }}
+                            value={
+                              estimateUpdateData.estimate_contractor[fieldIndex - 1] || ""
+                            }
+                            onChange={(e) => handleInputChange(undefined, e)}
+                            onKeyDown={(e) =>
+                              handleContractorEnterKey(e, fieldIndex)
+                            }
+                          />
+                          <br />
+                        </React.Fragment>
+                      )
+                  )}
+                </p>
+              </div>
             </div>
-            <br />
-            <br />
 
-            <div className="row estimate_details_div px-5 ">
-              <div className="col-md-5">
+            <div className="row estimate_details_div px-5 mt-3">
+              <div className="col-md-4">
                 <p>Invoice Date</p>
                 <TextField
                   style={{ cursor: "pointer" }}
@@ -308,7 +366,7 @@ function ModifyInvoiceReport() {
                   placeholder="MM/DD/YY"
                 />
               </div>
-              <div className="col-md-5">
+              <div className="col-md-3">
                 <p>Invoice No.</p>
                 <TextField
                   id="estimate_no"
@@ -332,10 +390,21 @@ function ModifyInvoiceReport() {
                   onChange={(e) => handleInputChange(undefined, e)}
                 />
               </div>
+              <div className="col-md-3">
+                <p>Project Manager</p>
+                <TextField
+                  id="estimate_project_manager"
+                  type="text"
+                  variant="standard"
+                  name="estimate_project_manager"
+                  InputProps={{ disableUnderline: true }}
+                  value={estimateUpdateData.estimate_project_manager}
+                  onChange={(e) => handleInputChange(undefined, e)}
+                />
+              </div>
             </div>
 
             <div className="line"></div>
-            <br />
 
             <div className="row item_details_div px-5">
               <div className="col-md-2">
@@ -411,11 +480,11 @@ function ModifyInvoiceReport() {
                         variant="standard"
                         type="text"
                         InputProps={{ disableUnderline: true }}
+                        style={{marginTop: "-13px"}}
                         readonly
-                        value={`${" "}$ ${
-                          (item.estimate_quantity || 0) *
+                        value={`${" "}$ ${(item.estimate_quantity || 0) *
                           (item.estimate_cost || 0)
-                        }`}
+                          }`}
                       />
                     </div>
                   </div>
@@ -423,7 +492,7 @@ function ModifyInvoiceReport() {
                 <br />
               </React.Fragment>
 
-              <div className="invoice-last-div" style={{ marginTop: "32%" }}>
+              <div className="invoice-last-div">
                 <div className="row">
                   <div className="col-md-9">
                     {/* <span>All jobs are completely guaranteed</span> */}
@@ -435,7 +504,7 @@ function ModifyInvoiceReport() {
                 </div>
               </div>
             </div>
-            <div className="row mt-5" style={{ fontSize: "23px" }}>
+            <div className="row" style={{ fontSize: "23px", marginTop: "13%" }}>
               <div className="col-md-7">
                 <span>
                   <b>
@@ -455,8 +524,7 @@ function ModifyInvoiceReport() {
               <div className="col-md-5" style={{ textAlign: "right" }}>
                 <span>
                   Thank you for considering our Proposal.
-                
-                  <br /> <br />
+                  <br />
                   All jobs are completely guaranteed
                 </span>
               </div>

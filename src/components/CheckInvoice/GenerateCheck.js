@@ -143,8 +143,8 @@ export default function GenerateCheck() {
                       </div>
                     </div>
 
-                    <div className="px-5 py-3" style={{ marginTop: "1500px" }}>
-                      {checkData.note.slice(0, 3).map((noteValue, index) => (
+                    <div className="px-5 py-3" style={{ marginTop: "150px" }}>
+                      {checkData.note.slice(0, 21).map((noteValue, index) => (
                         <div key={index}>
                           <TextField
                             type="text"
@@ -155,7 +155,7 @@ export default function GenerateCheck() {
                             label={index === 0 ? "Note" : undefined}
                             variant="standard"
                             InputLabelProps={{
-                              style: { fontSize: "40px" },
+                              style: { fontSize: "23px" },
                             }}
                             className="mt-4"
                           />

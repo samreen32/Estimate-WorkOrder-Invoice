@@ -13,6 +13,7 @@ function GeneratedInvoice() {
     setEstimateData({
       estimate_no: "",
       estimate_address: [""],
+      estimate_contractor: [""],
       estimate_date: "",
       estimate_project: "",
       items: [
@@ -60,7 +61,7 @@ function GeneratedInvoice() {
       </div>
 
       <div
-        className="container px-5 py-5 "
+        className="container px-5 py-5 mt-4"
         style={{ width: "100%" }}
         ref={targetRef}
       >
@@ -68,23 +69,23 @@ function GeneratedInvoice() {
           <div className="invoice-first-div col-10 px-5">
             <address className="mt-3 px-3">
               H FLOOR COVERING LLC <br />
-              <span style={{ fontSize: "22px", fontWeight: "500" }}>
+              <span style={{ fontSize: "20px", fontWeight: "500" }}>
                 {" "}
                 1148 BLAKES FIELD PL{" "}
               </span>{" "}
               <br />
-              <span style={{ fontSize: "22px", fontWeight: "500" }}>
+              <span style={{ fontSize: "20px", fontWeight: "500" }}>
                 HENDERSON NV 89011
               </span>{" "}
               <br />
-              <span style={{ fontSize: "22px", fontWeight: "500" }}>
+              <span style={{ fontSize: "20px", fontWeight: "500" }}>
                 702-463-2265
               </span>{" "}
             </address>
           </div>
-          <div className="col-2 mt-2" style={{ display: "flex" }}>
+          <div className="col-2" style={{ display: "flex" }}>
             <div>
-              <h4 style={{ textAlign: "center", fontSize: "30px" }}>
+              <h4 style={{ textAlign: "center", fontSize: "25px" }}>
                 <em>
                   <b>Estimate</b>
                 </em>
@@ -93,30 +94,44 @@ function GeneratedInvoice() {
             </div>
           </div>
         </div>
-        <div className="estimate_address_div px-5" style={{ fontSize: "22px" }}>
-          <p>Name/Address</p>
-          {estimateData.estimate_address.map((field, index) => (
-            <React.Fragment key={`estimate_address_${index}`}>
-              {field}
-              <br />
-            </React.Fragment>
-          ))}
+        <div className="row estimate_address_div px-5" style={{ fontSize: "20px" }}>
+          <div className="col-md-6">
+            <p>Name/Address</p>
+            {estimateData.estimate_address.map((field, index) => (
+              <React.Fragment key={`estimate_address_${index}`}>
+                {field}
+                <br />
+              </React.Fragment>
+            ))}
+          </div>
+          <div className="col-md-6">
+            <p>Contractor</p>
+            {estimateData.estimate_address.map((field, index) => (
+              <React.Fragment key={`estimate_cotractor_${index}`}>
+                {field}
+                <br />
+              </React.Fragment>
+            ))}
+          </div>
         </div>
         <div
-          className="row estimate_details_div px-5 "
-          style={{ marginTop: "10%" }}
+          className="row estimate_details_div px-5 mt-5"
         >
-          <div className="col-md-5" style={{ fontSize: "22px" }}>
+          <div className="col-md-4" style={{ fontSize: "22px" }}>
             <p>Date</p>
             {formatDate(estimateData.estimate_date)}
           </div>
-          <div className="col-md-5" style={{ fontSize: "22px" }}>
+          <div className="col-md-3" style={{ fontSize: "22px" }}>
             <p>Estimate No.</p>
             {estimateData.estimate_no}
           </div>
           <div className="col-md-2" style={{ fontSize: "22px" }}>
             <p>Project</p>
             {estimateData.estimate_project}
+          </div>
+          <div className="col-md-3" style={{ fontSize: "22px" }}>
+            <p>Project Manager</p>
+            {estimateData.estimate_project_manager}
           </div>
         </div>
         <div className="line mt-3"></div>
@@ -164,15 +179,14 @@ function GeneratedInvoice() {
             <p>Amount</p>
             {estimateData.items.map((item, index) => (
               <span key={index}>
-                {`${"    "}$ ${
-                  (item.estimate_quantity || 0) * (item.estimate_cost || 0)
-                }`}
+                {`${"    "}$ ${(item.estimate_quantity || 0) * (item.estimate_cost || 0)
+                  }`}
                 <br />
               </span>
             ))}
           </div>
         </div>
-        <div className="invoice-last-div" style={{ marginTop: "41%" }}>
+        <div className="invoice-last-div" style={{  }}>
           <div className="row">
             <div className="col-md-9">
               {/* <span>All jobs are completely guaranteed</span> */}
@@ -182,7 +196,7 @@ function GeneratedInvoice() {
             </div>
           </div>
         </div>
-        <div className="row mt-5" style={{ fontSize: "23px" }}>
+        <div className="row mt-3" style={{ fontSize: "23px" }}>
           <div className="col-md-7">
             <span>
               <b>
@@ -202,13 +216,14 @@ function GeneratedInvoice() {
           <div className="col-md-5" style={{ textAlign: "right" }}>
             <span>
               Thank you for considering our Proposal.
-              <br /> <br />
+              <br />
               Estimate valid for 30 days.
-              <br /> <br />
+              <br />
               All jobs are completely guaranteed
             </span>
           </div>
         </div>
+      
       </div>
     </div>
   );

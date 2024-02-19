@@ -4,6 +4,7 @@ body {
   font-family: "Times New Roman";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 .invoice-conatiner {
@@ -117,12 +118,12 @@ h3 {
 
 .invoice-first-div {
   display: flex;
-  font-size: 25px;
+  font-size: 23px;
   font-weight: 550;
 }
 
 .invoice-first-div img {
-  margin-top: 3%;
+  /* margin-top: 3%; */
   width: 30%;
   height: 65%;
 }
@@ -131,11 +132,10 @@ h3 {
   font-size: 3em;
 }
 
-
 .bill_to_div,
 .estimate_address_div,
 .po_details_div {
-  margin-top: 8%;
+  margin-top: 2%;
 
 }
 
@@ -164,8 +164,8 @@ h3 {
 }
 
 .invoice-last-div {
-  margin-top: 30%;
-  font-size: 30px;
+  margin-top: 55%;
+  font-size: 24px;
 }
 
 .invoice-last-div p {
@@ -175,7 +175,6 @@ h3 {
 .invoice-last-div h5 {
   text-align: center;
 }
-
 
 .download-icon-container {
   display: flex;
@@ -196,7 +195,7 @@ h3 {
 
 .css-1x51dt5-MuiInputBase-input-MuiInput-input {
   /* height: 2.3em !important; */
-  padding: 25px 0 0 5px !important;
+  padding: 15px 0 0 5px !important;
 }
 
 .invoice-map-details-row {

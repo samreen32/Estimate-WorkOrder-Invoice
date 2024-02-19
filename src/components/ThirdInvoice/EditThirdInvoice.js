@@ -10,7 +10,6 @@ import {
   UPDATE_WORKOUT_INVOICE,
 } from "../../Auth_API";
 import generatePDF from "react-to-pdf";
-
 function EditThirdInvoice() {
   let navigate = useNavigate();
   const targetRef = useRef();
@@ -21,11 +20,9 @@ function EditThirdInvoice() {
   const [visibleMaterialFields, setVisibleMaterialFields] = useState(1);
   const [focusedField, setFocusedField] = useState(null);
   const [focusedMaterialField, setFocusedMaterialField] = useState(null);
-
   /* Input field validation */
   const handleInputChange = (index, e) => {
     const { name, value } = e?.target || {};
-
     setWorkOrderUpdateData((prevData) => {
       if (index !== undefined) {
         const updatedItems = [...prevData.items];
@@ -33,7 +30,6 @@ function EditThirdInvoice() {
           ...updatedItems[index],
           [name]: value,
         };
-
         return {
           ...prevData,
           items: updatedItems,
@@ -47,7 +43,6 @@ function EditThirdInvoice() {
           const updatedAddress = [...prevData.work_address];
           const fieldIndex = Number(name.split("_")[2]);
           updatedAddress[fieldIndex - 1] = value;
-
           return {
             ...prevData,
             work_address: updatedAddress,
@@ -61,7 +56,6 @@ function EditThirdInvoice() {
           const updatedMaterial = [...prevData.material_desc];
           const fieldIndex = Number(name.split("_")[2]);
           updatedMaterial[fieldIndex - 1] = value;
-
           return {
             ...prevData,
             work_address: [...prevData.work_address], // Keep work_address unchanged
@@ -76,7 +70,6 @@ function EditThirdInvoice() {
       }
     });
   };
-
   /* Endpoint integration */
   useEffect(() => {
     const fetchInvoiceDetails = async () => {
@@ -96,7 +89,6 @@ function EditThirdInvoice() {
     };
     fetchInvoiceDetails();
   }, [invoiceId]);
-
   /* Update Endpoint integration */
   const handleUpdateInvoice = async () => {
     try {
@@ -148,7 +140,6 @@ function EditThirdInvoice() {
       console.error("Failed to update invoice:", error.message);
     }
   };
-
   /* Press enter key to add new field as well as key focus */
   const handleAddressEnterKey = (e, fieldIndex) => {
     if (e.key === "Enter") {
@@ -158,7 +149,6 @@ function EditThirdInvoice() {
       e.preventDefault();
     }
   };
-
   const handleMaterialEnterKey = (e, fieldIndex) => {
     if (e.key === "Enter") {
       const nextVisibleFields = Math.min(visibleMaterialFields + 1, 3);
@@ -167,7 +157,6 @@ function EditThirdInvoice() {
       e.preventDefault();
     }
   };
-
   useEffect(() => {
     if (focusedField !== null) {
       const inputRef = document.getElementById(
@@ -186,7 +175,6 @@ function EditThirdInvoice() {
       }
     }
   }, [focusedField, focusedMaterialField]);
-
   const handleGenerateNew = () => {
     setWorkOrderUpdateData({
       cust_id: "",
@@ -211,7 +199,6 @@ function EditThirdInvoice() {
     });
     navigate("/workout_report");
   };
-
   return (
     <div id="invoice-generated">
       <div
@@ -225,7 +212,6 @@ function EditThirdInvoice() {
         <span onClick={handleGenerateNew} style={{ cursor: "pointer" }}>
           <i className="fa fa-chevron-left fa-2x" aria-hidden="true"></i>
         </span>
-
         <div style={{ display: "flex" }}>
           <span onClick={handleUpdateInvoice} className="new-invoice-btn mx-3">
             Update workorder
@@ -239,7 +225,6 @@ function EditThirdInvoice() {
           </span>
         </div>
       </div>
-
       <div
         className="container px-5 py-5"
         style={{ width: "100%", marginTop: "2%" }}
@@ -257,8 +242,7 @@ function EditThirdInvoice() {
             </span>
           </div>
         </div>
-
-        <div className="row mt-3" style={{ fontSize: "25px" }}>
+        <div className="row mt-3" style={{ fontSize: "20px" }}>
           <div className="col-10">
             <div className="row">
               <div className="col-md-2">
@@ -290,7 +274,6 @@ function EditThirdInvoice() {
                 />
               </div>
             </div>
-
             <div className="row mt-4">
               <div className="col-md-6">
                 <b>Job Name</b>
@@ -329,7 +312,6 @@ function EditThirdInvoice() {
                 />
               </div>
             </div>
-
             <div className="row mt-4">
               <div className="col-md-8">
                 <b>Address </b> <br />
@@ -357,7 +339,6 @@ function EditThirdInvoice() {
                     )
                 )}
               </div>
-
               <div className="col-md-2">
                 <b>City</b> <br />
                 <TextField
@@ -381,7 +362,6 @@ function EditThirdInvoice() {
                 />
               </div>
             </div>
-
             <div className="row mt-4">
               <div className="col">
                 <b>Special Instructions</b>
@@ -398,17 +378,14 @@ function EditThirdInvoice() {
               </div>
             </div>
           </div>
-
           <div className="col-2">
             <div>
               <img src={logo} alt="logo tub" width={180} />
             </div>
           </div>
         </div>
-
         <div className="blue-bar"></div>
-
-        <div className="row mt-2" style={{ fontSize: "25px" }}>
+        <div className="row mt-2" style={{ fontSize: "20px" }}>
           <div className="col">
             <b>Material Description</b>
             <br />
@@ -434,11 +411,9 @@ function EditThirdInvoice() {
             )}
           </div>
         </div>
-
-        <div className="row mt-4" style={{ fontSize: "25px" }}>
+        <div className="row mt-4" style={{ fontSize: "20px" }}>
           <div className="col-md-8">
             <b>Tools or Suppliers</b>
-
             <TextField
               id="tools"
               type="text"
@@ -462,12 +437,11 @@ function EditThirdInvoice() {
             />
           </div>
         </div>
-
-        <div className="row py-3" style={{ fontSize: "25px" }}>
+        <div className="row py-3" style={{ fontSize: "20px" }}>
           <div className="col-md-12">Materials Expenses Supplies</div>
         </div>
         <br />
-        <div className="row" style={{ fontSize: "25px" }}>
+        <div className="row" style={{ fontSize: "20px" }}>
           <div className="col-md-3">For the Sum of X</div>
           <div className="col-md-9">
             <TextField
@@ -481,7 +455,6 @@ function EditThirdInvoice() {
             />
           </div>
         </div>
-
         {/* Theory */}
         <div className="row mt-3" style={{ fontSize: "19px" }}>
           <p>
@@ -508,9 +481,8 @@ function EditThirdInvoice() {
             also been paid.
           </p>
         </div>
-
         {/* Contractor */}
-        <div className="row" style={{ fontSize: "25px" }}>
+        <div className="row" style={{ fontSize: "20px" }}>
           <div className="col-md-6">
             <b>Contractor X</b>
             <br />
@@ -538,8 +510,7 @@ function EditThirdInvoice() {
             />
           </div>
         </div>
-
-        <div className="row mt-2" style={{ fontSize: "25px" }}>
+        <div className="row mt-2" style={{ fontSize: "20px" }}>
           <div className="col-md-6">
             <b>Authorized Signagure X</b>
             <br />
@@ -569,8 +540,7 @@ function EditThirdInvoice() {
             />
           </div>
         </div>
-
-        <div className="row mt-2" style={{ fontSize: "25px" }}>
+        <div className="row mt-2" style={{ fontSize: "20px" }}>
           <div className="col-md-6">
             <b>Date</b>
             <br />
@@ -602,5 +572,4 @@ function EditThirdInvoice() {
     </div>
   );
 }
-
 export default EditThirdInvoice;

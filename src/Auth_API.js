@@ -1,29 +1,29 @@
 export const CREATE_ESTIMATE_INVOICE =
-  "https://second-invoice-50268646ed44.herokuapp.com/api/auth/createEstimateInvoice";
+  "http://localhost:5000/api/auth/createEstimateInvoice";
 
 export const GET_ESTIMATE_INVOICE =
-  "https://second-invoice-50268646ed44.herokuapp.com/api/auth/getEstimateInvoiceById";
+  "http://localhost:5000/api/auth/getEstimateInvoiceById";
 
 export const GET_All_INVOICES =
-  "https://second-invoice-50268646ed44.herokuapp.com/api/auth/getAllEstimateInvoices";
+  "http://localhost:5000/api/auth/getAllEstimateInvoices";
 
 export const UPDATE_ESTIMATE_INVOICE =
-  "https://second-invoice-50268646ed44.herokuapp.com/api/auth/updateEstimateInvoice";
+  "http://localhost:5000/api/auth/updateEstimateInvoice";
 
 export const DELETE_SPECIFIC_INVOICE =
-  "https://second-invoice-50268646ed44.herokuapp.com/api/auth/deleteEstimateInvoice";
+  "http://localhost:5000/api/auth/deleteEstimateInvoice";
 
 export const CREATE_WORKOUT_INVOICE =
-  "https://second-invoice-50268646ed44.herokuapp.com/api/auth/createWorkOrderInvoice";
+  "http://localhost:5000/api/auth/createWorkOrderInvoice";
 
 export const GET_All_WORKOUT_INVOICES =
-  "https://second-invoice-50268646ed44.herokuapp.com/api/auth/getAllThirdInvoices";
+  "http://localhost:5000/api/auth/getAllThirdInvoices";
 
 export const DELETE_SPECIFIC_WORKOUT_INVOICE =
-  "https://second-invoice-50268646ed44.herokuapp.com/api/auth/deleteWorkoutInvoice";
+  "http://localhost:5000/api/auth/deleteWorkoutInvoice";
 
 export const GET_SPECIFIC_WORKOUT_INVOICE =
-  "https://second-invoice-50268646ed44.herokuapp.com/api/auth/getWorkoutInvoice";
+  "http://localhost:5000/api/auth/getWorkoutInvoice";
 
 export const UPDATE_WORKOUT_INVOICE =
-  "https://second-invoice-50268646ed44.herokuapp.com/api/auth/updateWorkoutInvoice";
+  "http://localhost:5000/api/auth/updateWorkoutInvoice";

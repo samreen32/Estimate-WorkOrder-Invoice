@@ -81,6 +81,7 @@ export default function HomeForm2() {
     { id: "id", label: "#", minWidth: 100 },
     { id: "estimate_no", label: "Invoice No", minWidth: 100 },
     { id: "estimate_project", label: "Project", minWidth: 100 },
+    { id: "estimate_project_manager", label: "Project Manager", minWidth: 100 },
     { id: "estimate_address", label: "Address", minWidth: 100 },
     { id: "invoice_date", label: "Invoice Date", minWidth: 100 },
     { id: "estimate_total", label: "Total", minWidth: 100 },
@@ -214,7 +215,7 @@ export default function HomeForm2() {
                                     invoice[column.id]
                                   ).toLocaleDateString()
                                 : column.id === "estimate_address"
-                                ? invoice[column.id].join(", ")
+                                ? invoice.estimate_address.length > 0 ? invoice.estimate_address[0] : "-"
                                 : invoice[column.id]}
                               {column.id === "estimate_total" && `$`}
                             </TableCell>

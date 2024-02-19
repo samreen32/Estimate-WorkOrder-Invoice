@@ -15,7 +15,7 @@ export default function CheckHome() {
     navigate("/generate_check");
   };
 
-  while (checkData.note.length < 3) {
+  while (checkData.note.length < 21) {
     checkData.note.push("");
   }
 
@@ -269,8 +269,8 @@ export default function CheckHome() {
                         type="text"
                         variant="standard"
                         name="check_signature"
-                        //   value={checkData.check_signature}
-                        //   onChange={(e) => handleCheckChange(undefined, e)}
+                      //   value={checkData.check_signature}
+                      //   onChange={(e) => handleCheckChange(undefined, e)}
                       />
                     </div>
                   </div>
@@ -278,8 +278,8 @@ export default function CheckHome() {
               </div>
             </div>
           </div>
-          <div style={{ marginTop: "500px" }}>
-            {checkData.note.slice(0, 3).map((noteValue, index) => (
+          <div style={{ marginTop: "120px" }}>
+            {checkData.note.slice(0, 21).map((noteValue, index) => (
               <div key={index}>
                 <TextField
                   type="text"
@@ -290,7 +290,7 @@ export default function CheckHome() {
                   label={index === 0 ? "Note" : undefined}
                   variant="standard"
                   InputLabelProps={{
-                    style: { fontSize: "40px" },
+                    style: { fontSize: "23px" },
                   }}
                   className="mt-4"
                 />

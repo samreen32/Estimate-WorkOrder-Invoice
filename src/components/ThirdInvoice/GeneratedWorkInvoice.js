@@ -80,7 +80,7 @@ function GeneratedWorkInvoice() {
           </>
           {/* after top */}
           <>
-            <div className="row py-5 px-5" style={{ fontSize: "23px" }}>
+            <div className="row py-5 px-5" style={{ fontSize: "20px" }}>
               <div className="col-10">
                 <div className="row">
                   <div className="col-md-6">
@@ -135,7 +135,7 @@ function GeneratedWorkInvoice() {
 
                 <div
                   className="row"
-                  style={{ fontSize: "23px", marginTop: "-30px" }}
+                  style={{ fontSize: "20px", marginTop: "-30px" }}
                 >
                   <div className="col">
                     <b>Special Instructions</b>
@@ -161,7 +161,7 @@ function GeneratedWorkInvoice() {
           <div className="blue-bar"></div>
 
           <>
-            <div className="row px-5 mt-1" style={{ fontSize: "23px" }}>
+            <div className="row px-5 mt-1" style={{ fontSize: "20px" }}>
               <div className="col">
                 <b>Material Description</b> <br />
                 {workOrderData.material_desc.map((field, index) => (
@@ -177,7 +177,7 @@ function GeneratedWorkInvoice() {
           <>
             <div
               className="row py-3 px-5"
-              style={{ fontSize: "23px", marginTop: "-40px" }}
+              style={{ fontSize: "20px", marginTop: "-40px" }}
             >
               <div className="col-md-8">
                 <b>Tools or Suppliers</b>
@@ -193,7 +193,7 @@ function GeneratedWorkInvoice() {
           </>
 
           <>
-            <div className="row mt-2 px-5" style={{ fontSize: "23px" }}>
+            <div className="row mt-2 px-5" style={{ fontSize: "20px" }}>
               <div className="col-md-12">
                 <b>Materials Expenses Supplies</b>
               </div>
@@ -236,7 +236,7 @@ function GeneratedWorkInvoice() {
 
           <>
             {/* Contractor */}
-            <div className="row px-5" style={{ fontSize: "23px" }}>
+            <div className="row px-5" style={{ fontSize: "20px" }}>
               <div className="col-md-6">
                 <b>Contractor X</b>
                 <br />
@@ -249,7 +249,7 @@ function GeneratedWorkInvoice() {
               </div>
             </div>
 
-            <div className="row px-5 mt-3" style={{ fontSize: "23px" }}>
+            <div className="row px-5 mt-3" style={{ fontSize: "20px" }}>
               <div className="col-md-6">
                 <b>Authorized Signagure X</b>
                 <br />
@@ -262,7 +262,7 @@ function GeneratedWorkInvoice() {
               </div>
             </div>
 
-            <div className="row mt-3 px-5" style={{ fontSize: "23px" }}>
+            <div className="row mt-3 px-5" style={{ fontSize: "20px" }}>
               <div className="col-md-6">
                 <b>Date</b>
                 <br />
