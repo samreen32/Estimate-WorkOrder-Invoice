@@ -195,22 +195,20 @@ function HomeForm() {
 
   return (
     <div id="invoice-generated">
-      <div className="row justify-content-center text-align-center">
-        <div className="col-md-8 text-center">
-          <div className="row">
-            <div className="col-md-2">
-              <span onClick={handleGenerateNew} style={{ cursor: "pointer" }}>
-                <i class="fa fa-chevron-left fa-2x mt-3" aria-hidden="true"></i>
-              </span>
-            </div>
-            <div className="col-md-8">
-
-            </div>
-            <div className="col-md-2 mt-3">
-              <span onClick={handleCreateInvoice} className="new-invoice-btn">
-                Save Estimate
-              </span>
-            </div>
+      <div className="centered-container">
+        <div className="row container py-3 mt-2" style={{ background: "transparent" }}>
+          <div className="col-md-2">
+            <span onClick={handleGenerateNew} style={{ cursor: "pointer" }}>
+              <i className="fa fa-chevron-left fa-2x mt-3" aria-hidden="true"></i>
+            </span>
+          </div>
+          <div className="col-md-8">
+            {/* Content for the middle column */}
+          </div>
+          <div className="col-md-2 mt-3">
+            <span onClick={handleCreateInvoice} className="new-invoice-btn">
+              Save Estimate
+            </span>
           </div>
         </div>
       </div>
@@ -219,37 +217,38 @@ function HomeForm() {
         className="container px-5 py-5 mt-4"
         style={{ width: "100%" }}
       >
-        <>
-          <div className="row">
-            <div className="invoice-first-div col-10 px-5">
-              <address className="px-3">
-                H FLOOR COVERING LLC <br />
-                <span style={{ fontSize: "20px", fontWeight: "500" }}>
-                  {" "}
-                  1148 BLAKES FIELD PL{" "}
-                </span>{" "}
-                <br />
-                <span style={{ fontSize: "20px", fontWeight: "500" }}>
-                  HENDERSON NV 89011
-                </span>{" "}
-                <br />
-                <span style={{ fontSize: "20px", fontWeight: "500" }}>
-                  702-463-2265
-                </span>{" "}
-              </address>
-            </div>
-            <div className="col-2" style={{ display: "flex" }}>
-              <div>
-                <h4 style={{ textAlign: "center", fontSize: "25px", fontWeight: 600 }}>
-                  <i>Estimate</i>
-                </h4>
-                <img src={logo} alt="logo tub" width={180} />
-              </div>
+        <div className="row">
+          <div className="invoice-first-div col-10 px-5">
+            <address className="px-3">
+              H FLOOR COVERING LLC <br />
+              <span style={{ fontSize: "20px", fontWeight: "500" }}>
+                {" "}
+                1148 BLAKES FIELD PL{" "}
+              </span>{" "}
+              <br />
+              <span style={{ fontSize: "20px", fontWeight: "500" }}>
+                HENDERSON NV 89011
+              </span>{" "}
+              <br />
+              <span style={{ fontSize: "20px", fontWeight: "500" }}>
+                Hfloorcovering@gmail.com <br />
+                702-463-2265
+              </span>{" "}
+            </address>
+          </div>
+          <div className="col-2" style={{ display: "flex" }}>
+            <div>
+              <h4 style={{ textAlign: "center", fontSize: "25px", fontWeight: 600 }}>
+                <i>Estimate</i>
+              </h4>
+              <img src={logo} alt="logo tub" width={180} />
             </div>
           </div>
+        </div>
 
-          <form>
-            <div className="row estimate_address_div px-5">
+        <form>
+          <div className="report-border">
+            <div className="row estimate_address_div px-2">
               <div className="col-md-6">
                 <p>
                   Name/Address <br />
@@ -305,8 +304,10 @@ function HomeForm() {
                 </p>
               </div>
             </div>
+          </div>
 
-            <div className="row estimate_details_div px-5 mt-2">
+          <div className="report-border mt-2">
+            <div className="row estimate_details_div px-2 mt-5">
               <div className="col-md-4">
                 <p>Date</p>
                 <TextField
@@ -359,21 +360,21 @@ function HomeForm() {
               </div>
             </div>
             <div className="line"></div>
-            <div className="row item_details_div px-5">
-              <div className="col-md-2">
+            <div className="row item_details_div px-2">
+              <div className="col-md-1">
                 <span className="plus-icon" onClick={handleAddItem}>
                   <i className="fas fa-plus-circle fa-xl"></i>
                   &nbsp;<span className="items-span">Item</span>
                 </span>
               </div>
-              <div className="col-md-4">
+              <div className="col-md-7">
                 {" "}
                 <p>Description</p>
               </div>
-              <div className="col-md-2" style={{ marginLeft: "-1.5%" }}>
+              <div className="col-md-1" style={{ marginLeft: "-1.7%" }}>
                 <p>Quantity</p>
               </div>
-              <div className="col-md-2">
+              <div className="col-md-1" style={{ marginLeft: "0.5%" }}>
                 <p>Cost</p>
               </div>
               <div className="col-md-2">
@@ -381,11 +382,11 @@ function HomeForm() {
               </div>
             </div>
 
-            <div className="row item_details_div px-5">
+            <div className="row item_details_div px-2">
               <React.Fragment>
                 {estimateData.items.map((item, index) => (
-                  <div className="row" style={{ marginTop: "-5px" }}>
-                    <div className="col-md-2">
+                  <div className="row">
+                    <div className="col-md-1">
                       <TextField
                         id="estimate_item"
                         variant="standard"
@@ -395,7 +396,7 @@ function HomeForm() {
                         onChange={(e) => handleInputChange(index, e)}
                       />
                     </div>
-                    <div className="col-md-4">
+                    <div className="col-md-7">
                       <TextField
                         id="estimate_description"
                         variant="standard"
@@ -406,7 +407,7 @@ function HomeForm() {
                         style={{ width: "100%" }}
                       />
                     </div>
-                    <div className="col-md-2">
+                    <div className="col-md-1">
                       <TextField
                         id="estimate_quantity"
                         variant="standard"
@@ -414,10 +415,10 @@ function HomeForm() {
                         name="estimate_quantity"
                         value={item.estimate_quantity}
                         onChange={(e) => handleInputChange(index, e)}
-                        style={{ width: "80%" }}
+                        style={{ width: "100%" }}
                       />
                     </div>
-                    <div className="col-md-2">
+                    <div className="col-md-1">
                       <TextField
                         id="estimate_cost"
                         variant="standard"
@@ -433,7 +434,7 @@ function HomeForm() {
                         variant="standard"
                         type="text"
                         InputProps={{ disableUnderline: true }}
-                        style={{marginTop: "-13px"}}
+                        style={{ marginTop: "-13px" }}
                         readonly
                         value={`${" "}$ ${(item.estimate_quantity || 0) *
                           (item.estimate_cost || 0)
@@ -483,8 +484,11 @@ function HomeForm() {
                 </span>
               </div>
             </div>
-          </form>
-        </>
+
+          </div>
+
+        </form>
+
       </div>
     </div>
   );

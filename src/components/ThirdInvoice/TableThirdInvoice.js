@@ -51,7 +51,7 @@ export default function TableThirdInvoice() {
   useEffect(() => {
     const totalSum = invoices.reduce((sum, invoice) => {
       const laborAmount = parseFloat(invoice.labor);
-  
+
       // Check if laborAmount is a valid number
       if (!isNaN(laborAmount)) {
         return sum + laborAmount;
@@ -60,10 +60,10 @@ export default function TableThirdInvoice() {
         return sum;
       }
     }, 0);
-  
+
     setTotalAmount(totalSum);
   }, [invoices]);
-  
+
 
   /* Endpoint integration for delete invoice */
   const handleDeleteClick = async (invoiceId) => {
@@ -166,9 +166,8 @@ export default function TableThirdInvoice() {
               <Toolbar className="toolbar-search">
                 <form className="d-flex search-form" role="search">
                   <div
-                    className={`search-container ${
-                      isExpanded ? "expanded" : ""
-                    }`}
+                    className={`search-container ${isExpanded ? "expanded" : ""
+                      }`}
                   >
                     <button
                       onClick={handleSearchClick}
@@ -224,11 +223,11 @@ export default function TableThirdInvoice() {
                             <TableCell key={column.id} align="left">
                               {column.id === "work_date"
                                 ? new Date(
-                                    invoice[column.id]
-                                  ).toLocaleDateString()
+                                  invoice[column.id]
+                                ).toLocaleDateString()
                                 : column.id === "estimate_address"
-                                ? invoice[column.id].join(", ")
-                                : invoice[column.id]}
+                                  ? invoice[column.id].join(", ")
+                                  : invoice[column.id]}
                               {column.id === "labor" && `$`}
                             </TableCell>
                           ))}
@@ -263,7 +262,7 @@ export default function TableThirdInvoice() {
                 style={{ fontSize: "18px" }}
               >
                 <p>
-                  <b>
+                  <b style={{ fontSize: "1.2rem" }}>
                     Total: $
                     {typeof totalAmount === "number"
                       ? totalAmount.toFixed(2)

@@ -294,239 +294,243 @@ function ModifyInvoiceReport() {
           </div>
 
           <form>
-            <div className="row estimate_address_div px-5">
-              <div className="col-md-6">
-                <p>
-                  Name/Address <br />
-                  {[1, 2, 3].map(
-                    (fieldIndex) =>
-                      fieldIndex <= visibleAddressFields && (
-                        <React.Fragment key={`estimate_address_${fieldIndex}`}>
-                          <TextField
-                            id={`estimate_address_${fieldIndex}`}
-                            type="text"
-                            variant="standard"
-                            name={`estimate_address_${fieldIndex}`}
-                            style={{ width: "100%" }}
-                            value={
-                              estimateUpdateData.estimate_address[fieldIndex - 1] || ""
-                            }
-                            onChange={(e) => handleInputChange(undefined, e)}
-                            onKeyDown={(e) =>
-                              handleAddressEnterKey(e, fieldIndex)
-                            }
-                          />
-                          <br />
-                        </React.Fragment>
-                      )
-                  )}
-                </p>
-              </div>
-              <div className="col-md-6">
-                <p>
-                  Contractor <br />
-                  {[1, 2, 3].map(
-                    (fieldIndex) =>
-                      fieldIndex <= visibleContractorFields && (
-                        <React.Fragment key={`estimate_contractor_${fieldIndex}`}>
-                          <TextField
-                            id={`estimate_contractor_${fieldIndex}`}
-                            type="text"
-                            variant="standard"
-                            name={`estimate_contractor_${fieldIndex}`}
-                            style={{ width: "100%" }}
-                            value={
-                              estimateUpdateData.estimate_contractor[fieldIndex - 1] || ""
-                            }
-                            onChange={(e) => handleInputChange(undefined, e)}
-                            onKeyDown={(e) =>
-                              handleContractorEnterKey(e, fieldIndex)
-                            }
-                          />
-                          <br />
-                        </React.Fragment>
-                      )
-                  )}
-                </p>
-              </div>
-            </div>
-
-            <div className="row estimate_details_div px-5 mt-3">
-              <div className="col-md-4">
-                <p>Invoice Date</p>
-                <TextField
-                  style={{ cursor: "pointer" }}
-                  id="invoice_date"
-                  type="date"
-                  variant="standard"
-                  name="invoice_date"
-                  InputProps={{ disableUnderline: true }}
-                  value={estimateUpdateData.invoice_date}
-                  onChange={(e) => handleInputChange(undefined, e)}
-                  placeholder="MM/DD/YY"
-                />
-              </div>
-              <div className="col-md-3">
-                <p>Invoice No.</p>
-                <TextField
-                  id="estimate_no"
-                  type="text"
-                  variant="standard"
-                  name="estimate_no"
-                  InputProps={{ disableUnderline: true }}
-                  value={estimateUpdateData.estimate_no}
-                  onChange={(e) => handleInputChange(undefined, e)}
-                />
-              </div>
-              <div className="col-md-2">
-                <p>Project</p>
-                <TextField
-                  id="estimate_project"
-                  type="text"
-                  variant="standard"
-                  name="estimate_project"
-                  InputProps={{ disableUnderline: true }}
-                  value={estimateUpdateData.estimate_project}
-                  onChange={(e) => handleInputChange(undefined, e)}
-                />
-              </div>
-              <div className="col-md-3">
-                <p>Project Manager</p>
-                <TextField
-                  id="estimate_project_manager"
-                  type="text"
-                  variant="standard"
-                  name="estimate_project_manager"
-                  InputProps={{ disableUnderline: true }}
-                  value={estimateUpdateData.estimate_project_manager}
-                  onChange={(e) => handleInputChange(undefined, e)}
-                />
-              </div>
-            </div>
-
-            <div className="line"></div>
-
-            <div className="row item_details_div px-5">
-              <div className="col-md-2">
-                <span className="plus-icon" onClick={handleAddItem}>
-                  <i className="fas fa-plus-circle fa-xl"></i>
-                  &nbsp;<span className="items-span">Item</span>
-                </span>
-              </div>
-              <div className="col-md-4">
-                {" "}
-                <p>Description</p>
-              </div>
-              <div className="col-md-2" style={{ marginLeft: "-1.5%" }}>
-                <p>Quantity</p>
-              </div>
-              <div className="col-md-2">
-                <p>Cost</p>
-              </div>
-              <div className="col-md-2">
-                <p>Total</p>
-              </div>
-            </div>
-
-            <div className="row item_details_div px-5">
-              <React.Fragment>
-                {estimateUpdateData.items.map((item, index) => (
-                  <div className="row" style={{ marginTop: "-5px" }}>
-                    <div className="col-md-2">
-                      <TextField
-                        id="estimate_item"
-                        variant="standard"
-                        type="text"
-                        name="estimate_item"
-                        value={item.estimate_item}
-                        onChange={(e) => handleInputChange(index, e)}
-                      />
-                    </div>
-                    <div className="col-md-4">
-                      <TextField
-                        id="estimate_description"
-                        variant="standard"
-                        type="text"
-                        name="estimate_description"
-                        value={item.estimate_description}
-                        onChange={(e) => handleInputChange(index, e)}
-                        style={{ width: "100%" }}
-                      />
-                    </div>
-                    <div className="col-md-2">
-                      <TextField
-                        id="estimate_quantity"
-                        variant="standard"
-                        type="number"
-                        name="estimate_quantity"
-                        value={item.estimate_quantity}
-                        onChange={(e) => handleInputChange(index, e)}
-                        style={{ width: "80%" }}
-                      />
-                    </div>
-                    <div className="col-md-2">
-                      <TextField
-                        id="estimate_cost"
-                        variant="standard"
-                        type="text"
-                        name="estimate_cost"
-                        value={item.estimate_cost}
-                        onChange={(e) => handleInputChange(index, e)}
-                      />
-                    </div>
-                    <div className="col-md-2 mt-3">
-                      <TextField
-                        id="estimate_total"
-                        variant="standard"
-                        type="text"
-                        InputProps={{ disableUnderline: true }}
-                        style={{marginTop: "-13px"}}
-                        readonly
-                        value={`${" "}$ ${(item.estimate_quantity || 0) *
-                          (item.estimate_cost || 0)
-                          }`}
-                      />
-                    </div>
-                  </div>
-                ))}
-                <br />
-              </React.Fragment>
-
-              <div className="invoice-last-div">
-                <div className="row">
-                  <div className="col-md-9">
-                    {/* <span>All jobs are completely guaranteed</span> */}
-                  </div>
-                  <div className="col-md-3 px-5">
-                    <span>Total </span>$
-                    {estimateUpdateData.estimate_total || ""}
-                  </div>
+            <div className="report-border">
+              <div className="row estimate_address_div px-2">
+                <div className="col-md-6">
+                  <p>
+                    Name/Address <br />
+                    {[1, 2, 3].map(
+                      (fieldIndex) =>
+                        fieldIndex <= visibleAddressFields && (
+                          <React.Fragment key={`estimate_address_${fieldIndex}`}>
+                            <TextField
+                              id={`estimate_address_${fieldIndex}`}
+                              type="text"
+                              variant="standard"
+                              name={`estimate_address_${fieldIndex}`}
+                              style={{ width: "100%" }}
+                              value={
+                                estimateUpdateData.estimate_address[fieldIndex - 1] || ""
+                              }
+                              onChange={(e) => handleInputChange(undefined, e)}
+                              onKeyDown={(e) =>
+                                handleAddressEnterKey(e, fieldIndex)
+                              }
+                            />
+                            <br />
+                          </React.Fragment>
+                        )
+                    )}
+                  </p>
+                </div>
+                <div className="col-md-6">
+                  <p>
+                    Contractor <br />
+                    {[1, 2, 3].map(
+                      (fieldIndex) =>
+                        fieldIndex <= visibleContractorFields && (
+                          <React.Fragment key={`estimate_contractor_${fieldIndex}`}>
+                            <TextField
+                              id={`estimate_contractor_${fieldIndex}`}
+                              type="text"
+                              variant="standard"
+                              name={`estimate_contractor_${fieldIndex}`}
+                              style={{ width: "100%" }}
+                              value={
+                                estimateUpdateData.estimate_contractor[fieldIndex - 1] || ""
+                              }
+                              onChange={(e) => handleInputChange(undefined, e)}
+                              onKeyDown={(e) =>
+                                handleContractorEnterKey(e, fieldIndex)
+                              }
+                            />
+                            <br />
+                          </React.Fragment>
+                        )
+                    )}
+                  </p>
                 </div>
               </div>
             </div>
-            <div className="row" style={{ fontSize: "23px", marginTop: "13%" }}>
-              <div className="col-md-7">
-                <span>
-                  <b>
-                    <i>EXCLUSIONS: </i>
-                  </b>
-                  Moving Furniture, Major floor prep, Wax shot blasting,
-                  Moisture barrier, Asbestos abatement, Wall board, track steps,
-                  Unforeseeable conditions that may be discovered after existing
-                  floor covering is removed.
-                  <br /> <br />
-                  <b>
-                    <i>WARRANTY: </i>
-                  </b>
-                  One-year warranty after installation is complete.
-                </span>
+
+            <div className="report-border mt-2">
+              <div className="row estimate_details_div px-2 mt-3">
+                <div className="col-md-4">
+                  <p>Invoice Date</p>
+                  <TextField
+                    style={{ cursor: "pointer" }}
+                    id="invoice_date"
+                    type="date"
+                    variant="standard"
+                    name="invoice_date"
+                    InputProps={{ disableUnderline: true }}
+                    value={estimateUpdateData.invoice_date}
+                    onChange={(e) => handleInputChange(undefined, e)}
+                    placeholder="MM/DD/YY"
+                  />
+                </div>
+                <div className="col-md-3">
+                  <p>Invoice No.</p>
+                  <TextField
+                    id="estimate_no"
+                    type="text"
+                    variant="standard"
+                    name="estimate_no"
+                    InputProps={{ disableUnderline: true }}
+                    value={estimateUpdateData.estimate_no}
+                    onChange={(e) => handleInputChange(undefined, e)}
+                  />
+                </div>
+                <div className="col-md-2">
+                  <p>Project</p>
+                  <TextField
+                    id="estimate_project"
+                    type="text"
+                    variant="standard"
+                    name="estimate_project"
+                    InputProps={{ disableUnderline: true }}
+                    value={estimateUpdateData.estimate_project}
+                    onChange={(e) => handleInputChange(undefined, e)}
+                  />
+                </div>
+                <div className="col-md-3">
+                  <p>Project Manager</p>
+                  <TextField
+                    id="estimate_project_manager"
+                    type="text"
+                    variant="standard"
+                    name="estimate_project_manager"
+                    InputProps={{ disableUnderline: true }}
+                    value={estimateUpdateData.estimate_project_manager}
+                    onChange={(e) => handleInputChange(undefined, e)}
+                  />
+                </div>
               </div>
-              <div className="col-md-5" style={{ textAlign: "right" }}>
-                <span>
-                  Thank you for considering our Proposal.
+
+              <div className="line"></div>
+
+              <div className="row item_details_div px-2">
+                <div className="col-md-1">
+                  <span className="plus-icon" onClick={handleAddItem}>
+                    <i className="fas fa-plus-circle fa-xl"></i>
+                    &nbsp;<span className="items-span">Item</span>
+                  </span>
+                </div>
+                <div className="col-md-7">
+                  {" "}
+                  <p>Description</p>
+                </div>
+                <div className="col-md-1" style={{ marginLeft: "-1.7%" }}>
+                  <p>Quantity</p>
+                </div>
+                <div className="col-md-1" style={{ marginLeft: "0.5%" }}>
+                  <p>Cost</p>
+                </div>
+                <div className="col-md-2">
+                  <p>Total</p>
+                </div>
+              </div>
+
+              <div className="row item_details_div px-2">
+                <React.Fragment>
+                  {estimateUpdateData.items.map((item, index) => (
+                    <div className="row">
+                      <div className="col-md-1">
+                        <TextField
+                          id="estimate_item"
+                          variant="standard"
+                          type="text"
+                          name="estimate_item"
+                          value={item.estimate_item}
+                          onChange={(e) => handleInputChange(index, e)}
+                        />
+                      </div>
+                      <div className="col-md-7">
+                        <TextField
+                          id="estimate_description"
+                          variant="standard"
+                          type="text"
+                          name="estimate_description"
+                          value={item.estimate_description}
+                          onChange={(e) => handleInputChange(index, e)}
+                          style={{ width: "100%" }}
+                        />
+                      </div>
+                      <div className="col-md-1">
+                        <TextField
+                          id="estimate_quantity"
+                          variant="standard"
+                          type="number"
+                          name="estimate_quantity"
+                          value={item.estimate_quantity}
+                          onChange={(e) => handleInputChange(index, e)}
+                          style={{ width: "100%" }}
+                        />
+                      </div>
+                      <div className="col-md-1">
+                        <TextField
+                          id="estimate_cost"
+                          variant="standard"
+                          type="text"
+                          name="estimate_cost"
+                          value={item.estimate_cost}
+                          onChange={(e) => handleInputChange(index, e)}
+                        />
+                      </div>
+                      <div className="col-md-2 mt-3">
+                        <TextField
+                          id="estimate_total"
+                          variant="standard"
+                          type="text"
+                          InputProps={{ disableUnderline: true }}
+                          style={{ marginTop: "-13px" }}
+                          readonly
+                          value={`${" "}$ ${(item.estimate_quantity || 0) *
+                            (item.estimate_cost || 0)
+                            }`}
+                        />
+                      </div>
+                    </div>
+                  ))}
                   <br />
-                  All jobs are completely guaranteed
-                </span>
+                </React.Fragment>
+
+                <div className="invoice-last-div">
+                  <div className="row">
+                    <div className="col-md-9">
+                      {/* <span>All jobs are completely guaranteed</span> */}
+                    </div>
+                    <div className="col-md-3 px-5">
+                      <span>Total </span>$
+                      {estimateUpdateData.estimate_total || ""}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="row" style={{ fontSize: "23px", marginTop: "13%" }}>
+                <div className="col-md-7">
+                  <span>
+                    <b>
+                      <i>EXCLUSIONS: </i>
+                    </b>
+                    Moving Furniture, Major floor prep, Wax shot blasting,
+                    Moisture barrier, Asbestos abatement, Wall board, track steps,
+                    Unforeseeable conditions that may be discovered after existing
+                    floor covering is removed.
+                    <br /> <br />
+                    <b>
+                      <i>WARRANTY: </i>
+                    </b>
+                    One-year warranty after installation is complete.
+                  </span>
+                </div>
+                <div className="col-md-5" style={{ textAlign: "right" }}>
+                  <span>
+                    Thank you for considering our Proposal.
+                    <br />
+                    All jobs are completely guaranteed
+                  </span>
+                </div>
               </div>
             </div>
           </form>

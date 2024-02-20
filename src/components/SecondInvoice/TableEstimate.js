@@ -253,7 +253,7 @@ export default function TableEstimate() {
                 style={{ fontSize: "18px" }}
               >
                 <p>
-                  <b>Total: ${totalAmount.toFixed(2)}</b>
+                  <b style={{ fontSize: "1.2rem" }}>Total: ${totalAmount.toFixed(2)}</b>
                 </p>
               </div>
 

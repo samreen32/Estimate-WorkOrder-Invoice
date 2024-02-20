@@ -40,7 +40,7 @@ function GeneratedInvoice() {
   return (
     <div id="invoice-generated">
       <div className="row">
-        <div className="col-4" style={{ marginTop: "40px" }}>
+        <div className="col-4" style={{ marginTop: "20px" }}>
           <div className="add-container">
             <span onClick={handleGenerateNew} className="new-invoice-btn">
               Generate new estimate
@@ -50,7 +50,7 @@ function GeneratedInvoice() {
         <div className="col-4">
           <h2>Estimate Details</h2>
         </div>
-        <div className="col-4" style={{ marginTop: "50px" }}>
+        <div className="col-4" style={{ marginTop: "30px" }}>
           <span
             onClick={() => generatePDF(targetRef, { filename: "invoice.pdf" })}
             className="new-invoice-btn"
@@ -79,6 +79,7 @@ function GeneratedInvoice() {
               </span>{" "}
               <br />
               <span style={{ fontSize: "20px", fontWeight: "500" }}>
+                Hfloorcovering@gmail.com <br />
                 702-463-2265
               </span>{" "}
             </address>
@@ -94,136 +95,139 @@ function GeneratedInvoice() {
             </div>
           </div>
         </div>
-        <div className="row estimate_address_div px-5" style={{ fontSize: "20px" }}>
-          <div className="col-md-6">
-            <p>Name/Address</p>
-            {estimateData.estimate_address.map((field, index) => (
-              <React.Fragment key={`estimate_address_${index}`}>
-                {field}
-                <br />
-              </React.Fragment>
-            ))}
-          </div>
-          <div className="col-md-6">
-            <p>Contractor</p>
-            {estimateData.estimate_address.map((field, index) => (
-              <React.Fragment key={`estimate_cotractor_${index}`}>
-                {field}
-                <br />
-              </React.Fragment>
-            ))}
-          </div>
-        </div>
-        <div
-          className="row estimate_details_div px-5 mt-5"
-        >
-          <div className="col-md-4" style={{ fontSize: "22px" }}>
-            <p>Date</p>
-            {formatDate(estimateData.estimate_date)}
-          </div>
-          <div className="col-md-3" style={{ fontSize: "22px" }}>
-            <p>Estimate No.</p>
-            {estimateData.estimate_no}
-          </div>
-          <div className="col-md-2" style={{ fontSize: "22px" }}>
-            <p>Project</p>
-            {estimateData.estimate_project}
-          </div>
-          <div className="col-md-3" style={{ fontSize: "22px" }}>
-            <p>Project Manager</p>
-            {estimateData.estimate_project_manager}
-          </div>
-        </div>
-        <div className="line mt-3"></div>
-        <div className="row item_details_div px-5">
-          <div className="col-md-2" style={{ fontSize: "22px" }}>
-            <p>Item</p>
-
-            {estimateData.items.map((item, index) => (
-              <span key={index}>
-                {item.estimate_item}
-                {index < estimateData.items.length - 1 && <br />}
-              </span>
-            ))}
-          </div>
-          <div className="col-md-4" style={{ fontSize: "22px" }}>
-            <p>Description</p>
-
-            {estimateData.items.map((item, index) => (
-              <span key={index}>
-                {item.estimate_description}
-                {index < estimateData.items.length - 1 && <br />}
-              </span>
-            ))}
-          </div>
-          <div className="col-md-2" style={{ fontSize: "22px" }}>
-            <p>Quantity</p>
-
-            {estimateData.items.map((item, index) => (
-              <span key={index}>
-                {item.estimate_quantity}
-                {index < estimateData.items.length - 1 && <br />}
-              </span>
-            ))}
-          </div>
-          <div className="col-md-2" style={{ fontSize: "22px" }}>
-            <p>Cost</p>
-            {estimateData.items.map((item, index) => (
-              <span key={index}>
-                {item.estimate_cost}
-                {index < estimateData.items.length - 1 && <br />}
-              </span>
-            ))}
-          </div>
-          <div className="col-md-2" style={{ fontSize: "22px" }}>
-            <p>Amount</p>
-            {estimateData.items.map((item, index) => (
-              <span key={index}>
-                {`${"    "}$ ${(item.estimate_quantity || 0) * (item.estimate_cost || 0)
-                  }`}
-                <br />
-              </span>
-            ))}
-          </div>
-        </div>
-        <div className="invoice-last-div" style={{  }}>
-          <div className="row">
-            <div className="col-md-9">
-              {/* <span>All jobs are completely guaranteed</span> */}
+        <div className="report-border">
+          <div className="row estimate_address_div px-2" style={{ fontSize: "20px" }}>
+            <div className="col-md-6">
+              <p>Name/Address</p>
+              {estimateData.estimate_address.map((field, index) => (
+                <React.Fragment key={`estimate_address_${index}`}>
+                  {field}
+                  <br />
+                </React.Fragment>
+              ))}
             </div>
-            <div className="col-md-3 px-5">
-              <span>Total </span> ${estimateData.estimate_total || ""}
+            <div className="col-md-6">
+              <p>Contractor</p>
+              {estimateData.estimate_address.map((field, index) => (
+                <React.Fragment key={`estimate_cotractor_${index}`}>
+                  {field}
+                  <br />
+                </React.Fragment>
+              ))}
             </div>
           </div>
         </div>
-        <div className="row mt-3" style={{ fontSize: "23px" }}>
-          <div className="col-md-7">
-            <span>
-              <b>
-                <i>EXCLUSIONS: </i>
-              </b>
-              Moving Furniture, Major floor prep, Wax shot blasting, Moisture
-              barrier, Asbestos abatement, Wall board, track steps,
-              Unforeseeable conditions that may be discovered after existing
-              floor covering is removed.
-              <br /> <br />
-              <b>
-                <i>WARRANTY: </i>
-              </b>
-              One-year warranty after installation is complete.
-            </span>
+
+        <div className="report-border mt-2">
+          <div className="row estimate_details_div px-2 mt-5">
+            <div className="col-md-4" style={{ fontSize: "22px" }}>
+              <p>Date</p>
+              {formatDate(estimateData.estimate_date)}
+            </div>
+            <div className="col-md-3" style={{ fontSize: "22px" }}>
+              <p>Estimate No.</p>
+              {estimateData.estimate_no}
+            </div>
+            <div className="col-md-2" style={{ fontSize: "22px" }}>
+              <p>Project</p>
+              {estimateData.estimate_project}
+            </div>
+            <div className="col-md-3" style={{ fontSize: "22px" }}>
+              <p>Project Manager</p>
+              {estimateData.estimate_project_manager}
+            </div>
           </div>
-          <div className="col-md-5" style={{ textAlign: "right" }}>
-            <span>
-              Thank you for considering our Proposal.
-              <br />
-              Estimate valid for 30 days.
-              <br />
-              All jobs are completely guaranteed
-            </span>
+          <div className="line mt-3"></div>
+          <div className="row item_details_div px-2">
+            <div className="col-md-2" style={{ fontSize: "22px" }}>
+              <p>Item</p>
+
+              {estimateData.items.map((item, index) => (
+                <span key={index}>
+                  {item.estimate_item}
+                  {index < estimateData.items.length - 1 && <br />}
+                </span>
+              ))}
+            </div>
+            <div className="col-md-4" style={{ fontSize: "22px" }}>
+              <p>Description</p>
+
+              {estimateData.items.map((item, index) => (
+                <span key={index}>
+                  {item.estimate_description}
+                  {index < estimateData.items.length - 1 && <br />}
+                </span>
+              ))}
+            </div>
+            <div className="col-md-2" style={{ fontSize: "22px" }}>
+              <p>Quantity</p>
+
+              {estimateData.items.map((item, index) => (
+                <span key={index}>
+                  {item.estimate_quantity}
+                  {index < estimateData.items.length - 1 && <br />}
+                </span>
+              ))}
+            </div>
+            <div className="col-md-2" style={{ fontSize: "22px" }}>
+              <p>Cost</p>
+              {estimateData.items.map((item, index) => (
+                <span key={index}>
+                  {item.estimate_cost}
+                  {index < estimateData.items.length - 1 && <br />}
+                </span>
+              ))}
+            </div>
+            <div className="col-md-2" style={{ fontSize: "22px" }}>
+              <p>Amount</p>
+              {estimateData.items.map((item, index) => (
+                <span key={index}>
+                  {`${"    "}$ ${(item.estimate_quantity || 0) * (item.estimate_cost || 0)
+                    }`}
+                  <br />
+                </span>
+              ))}
+            </div>
+          </div>
+          <div className="invoice-last-div" style={{}}>
+            <div className="row">
+              <div className="col-md-9">
+                {/* <span>All jobs are completely guaranteed</span> */}
+              </div>
+              <div className="col-md-3 px-5">
+                <span>Total </span> ${estimateData.estimate_total || ""}
+              </div>
+            </div>
+          </div>
+          <div className="row mt-3" style={{ fontSize: "23px" }}>
+            <div className="col-md-7">
+              <span>
+                <b>
+                  <i>EXCLUSIONS: </i>
+                </b>
+                Moving Furniture, Major floor prep, Wax shot blasting, Moisture
+                barrier, Asbestos abatement, Wall board, track steps,
+                Unforeseeable conditions that may be discovered after existing
+                floor covering is removed.
+                <br /> <br />
+                <b>
+                  <i>WARRANTY: </i>
+                </b>
+                One-year warranty after installation is complete.
+              </span>
+            </div>
+            <div className="col-md-5" style={{ textAlign: "right" }}>
+              <span>
+                Thank you for considering our Proposal.
+                <br />
+                Estimate valid for 30 days.
+                <br />
+                All jobs are completely guaranteed
+              </span>
+            </div>
           </div>
         </div>
-      
+
       </div>
     </div>
   );

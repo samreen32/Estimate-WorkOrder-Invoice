@@ -76,7 +76,7 @@ export default function TableInvoices() {
   const handleEditInvoiceClick = (invoiceId) => {
     navigate(`/modify_invoice_report`, { state: { invoiceId } });
   };
-  
+
   const columns = [
     { id: "id", label: "#", minWidth: 100 },
     { id: "estimate_no", label: "Invoice No", minWidth: 100 },
@@ -152,9 +152,8 @@ export default function TableInvoices() {
               <Toolbar className="toolbar-search">
                 <form className="d-flex search-form" role="search">
                   <div
-                    className={`search-container ${
-                      isExpanded ? "expanded" : ""
-                    }`}
+                    className={`search-container ${isExpanded ? "expanded" : ""
+                      }`}
                   >
                     <button
                       onClick={handleSearchClick}
@@ -211,12 +210,12 @@ export default function TableInvoices() {
                               {column.id === "invoice_date"
                                 ? invoice[column.id]
                                   ? new Date(
-                                      invoice[column.id]
-                                    ).toLocaleDateString()
+                                    invoice[column.id]
+                                  ).toLocaleDateString()
                                   : ""
                                 : column.id === "estimate_address"
-                                ? invoice.estimate_address.length > 0 ? invoice.estimate_address[0] : "-"
-                                : invoice[column.id]}
+                                  ? invoice.estimate_address.length > 0 ? invoice.estimate_address[0] : "-"
+                                  : invoice[column.id]}
                               {column.id === "estimate_total" && `$`}
                             </TableCell>
                           ))}
@@ -255,7 +254,7 @@ export default function TableInvoices() {
                 style={{ fontSize: "18px" }}
               >
                 <p>
-                  <b>Total: ${totalAmount.toFixed(2)}</b>
+                  <b style={{ fontSize: "1.2rem" }}>Total: ${totalAmount.toFixed(2)}</b>
                 </p>
               </div>
 

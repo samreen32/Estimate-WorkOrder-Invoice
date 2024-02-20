@@ -1,29 +1,29 @@
 export const CREATE_ESTIMATE_INVOICE =
-  "http://localhost:5000/api/auth/createEstimateInvoice";
+  "https://hfloorcovering-715e93ae26f6.herokuapp.com/api/auth/createEstimateInvoice";
 
 export const GET_ESTIMATE_INVOICE =
-  "http://localhost:5000/api/auth/getEstimateInvoiceById";
+  "https://hfloorcovering-715e93ae26f6.herokuapp.com/api/auth/getEstimateInvoiceById";
 
 export const GET_All_INVOICES =
-  "http://localhost:5000/api/auth/getAllEstimateInvoices";
+  "https://hfloorcovering-715e93ae26f6.herokuapp.com/api/auth/getAllEstimateInvoices";
 
 export const UPDATE_ESTIMATE_INVOICE =
-  "http://localhost:5000/api/auth/updateEstimateInvoice";
+  "https://hfloorcovering-715e93ae26f6.herokuapp.com/api/auth/updateEstimateInvoice";
 
 export const DELETE_SPECIFIC_INVOICE =
-  "http://localhost:5000/api/auth/deleteEstimateInvoice";
+  "https://hfloorcovering-715e93ae26f6.herokuapp.com/api/auth/deleteEstimateInvoice";
 
 export const CREATE_WORKOUT_INVOICE =
-  "http://localhost:5000/api/auth/createWorkOrderInvoice";
+  "https://hfloorcovering-715e93ae26f6.herokuapp.com/api/auth/createWorkOrderInvoice";
 
 export const GET_All_WORKOUT_INVOICES =
-  "http://localhost:5000/api/auth/getAllThirdInvoices";
+  "https://hfloorcovering-715e93ae26f6.herokuapp.com/api/auth/getAllThirdInvoices";
 
 export const DELETE_SPECIFIC_WORKOUT_INVOICE =
-  "http://localhost:5000/api/auth/deleteWorkoutInvoice";
+  "https://hfloorcovering-715e93ae26f6.herokuapp.com/api/auth/deleteWorkoutInvoice";
 
 export const GET_SPECIFIC_WORKOUT_INVOICE =
-  "http://localhost:5000/api/auth/getWorkoutInvoice";
+  "https://hfloorcovering-715e93ae26f6.herokuapp.com/api/auth/getWorkoutInvoice";
 
 export const UPDATE_WORKOUT_INVOICE =
-  "http://localhost:5000/api/auth/updateWorkoutInvoice";
+  "https://hfloorcovering-715e93ae26f6.herokuapp.com/api/auth/updateWorkoutInvoice";

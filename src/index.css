@@ -108,6 +108,13 @@ h3 {
   transition: .3s ease-in-out 1.2s;
 }
 
+.centered-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
 /* INVOICE GENERATED */
 #invoice-generated h2 {
   margin: auto;
@@ -396,19 +403,19 @@ h3 {
 }
 
 @media (max-width: 1432px) {
-  .new-invoice-btn{
+  .new-invoice-btn {
     font-size: 12px;
   }
 }
 
 @media (max-width: 1022px) {
-  .new-invoice-btn{
+  .new-invoice-btn {
     font-size: 8px;
   }
 }
 
 @media (max-width: 817px) {
-  .new-invoice-btn{
+  .new-invoice-btn {
     font-size: 6px !important;
   }
 }
@@ -1053,20 +1060,22 @@ a:focus {
   }
 }
 
-@media (max-width: 376px) {}
-
-@media (min-width: 1200px) {
-  .container {
-    max-width: 1170px;
-  }
-}
-
 .css-y8ay40-MuiTableCell-root,
-.css-1ex1afd-MuiTableCell-root {
-  font-size: 1rem !important;
+.css-1ex1afd-MuiTableCell-root,
+.css-pdct74-MuiTablePagination-selectLabel,
+.css-194a1fa-MuiSelect-select-MuiInputBase-input.css-194a1fa-MuiSelect-select-MuiInputBase-input.css-194a1fa-MuiSelect-select-MuiInputBase-input,
+.css-levciy-MuiTablePagination-displayedRows {
+  font-size: 1.2rem !important;
 }
 
+.css-194a1fa-MuiSelect-select-MuiInputBase-input.css-194a1fa-MuiSelect-select-MuiInputBase-input.css-194a1fa-MuiSelect-select-MuiInputBase-input {
+  margin-top: 12px !important;
+}
 
+.report-border {
+  border: 5px solid black;
+  padding: 10px;
+}
 
 /* Third invoice */
 .blue-bar {
@@ -1102,12 +1111,12 @@ font-size: 25px !important;
 }
 
 
-.css-8coetn{
+.css-8coetn {
   font-weight: 600 !important;
   text-align: center !important;
 }
 
-.css-q34dxg{
+.css-q34dxg {
   text-align: center !important;
-  
+
 }
