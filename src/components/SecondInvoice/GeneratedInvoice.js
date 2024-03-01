@@ -13,6 +13,7 @@ function GeneratedInvoice() {
     setEstimateData({
       estimate_no: "",
       estimate_address: [""],
+      estimate_custEmail: "",
       estimate_contractor: [""],
       estimate_date: "",
       estimate_project: "",
@@ -106,7 +107,11 @@ function GeneratedInvoice() {
                 </React.Fragment>
               ))}
             </div>
-            <div className="col-md-6">
+            <div className="col-md-3" style={{ fontSize: "22px" }}>
+              <p>Customer Email</p>
+              {estimateData.estimate_custEmail}
+            </div>
+            <div className="col-md-3">
               <p>Contractor</p>
               {estimateData.estimate_address.map((field, index) => (
                 <React.Fragment key={`estimate_cotractor_${index}`}>

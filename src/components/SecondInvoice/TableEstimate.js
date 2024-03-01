@@ -84,6 +84,7 @@ export default function TableEstimate() {
     { id: "id", label: "#", minWidth: 100 },
     { id: "estimate_no", label: "Estimate No", minWidth: 100 },
     { id: "estimate_project", label: "Project", minWidth: 100 },
+    // { id: "estimate_custEmail", label: "Customer Email", minWidth: 100 },
     { id: "estimate_project_manager", label: "Project Manager", minWidth: 100 },
     { id: "estimate_address", label: "Address", minWidth: 100 },
     { id: "estimate_date", label: "Date", minWidth: 100 },

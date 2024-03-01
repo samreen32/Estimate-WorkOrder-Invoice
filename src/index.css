@@ -1064,12 +1064,16 @@ a:focus {
 .css-1ex1afd-MuiTableCell-root,
 .css-pdct74-MuiTablePagination-selectLabel,
 .css-194a1fa-MuiSelect-select-MuiInputBase-input.css-194a1fa-MuiSelect-select-MuiInputBase-input.css-194a1fa-MuiSelect-select-MuiInputBase-input,
-.css-levciy-MuiTablePagination-displayedRows {
+.css-levciy-MuiTablePagination-displayedRows,
+.css-q34dxg,
+.css-8coetn,
+.css-1chpzqh,
+.css-1cccqvr.css-1cccqvr.css-1cccqvr {
   font-size: 1.2rem !important;
 }
 
-.css-194a1fa-MuiSelect-select-MuiInputBase-input.css-194a1fa-MuiSelect-select-MuiInputBase-input.css-194a1fa-MuiSelect-select-MuiInputBase-input {
-  margin-top: 12px !important;
+.css-1cccqvr.css-1cccqvr.css-1cccqvr {
+  margin-top: -12px !important;
 }
 
 .report-border {

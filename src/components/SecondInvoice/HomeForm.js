@@ -81,15 +81,16 @@ function HomeForm() {
     try {
       const response = await axios.post(
         `${CREATE_ESTIMATE_INVOICE}`,
-        estimateData
+        estimateData,
       );
-      console.log("Invoice created successfully:", response.data);
+      console.log("Invoice created successfully:", response.data.estimate_invoice);
       setEstimateData((prevData) => ({
         ...prevData,
         estimate_invoice: {
           ...prevData.estimate_invoice,
           estimate_no: response.data.estimate_invoice.estimate_no,
           estimate_date: response.data.estimate_invoice.estimate_date,
+          estimate_custEmail: response.data.estimate_invoice.estimate_custEmail,
           invoice_date: response.data.estimate_invoice.invoice_date,
           estimate_total: response.data.estimate_invoice.estimate_total,
         },
@@ -174,6 +175,7 @@ function HomeForm() {
     setEstimateData({
       estimate_no: "",
       estimate_address: [""],
+      estimate_custEmail: "",
       estimate_contractor: [""],
       estimate_date: "",
       estimate_project: "",
@@ -261,7 +263,7 @@ function HomeForm() {
                             type="text"
                             variant="standard"
                             name={`estimate_address_${fieldIndex}`}
-                            style={{ width: "100%" }}
+                            style={{ width: "95%" }}
                             value={
                               estimateData.estimate_address[fieldIndex - 1] || ""
                             }
@@ -276,7 +278,20 @@ function HomeForm() {
                   )}
                 </p>
               </div>
-              <div className="col-md-6">
+              <div className="col-md-3">
+                <p>Customer Email<br />
+                  <TextField
+                    style={{ cursor: "pointer" }}
+                    id="estimate_custEmail"
+                    type="email"
+                    variant="standard"
+                    name="estimate_custEmail"
+                    value={estimateData.estimate_custEmail}
+                    onChange={(e) => handleInputChange(undefined, e)}
+                  />
+                </p>
+              </div>
+              <div className="col-md-3">
                 <p>
                   Contractor <br />
                   {[1, 2, 3].map(

@@ -78,9 +78,11 @@ export default function TableInvoices() {
   };
 
   const columns = [
-    { id: "id", label: "#", minWidth: 100 },
-    { id: "estimate_no", label: "Invoice No", minWidth: 100 },
+    { id: "id", label: "#", minWidth: 10 },
+    { id: "estimate_no", label: "Invoice No", minWidth: 10 },
     { id: "estimate_project", label: "Project", minWidth: 100 },
+    { id: "estimate_project_manager", label: "Project Manager", minWidth: 100 },
+    // { id: "estimate_custEmail", label: "Customer Email", minWidth: 100 },
     { id: "estimate_address", label: "Address", minWidth: 100 },
     { id: "invoice_date", label: "Date", minWidth: 100 },
     { id: "estimate_total", label: "Total", minWidth: 100 },
@@ -220,6 +222,18 @@ export default function TableInvoices() {
                             </TableCell>
                           ))}
 
+                          {/* <TableCell align="left" style={{ display: "" }}>
+                            <Button
+                              variant="contained"
+                              color="primary"
+                              onClick={() =>
+                                handleEditInvoiceClick(invoice._id)
+                              }
+                              style={{ cursor: "pointer", padding: "6px 22px" }}
+                            >
+                              Send Invoice
+                            </Button>
+                          </TableCell> */}
                           <TableCell align="left" style={{ display: "" }}>
                             <Button
                               variant="contained"

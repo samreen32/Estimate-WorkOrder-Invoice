@@ -3,13 +3,11 @@ import React, { createContext, useContext, useState } from "react";
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  // const generateRandomNumber = () => {
-  //   return Math.floor(10000 + Math.random() * 90000);
-  // };
   const [invoiceDetails, setInvoiceDetails] = useState(null);
   const [estimateData, setEstimateData] = useState({
     estimate_no: "",
     estimate_address: [""],
+    estimate_custEmail: "",
     estimate_contractor: [""],
     estimate_date: "",
     invoice_date: "",
@@ -31,6 +29,7 @@ const AuthProvider = ({ children }) => {
   const [estimateUpdateData, setEstimateUpdateData] = useState({
     estimate_no: "",
     estimate_address: [""],
+    estimate_custEmail: "",
     estimate_contractor: [""],
     estimate_date: "",
     invoice_date: "",

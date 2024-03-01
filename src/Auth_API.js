@@ -27,3 +27,5 @@ export const GET_SPECIFIC_WORKOUT_INVOICE =
 
 export const UPDATE_WORKOUT_INVOICE =
   "https://hfloorcovering-715e93ae26f6.herokuapp.com/api/auth/updateWorkoutInvoice";
+
+export const SEND_ESTIMATE_MAIL = "https://hfloorcovering-715e93ae26f6.herokuapp.com/api/auth/send-email"

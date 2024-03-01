@@ -117,6 +117,7 @@ function ModifyInvoiceReport() {
         setEstimateUpdateData({
           estimate_no: "",
           estimate_address: [""],
+          estimate_custEmail: "",
           estimate_contractor: [""],
           estimate_date: "",
           estimate_project: "",
@@ -211,6 +212,7 @@ function ModifyInvoiceReport() {
     setEstimateUpdateData({
       estimate_no: "",
       estimate_address: [""],
+      estimate_custEmail: "",
       estimate_contractor: [""],
       estimate_date: "",
       invoice_date: "",
@@ -308,7 +310,7 @@ function ModifyInvoiceReport() {
                               type="text"
                               variant="standard"
                               name={`estimate_address_${fieldIndex}`}
-                              style={{ width: "100%" }}
+                              style={{ width: "95%" }}
                               value={
                                 estimateUpdateData.estimate_address[fieldIndex - 1] || ""
                               }
@@ -323,7 +325,20 @@ function ModifyInvoiceReport() {
                     )}
                   </p>
                 </div>
-                <div className="col-md-6">
+                <div className="col-md-3">
+                  <p>Customer Email<br />
+                    <TextField
+                      style={{ cursor: "pointer" }}
+                      id="estimate_custEmail"
+                      type="email"
+                      variant="standard"
+                      name="estimate_custEmail"
+                      value={estimateUpdateData.estimate_custEmail}
+                      onChange={(e) => handleInputChange(undefined, e)}
+                    />
+                  </p>
+                </div>
+                <div className="col-md-3">
                   <p>
                     Contractor <br />
                     {[1, 2, 3].map(
