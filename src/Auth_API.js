@@ -1,31 +1,31 @@
 export const CREATE_ESTIMATE_INVOICE =
-  "https://hfloorcovering-715e93ae26f6.herokuapp.com/api/auth/createEstimateInvoice";
+  " https://hfloorcovering-715e93ae26f6.herokuapp.com/api/auth/createEstimateInvoice";
 
 export const GET_ESTIMATE_INVOICE =
-  "https://hfloorcovering-715e93ae26f6.herokuapp.com/api/auth/getEstimateInvoiceById";
+  " https://hfloorcovering-715e93ae26f6.herokuapp.com/api/auth/getEstimateInvoiceById";
 
 export const GET_All_INVOICES =
-  "https://hfloorcovering-715e93ae26f6.herokuapp.com/api/auth/getAllEstimateInvoices";
+  " https://hfloorcovering-715e93ae26f6.herokuapp.com/api/auth/getAllEstimateInvoices";
 
 export const UPDATE_ESTIMATE_INVOICE =
-  "https://hfloorcovering-715e93ae26f6.herokuapp.com/api/auth/updateEstimateInvoice";
+  " https://hfloorcovering-715e93ae26f6.herokuapp.com/api/auth/updateEstimateInvoice";
 
 export const DELETE_SPECIFIC_INVOICE =
-  "https://hfloorcovering-715e93ae26f6.herokuapp.com/api/auth/deleteEstimateInvoice";
+  " https://hfloorcovering-715e93ae26f6.herokuapp.com/api/auth/deleteEstimateInvoice";
 
 export const CREATE_WORKOUT_INVOICE =
-  "https://hfloorcovering-715e93ae26f6.herokuapp.com/api/auth/createWorkOrderInvoice";
+  " https://hfloorcovering-715e93ae26f6.herokuapp.com/api/auth/createWorkOrderInvoice";
 
 export const GET_All_WORKOUT_INVOICES =
-  "https://hfloorcovering-715e93ae26f6.herokuapp.com/api/auth/getAllThirdInvoices";
+  " https://hfloorcovering-715e93ae26f6.herokuapp.com/api/auth/getAllThirdInvoices";
 
 export const DELETE_SPECIFIC_WORKOUT_INVOICE =
-  "https://hfloorcovering-715e93ae26f6.herokuapp.com/api/auth/deleteWorkoutInvoice";
+  " https://hfloorcovering-715e93ae26f6.herokuapp.com/api/auth/deleteWorkoutInvoice";
 
 export const GET_SPECIFIC_WORKOUT_INVOICE =
-  "https://hfloorcovering-715e93ae26f6.herokuapp.com/api/auth/getWorkoutInvoice";
+  " https://hfloorcovering-715e93ae26f6.herokuapp.com/api/auth/getWorkoutInvoice";
 
 export const UPDATE_WORKOUT_INVOICE =
-  "https://hfloorcovering-715e93ae26f6.herokuapp.com/api/auth/updateWorkoutInvoice";
+  " https://hfloorcovering-715e93ae26f6.herokuapp.com/api/auth/updateWorkoutInvoice";
 
-export const SEND_ESTIMATE_MAIL = "https://hfloorcovering-715e93ae26f6.herokuapp.com/api/auth/send-email"
+export const SEND_ESTIMATE_MAIL = " https://hfloorcovering-715e93ae26f6.herokuapp.com/api/auth/send-email"

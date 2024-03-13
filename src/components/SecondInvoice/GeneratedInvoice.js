@@ -53,7 +53,7 @@ function GeneratedInvoice() {
         </div>
         <div className="col-4" style={{ marginTop: "30px" }}>
           <span
-            onClick={() => generatePDF(targetRef, { filename: "invoice.pdf" })}
+            onClick={() => generatePDF(targetRef, { filename: "estimate.pdf" })}
             className="new-invoice-btn"
           >
             Save the PDF
@@ -66,7 +66,7 @@ function GeneratedInvoice() {
         style={{ width: "100%" }}
         ref={targetRef}
       >
-        <div className="row">
+        <div className="row mt-3">
           <div className="invoice-first-div col-10 px-5">
             <address className="mt-3 px-3">
               H FLOOR COVERING LLC <br />
@@ -98,22 +98,14 @@ function GeneratedInvoice() {
         </div>
         <div className="report-border">
           <div className="row estimate_address_div px-2" style={{ fontSize: "20px" }}>
-            <div className="col-md-6">
-              <p>Name/Address</p>
-              {estimateData.estimate_address.map((field, index) => (
-                <React.Fragment key={`estimate_address_${index}`}>
-                  {field}
-                  <br />
-                </React.Fragment>
-              ))}
-            </div>
-            <div className="col-md-3" style={{ fontSize: "22px" }}>
-              <p>Customer Email</p>
+
+            <div className="col-md-6" style={{ fontSize: "22px" }}>
+              <p>Customer Email</p>&nbsp;&nbsp;&nbsp;
               {estimateData.estimate_custEmail}
             </div>
-            <div className="col-md-3">
-              <p>Contractor</p>
-              {estimateData.estimate_address.map((field, index) => (
+            <div className="col-md-6">
+              <p>Contractor</p> &nbsp;&nbsp;&nbsp;
+              {estimateData.estimate_contractor.map((field, index) => (
                 <React.Fragment key={`estimate_cotractor_${index}`}>
                   {field}
                   <br />
@@ -121,6 +113,33 @@ function GeneratedInvoice() {
               ))}
             </div>
           </div>
+          <div className="row estimate_address_div px-2" style={{ fontSize: "20px" }}>
+            <div className="col-md-6">
+              <p>Name</p>&nbsp;&nbsp;&nbsp;
+              {estimateData.estimate_name}
+            </div>
+            <div className="col-md-6" style={{ fontSize: "22px" }}>
+              <p>Address</p>&nbsp;&nbsp;&nbsp;
+              {estimateData.estimate_address.map((field, index) => (
+                <React.Fragment key={`estimate_address_${index}`}>
+                  {field}
+                  <br />
+                </React.Fragment>
+              ))}
+            </div>
+          </div>
+          <div className="row estimate_address_div px-2" style={{ fontSize: "20px" }}>
+            <div className="col-md-4">
+              <p>City</p><span>{estimateData.estimate_city}</span>
+            </div>
+            <div className="col-md-4">
+              <p>Zip</p><span>{estimateData.estimate_zip}</span>
+            </div>
+            <div className="col-md-4">
+              <p>Phone</p><span>{estimateData.estimate_phone}</span>
+            </div>
+          </div>
+
         </div>
 
         <div className="report-border mt-2">
@@ -194,12 +213,12 @@ function GeneratedInvoice() {
               ))}
             </div>
           </div>
-          <div className="invoice-last-div" style={{}}>
+          <div className="invoice-last-div" style={{ marginTop: "" }}>
             <div className="row">
               <div className="col-md-9">
                 {/* <span>All jobs are completely guaranteed</span> */}
               </div>
-              <div className="col-md-3 px-5">
+              <div className="col-md-3 px-5 pb-5">
                 <span>Total </span> ${estimateData.estimate_total || ""}
               </div>
             </div>

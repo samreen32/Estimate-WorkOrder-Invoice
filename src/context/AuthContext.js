@@ -7,6 +7,10 @@ const AuthProvider = ({ children }) => {
   const [estimateData, setEstimateData] = useState({
     estimate_no: "",
     estimate_address: [""],
+    estimate_name: "",
+    estimate_zip: "",
+    estimate_city: "",
+    estimate_phone: "",
     estimate_custEmail: "",
     estimate_contractor: [""],
     estimate_date: "",
@@ -29,6 +33,10 @@ const AuthProvider = ({ children }) => {
   const [estimateUpdateData, setEstimateUpdateData] = useState({
     estimate_no: "",
     estimate_address: [""],
+    estimate_name: "",
+    estimate_zip: "",
+    estimate_city: "",
+    estimate_phone: "",
     estimate_custEmail: "",
     estimate_contractor: [""],
     estimate_date: "",

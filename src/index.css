@@ -1,7 +1,7 @@
 body {
   margin: 0;
   background: #e2e2e2;
-  font-family: "Times New Roman";
+  font-family: sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -126,7 +126,7 @@ h3 {
 .invoice-first-div {
   display: flex;
   font-size: 23px;
-  font-weight: 550;
+  font-weight: 700;
 }
 
 .invoice-first-div img {
@@ -171,7 +171,7 @@ h3 {
 }
 
 .invoice-last-div {
-  margin-top: 55%;
+  margin-top: 40%;
   font-size: 24px;
 }
 
@@ -1123,4 +1123,33 @@ font-size: 25px !important;
 .css-q34dxg {
   text-align: center !important;
 
+}
+
+.estimate_address_div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.estimate_address_div .col-md-6,
+.estimate_address_div .col-md-3 {
+  display: flex;
+  align-items: center;
+  /* margin-bottom: 10px; */
+}
+
+.estimate_address_div .col-md-6 p,
+.estimate_address_div .col-md-3 p {
+  /* margin-right: 10px; */
+  margin-bottom: 0;
+}
+
+.estimate_address_div .col-md-4 {
+  display: flex;
+  align-items: center;
+}
+
+.estimate_address_div p {
+  margin-right: 10px;
+  margin-bottom: 0;
 }

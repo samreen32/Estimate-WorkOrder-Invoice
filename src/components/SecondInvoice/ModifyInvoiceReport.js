@@ -117,6 +117,10 @@ function ModifyInvoiceReport() {
         setEstimateUpdateData({
           estimate_no: "",
           estimate_address: [""],
+          estimate_name: "",
+          estimate_zip: "",
+          estimate_city: "",
+          estimate_phone: "",
           estimate_custEmail: "",
           estimate_contractor: [""],
           estimate_date: "",
@@ -212,6 +216,10 @@ function ModifyInvoiceReport() {
     setEstimateUpdateData({
       estimate_no: "",
       estimate_address: [""],
+      estimate_name: "",
+      estimate_zip: "",
+      estimate_city: "",
+      estimate_phone: "",
       estimate_custEmail: "",
       estimate_contractor: [""],
       estimate_date: "",
@@ -267,7 +275,7 @@ function ModifyInvoiceReport() {
         ref={targetRef}
       >
         <>
-          <div className="row">
+          <div className="row mt-3">
             <div className="invoice-first-div col-10 px-5">
               <address className="px-3">
                 H FLOOR COVERING LLC <br />
@@ -298,72 +306,117 @@ function ModifyInvoiceReport() {
           <form>
             <div className="report-border">
               <div className="row estimate_address_div px-2">
-                <div className="col-md-6">
-                  <p>
-                    Name/Address <br />
-                    {[1, 2, 3].map(
-                      (fieldIndex) =>
-                        fieldIndex <= visibleAddressFields && (
-                          <React.Fragment key={`estimate_address_${fieldIndex}`}>
-                            <TextField
-                              id={`estimate_address_${fieldIndex}`}
-                              type="text"
-                              variant="standard"
-                              name={`estimate_address_${fieldIndex}`}
-                              style={{ width: "95%" }}
-                              value={
-                                estimateUpdateData.estimate_address[fieldIndex - 1] || ""
-                              }
-                              onChange={(e) => handleInputChange(undefined, e)}
-                              onKeyDown={(e) =>
-                                handleAddressEnterKey(e, fieldIndex)
-                              }
-                            />
-                            <br />
-                          </React.Fragment>
-                        )
-                    )}
-                  </p>
+                <div className="col-md-6" style={{ display: "flex" }}>
+                  <p>Customer Email</p>
+                  <TextField
+                    style={{ cursor: "pointer", width: "100%" }}
+                    id="estimate_custEmail"
+                    type="email"
+                    variant="standard"
+                    name="estimate_custEmail"
+                    value={estimateUpdateData.estimate_custEmail}
+                    onChange={(e) => handleInputChange(undefined, e)}
+                  />
                 </div>
-                <div className="col-md-3">
-                  <p>Customer Email<br />
-                    <TextField
-                      style={{ cursor: "pointer" }}
-                      id="estimate_custEmail"
-                      type="email"
-                      variant="standard"
-                      name="estimate_custEmail"
-                      value={estimateUpdateData.estimate_custEmail}
-                      onChange={(e) => handleInputChange(undefined, e)}
-                    />
-                  </p>
-                </div>
-                <div className="col-md-3">
+                <div className="col-md-6" style={{ display: "flex" }}>
                   <p>
-                    Contractor <br />
-                    {[1, 2, 3].map(
-                      (fieldIndex) =>
-                        fieldIndex <= visibleContractorFields && (
-                          <React.Fragment key={`estimate_contractor_${fieldIndex}`}>
-                            <TextField
-                              id={`estimate_contractor_${fieldIndex}`}
-                              type="text"
-                              variant="standard"
-                              name={`estimate_contractor_${fieldIndex}`}
-                              style={{ width: "100%" }}
-                              value={
-                                estimateUpdateData.estimate_contractor[fieldIndex - 1] || ""
-                              }
-                              onChange={(e) => handleInputChange(undefined, e)}
-                              onKeyDown={(e) =>
-                                handleContractorEnterKey(e, fieldIndex)
-                              }
-                            />
-                            <br />
-                          </React.Fragment>
-                        )
-                    )}
-                  </p>
+                    Contractor </p>&nbsp;&nbsp;&nbsp;
+                  {[1, 2, 3].map(
+                    (fieldIndex) =>
+                      fieldIndex <= visibleContractorFields && (
+                        <React.Fragment key={`estimate_contractor_${fieldIndex}`}>
+                          <TextField
+                            id={`estimate_contractor_${fieldIndex}`}
+                            type="text"
+                            variant="standard"
+                            name={`estimate_contractor_${fieldIndex}`}
+                            style={{ width: "100%" }}
+                            value={
+                              estimateUpdateData.estimate_contractor[fieldIndex - 1] || ""
+                            }
+                            onChange={(e) => handleInputChange(undefined, e)}
+                            onKeyDown={(e) =>
+                              handleContractorEnterKey(e, fieldIndex)
+                            }
+                          />
+                          <br />
+                        </React.Fragment>
+                      )
+                  )}
+                </div>
+              </div>
+              <div className="row estimate_address_div px-2">
+                <div className="col-md-6" style={{ display: "flex" }}>
+                  <p>Name</p>&nbsp;&nbsp;&nbsp;
+                  <TextField
+                    style={{ cursor: "pointer", width: "100%" }}
+                    id="estimate_name"
+                    type="email"
+                    variant="standard"
+                    name="estimate_name"
+                    value={estimateUpdateData.estimate_name}
+                    onChange={(e) => handleInputChange(undefined, e)}
+                  />
+                </div>
+                <div className="col-md-6" style={{ display: "flex" }}>
+                  <p>Address</p>&nbsp;&nbsp;&nbsp;
+                  {[1].map((fieldIndex) => (
+                    fieldIndex <= visibleAddressFields && (
+                      <React.Fragment key={`estimate_address_${fieldIndex}`}>
+                        <TextField
+                          id={`estimate_address_${fieldIndex}`}
+                          type="text"
+                          variant="standard"
+                          name={`estimate_address_${fieldIndex}`}
+                          value={estimateUpdateData.estimate_address[fieldIndex - 1] || ""}
+                          onChange={(e) => handleInputChange(undefined, e)}
+                          onKeyDown={(e) => handleAddressEnterKey(e, fieldIndex)}
+                          style={{ width: "100%" }}
+                        />
+
+                      </React.Fragment>
+                    )
+                  ))}
+                </div>
+              </div>
+              <div className="row estimate_address_div px-2">
+                <div className="col-md-4" style={{ display: "flex" }}>
+                  <p>City</p>&nbsp;&nbsp;&nbsp;
+                  <TextField
+                    style={{ cursor: "pointer", width: "70%" }}
+                    id="estimate_city"
+                    type="text"
+                    variant="standard"
+                    name="estimate_city"
+                    value={estimateUpdateData.estimate_city}
+
+                    onChange={(e) => handleInputChange(undefined, e)}
+                  />
+                </div>
+
+                <div className="col-md-3" style={{ display: "flex" }}>
+                  <p>Zip</p>&nbsp;&nbsp;&nbsp;
+                  <TextField
+                    style={{ cursor: "pointer", width: "60%" }}
+                    id="estimate_zip"
+                    type="text"
+                    variant="standard"
+                    name="estimate_zip"
+                    value={estimateUpdateData.estimate_zip}
+                    onChange={(e) => handleInputChange(undefined, e)}
+                  />
+                </div>
+                <div className="col-md-5" style={{ display: "flex" }}>
+                  <p>Phone</p>&nbsp;&nbsp;&nbsp;
+                  <TextField
+                    style={{ cursor: "pointer", width: "100%" }}
+                    id="estimate_phone"
+                    type="number"
+                    variant="standard"
+                    name="estimate_phone"
+                    value={estimateUpdateData.estimate_phone}
+                    onChange={(e) => handleInputChange(undefined, e)}
+                  />
                 </div>
               </div>
             </div>
@@ -435,10 +488,10 @@ function ModifyInvoiceReport() {
                   {" "}
                   <p>Description</p>
                 </div>
-                <div className="col-md-1" style={{ marginLeft: "-1.7%" }}>
+                <div className="col-md-1" style={{ marginLeft: "-3%" }}>
                   <p>Quantity</p>
                 </div>
-                <div className="col-md-1" style={{ marginLeft: "0.5%" }}>
+                <div className="col-md-1" style={{ marginLeft: "1%" }}>
                   <p>Cost</p>
                 </div>
                 <div className="col-md-2">
@@ -515,14 +568,14 @@ function ModifyInvoiceReport() {
                     <div className="col-md-9">
                       {/* <span>All jobs are completely guaranteed</span> */}
                     </div>
-                    <div className="col-md-3 px-5">
+                    <div className="col-md-3 px-5 pb-5">
                       <span>Total </span>$
                       {estimateUpdateData.estimate_total || ""}
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="row" style={{ fontSize: "23px", marginTop: "13%" }}>
+              <div className="row" style={{ fontSize: "23px" }}>
                 <div className="col-md-7">
                   <span>
                     <b>
