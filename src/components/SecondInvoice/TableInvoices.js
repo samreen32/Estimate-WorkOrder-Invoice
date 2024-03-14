@@ -221,19 +221,6 @@ export default function TableInvoices() {
                               {column.id === "estimate_total" && `$`}
                             </TableCell>
                           ))}
-
-                          {/* <TableCell align="left" style={{ display: "" }}>
-                            <Button
-                              variant="contained"
-                              color="primary"
-                              onClick={() =>
-                                handleEditInvoiceClick(invoice._id)
-                              }
-                              style={{ cursor: "pointer", padding: "6px 22px" }}
-                            >
-                              Send Invoice
-                            </Button>
-                          </TableCell> */}
                           <TableCell align="left" style={{ display: "" }}>
                             <Button
                               variant="contained"

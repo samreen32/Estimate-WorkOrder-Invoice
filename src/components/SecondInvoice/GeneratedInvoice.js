@@ -162,61 +162,62 @@ function GeneratedInvoice() {
             </div>
           </div>
           <div className="line mt-3"></div>
-          <div className="row item_details_div px-2">
-            <div className="col-md-2" style={{ fontSize: "22px" }}>
-              <p>Item</p>
+          <div style={{ width: "100%", height: "500px", overflowY: "auto", overflowX: "hidden" }}>
+            <div className="row item_details_div px-2">
+              <div className="col-md-2" style={{ fontSize: "22px" }}>
+                <p>Item</p>
 
-              {estimateData.items.map((item, index) => (
-                <span key={index}>
-                  {item.estimate_item}
-                  {index < estimateData.items.length - 1 && <br />}
-                </span>
-              ))}
-            </div>
-            <div className="col-md-4" style={{ fontSize: "22px" }}>
-              <p>Description</p>
+                {estimateData.items.map((item, index) => (
+                  <span key={index}>
+                    {item.estimate_item}
+                    {index < estimateData.items.length - 1 && <br />}
+                  </span>
+                ))}
+              </div>
+              <div className="col-md-4" style={{ fontSize: "22px" }}>
+                <p>Description</p>
 
-              {estimateData.items.map((item, index) => (
-                <span key={index}>
-                  {item.estimate_description}
-                  {index < estimateData.items.length - 1 && <br />}
-                </span>
-              ))}
-            </div>
-            <div className="col-md-2" style={{ fontSize: "22px" }}>
-              <p>Quantity</p>
+                {estimateData.items.map((item, index) => (
+                  <span key={index}>
+                    {item.estimate_description}
+                    {index < estimateData.items.length - 1 && <br />}
+                  </span>
+                ))}
+              </div>
+              <div className="col-md-2" style={{ fontSize: "22px" }}>
+                <p>Quantity</p>
 
-              {estimateData.items.map((item, index) => (
-                <span key={index}>
-                  {item.estimate_quantity}
-                  {index < estimateData.items.length - 1 && <br />}
-                </span>
-              ))}
-            </div>
-            <div className="col-md-2" style={{ fontSize: "22px" }}>
-              <p>Cost</p>
-              {estimateData.items.map((item, index) => (
-                <span key={index}>
-                  {item.estimate_cost}
-                  {index < estimateData.items.length - 1 && <br />}
-                </span>
-              ))}
-            </div>
-            <div className="col-md-2" style={{ fontSize: "22px" }}>
-              <p>Amount</p>
-              {estimateData.items.map((item, index) => (
-                <span key={index}>
-                  {`${"    "}$ ${(item.estimate_quantity || 0) * (item.estimate_cost || 0)
-                    }`}
-                  <br />
-                </span>
-              ))}
+                {estimateData.items.map((item, index) => (
+                  <span key={index}>
+                    {item.estimate_quantity}
+                    {index < estimateData.items.length - 1 && <br />}
+                  </span>
+                ))}
+              </div>
+              <div className="col-md-2" style={{ fontSize: "22px" }}>
+                <p>Cost</p>
+                {estimateData.items.map((item, index) => (
+                  <span key={index}>
+                    {item.estimate_cost}
+                    {index < estimateData.items.length - 1 && <br />}
+                  </span>
+                ))}
+              </div>
+              <div className="col-md-2" style={{ fontSize: "22px" }}>
+                <p>Amount</p>
+                {estimateData.items.map((item, index) => (
+                  <span key={index}>
+                    {`${"    "}$ ${(item.estimate_quantity || 0) * (item.estimate_cost || 0)
+                      }`}
+                    <br />
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
           <div className="invoice-last-div" style={{ marginTop: "" }}>
             <div className="row">
               <div className="col-md-9">
-                {/* <span>All jobs are completely guaranteed</span> */}
               </div>
               <div className="col-md-3 px-5 pb-5">
                 <span>Total </span> ${estimateData.estimate_total || ""}

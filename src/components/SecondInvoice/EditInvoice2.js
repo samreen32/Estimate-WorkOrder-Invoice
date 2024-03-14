@@ -499,79 +499,82 @@ function EditInvoice2() {
                 </div>
               </div>
 
-              <div className="row item_details_div px-2">
-                <React.Fragment>
-                  {estimateUpdateData.items.map((item, index) => (
-                    <div className="row">
-                      <div className="col-md-1">
-                        <TextField
-                          id="estimate_item"
-                          variant="standard"
-                          type="text"
-                          name="estimate_item"
-                          value={item.estimate_item}
-                          onChange={(e) => handleInputChange(index, e)}
-                        />
+              <div style={{ width: "100%", height: "500px", overflowY: "auto", overflowX: "hidden" }}>
+                <div className="row item_details_div px-2">
+                  <React.Fragment>
+                    {estimateUpdateData.items.map((item, index) => (
+                      <div className="row">
+                        <div className="col-md-1">
+                          <TextField
+                            id="estimate_item"
+                            variant="standard"
+                            type="text"
+                            name="estimate_item"
+                            value={item.estimate_item}
+                            onChange={(e) => handleInputChange(index, e)}
+                            style={{ width: "100%", marginTop: index === 0 ? "5px" : "26px" }}
+                          />
+                        </div>
+                        <div className="col-md-7">
+                          <TextField
+                            id="estimate_description"
+                            variant="standard"
+                            type="text"
+                            name="estimate_description"
+                            value={item.estimate_description}
+                            onChange={(e) => handleInputChange(index, e)}
+                            style={{ width: "100%", marginTop: index === 0 ? "5px" : "26px" }}
+                          />
+                        </div>
+                        <div className="col-md-1">
+                          <TextField
+                            id="estimate_quantity"
+                            variant="standard"
+                            type="number"
+                            name="estimate_quantity"
+                            value={item.estimate_quantity}
+                            onChange={(e) => handleInputChange(index, e)}
+                            style={{ width: "100%", marginTop: index === 0 ? "5px" : "26px" }}
+                          />
+                        </div>
+                        <div className="col-md-1">
+                          <TextField
+                            id="estimate_cost"
+                            variant="standard"
+                            type="text"
+                            name="estimate_cost"
+                            value={item.estimate_cost}
+                            onChange={(e) => handleInputChange(index, e)}
+                            style={{ width: "100%", marginTop: index === 0 ? "5px" : "26px" }}
+                          />
+                        </div>
+                        <div className="col-md-2">
+                          <TextField
+                            id="estimate_total"
+                            variant="standard"
+                            type="text"
+                            InputProps={{ disableUnderline: true }}
+                            style={{ width: "100%", marginTop: index === 0 ? "5px" : "26px" }}
+                            readonly
+                            value={`${" "}$ ${(item.estimate_quantity || 0) *
+                              (item.estimate_cost || 0)
+                              }`}
+                          />
+                        </div>
                       </div>
-                      <div className="col-md-7">
-                        <TextField
-                          id="estimate_description"
-                          variant="standard"
-                          type="text"
-                          name="estimate_description"
-                          value={item.estimate_description}
-                          onChange={(e) => handleInputChange(index, e)}
-                          style={{ width: "100%" }}
-                        />
-                      </div>
-                      <div className="col-md-1">
-                        <TextField
-                          id="estimate_quantity"
-                          variant="standard"
-                          type="number"
-                          name="estimate_quantity"
-                          value={item.estimate_quantity}
-                          onChange={(e) => handleInputChange(index, e)}
-                          style={{ width: "100%" }}
-                        />
-                      </div>
-                      <div className="col-md-1">
-                        <TextField
-                          id="estimate_cost"
-                          variant="standard"
-                          type="text"
-                          name="estimate_cost"
-                          value={item.estimate_cost}
-                          onChange={(e) => handleInputChange(index, e)}
-                        />
-                      </div>
-                      <div className="col-md-2 mt-3">
-                        <TextField
-                          id="estimate_total"
-                          variant="standard"
-                          type="text"
-                          InputProps={{ disableUnderline: true }}
-                          style={{ marginTop: "-13px" }}
-                          readonly
-                          value={`${" "}$ ${(item.estimate_quantity || 0) *
-                            (item.estimate_cost || 0)
-                            }`}
-                        />
-                      </div>
-                    </div>
-                  ))}
-                  <br />
-                </React.Fragment>
+                    ))}
+                    <br />
+                  </React.Fragment>
+                </div>
+              </div>
 
-                <div className="invoice-last-div">
-                  <div className="row">
-                    <div className="col-md-9">
-                      {/* <span>All jobs are completely guaranteed</span> */}
-                    </div>
-                    <div className="col-md-3 px-5 pb-5">
-                      <span>Total </span>$
-                      {estimateUpdateData.estimate_total || ""}
-                    </div>
+              <div className="invoice-last-div">
+                <div className="row">
+                  <div className="col-md-9">
+                  </div>
+                  <div className="col-md-3 px-5 pb-5">
+                    <span>Total </span>$
+                    {estimateUpdateData.estimate_total || ""}
                   </div>
                 </div>
               </div>

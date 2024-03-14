@@ -156,8 +156,12 @@ h3 {
 
 .css-1x51dt5-MuiInputBase-input-MuiInput-input,
 .css-mnn31 {
-  font-size: 22px !important;
+  font-size: 1.3rem !important;
 }
+
+/* .css-zrqpq1 {
+  font-size: 1.3rem !important;
+} */
 
 .line {
   /* margin-top: 3%; */
@@ -171,7 +175,7 @@ h3 {
 }
 
 .invoice-last-div {
-  margin-top: 40%;
+  margin-top: 10%;
   font-size: 24px;
 }
 
@@ -243,7 +247,8 @@ h3 {
 }
 
 .css-mnn31 {
-  height: 2.75em !important;
+  /* height: 1.75em !important; */
+  padding: 0px !important;
 }
 
 /* Recieve Payment */
