@@ -15,11 +15,12 @@ function HomeForm() {
   const [focusedField, setFocusedField] = useState(null);
   const [focusedContractorField, setFocusedContractorField] = useState(null);
 
-  /* Input field validation */
+
   const handleInputChange = (index, e) => {
     const { name, value } = e?.target || {};
 
     setEstimateData((prevData) => {
+
       if (index !== undefined) {
         const updatedItems = [...prevData.items];
         updatedItems[index] = {
@@ -72,9 +73,9 @@ function HomeForm() {
           };
         }
       }
-
     });
   };
+
 
   /* Endpoint integration */
   const handleCreateInvoice = async () => {
@@ -171,6 +172,7 @@ function HomeForm() {
     }
   }, [focusedContractorField]);
 
+
   const handleGenerateNew = () => {
     setEstimateData({
       estimate_no: "",
@@ -193,6 +195,30 @@ function HomeForm() {
       },
     });
     navigate("/");
+  };
+
+  function formatPhoneNumber(value) {
+    if (!value) return value;
+
+    const phoneNumber = value.replace(/[^\d]/g, '');
+    const phoneNumberLength = phoneNumber.length;
+
+    if (phoneNumberLength < 4) return phoneNumber;
+
+    if (phoneNumberLength < 7) {
+      return `${phoneNumber.slice(0, 3)}-${phoneNumber.slice(3)}`;
+    }
+
+    return `${phoneNumber.slice(0, 3)}-${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6, 10)}`;
+  }
+
+  const handlePhoneChange = (e) => {
+    const { name, value } = e.target;
+    const formattedPhoneNumber = formatPhoneNumber(value);
+    setEstimateData((prevData) => ({
+      ...prevData,
+      [name]: formattedPhoneNumber,
+    }));
   };
 
   return (
@@ -251,19 +277,19 @@ function HomeForm() {
         <form>
           <div className="report-border">
             <div className="row estimate_address_div px-2">
-              <div className="col-md-6" style={{ display: "flex" }}>
-                <p>Customer Email</p>
+              <div className="col-md-7" style={{ display: "flex" }}>
+                <p>Customer Name</p>&nbsp;&nbsp;&nbsp;
                 <TextField
-                  style={{ cursor: "pointer", width: "100%" }}
-                  id="estimate_custEmail"
+                  style={{ cursor: "pointer", width: "50%" }}
+                  id="estimate_name"
                   type="email"
                   variant="standard"
-                  name="estimate_custEmail"
-                  value={estimateData.estimate_custEmail}
+                  name="estimate_name"
+                  value={estimateData.estimate_name}
                   onChange={(e) => handleInputChange(undefined, e)}
                 />
               </div>
-              <div className="col-md-6" style={{ display: "flex" }}>
+              <div className="col-md-5" style={{ display: "flex" }}>
                 <p>
                   Contractor </p>&nbsp;&nbsp;&nbsp;
                 {[1, 2, 3].map(
@@ -275,7 +301,7 @@ function HomeForm() {
                           type="text"
                           variant="standard"
                           name={`estimate_contractor_${fieldIndex}`}
-                          style={{ width: "100%" }}
+                          style={{ width: "70%" }}
                           value={
                             estimateData.estimate_contractor[fieldIndex - 1] || ""
                           }
@@ -290,20 +316,9 @@ function HomeForm() {
                 )}
               </div>
             </div>
+
             <div className="row estimate_address_div px-2">
-              <div className="col-md-6" style={{ display: "flex" }}>
-                <p>Name</p>&nbsp;&nbsp;&nbsp;
-                <TextField
-                  style={{ cursor: "pointer", width: "100%" }}
-                  id="estimate_name"
-                  type="email"
-                  variant="standard"
-                  name="estimate_name"
-                  value={estimateData.estimate_name}
-                  onChange={(e) => handleInputChange(undefined, e)}
-                />
-              </div>
-              <div className="col-md-6" style={{ display: "flex" }}>
+              <div className="col-md-7" style={{ display: "flex" }}>
                 <p>Address</p>&nbsp;&nbsp;&nbsp;
                 {[1].map((fieldIndex) => (
                   fieldIndex <= visibleAddressFields && (
@@ -318,23 +333,48 @@ function HomeForm() {
                         onKeyDown={(e) => handleAddressEnterKey(e, fieldIndex)}
                         style={{ width: "100%" }}
                       />
-
                     </React.Fragment>
                   )
                 ))}
               </div>
+              <div className="col-md-5" style={{ display: "flex" }}>
+                <p>Email</p>
+                <TextField
+                  style={{ cursor: "pointer", width: "75%", marginLeft: "60px" }}
+                  id="estimate_custEmail"
+                  type="email"
+                  variant="standard"
+                  name="estimate_custEmail"
+                  value={estimateData.estimate_custEmail}
+                  onChange={(e) => handleInputChange(undefined, e)}
+                />
+              </div>
+
             </div>
+
             <div className="row estimate_address_div px-2">
+              <div className="col-md-5" style={{ display: "flex" }}>
+                <p>Phone</p>&nbsp;&nbsp;&nbsp;
+                <TextField
+                  style={{ cursor: "pointer", width: "55%" }}
+                  id="estimate_phone"
+                  type="text"
+                  variant="standard"
+                  name="estimate_phone"
+                  value={estimateData.estimate_phone}
+                  onChange={handlePhoneChange}
+
+                />
+              </div>
               <div className="col-md-4" style={{ display: "flex" }}>
                 <p>City</p>&nbsp;&nbsp;&nbsp;
                 <TextField
-                  style={{ cursor: "pointer", width: "70%" }}
+                  style={{ cursor: "pointer", width: "50%" }}
                   id="estimate_city"
                   type="text"
                   variant="standard"
                   name="estimate_city"
                   value={estimateData.estimate_city}
-
                   onChange={(e) => handleInputChange(undefined, e)}
                 />
               </div>
@@ -342,27 +382,16 @@ function HomeForm() {
               <div className="col-md-3" style={{ display: "flex" }}>
                 <p>Zip</p>&nbsp;&nbsp;&nbsp;
                 <TextField
-                  style={{ cursor: "pointer", width: "60%" }}
+                  style={{ cursor: "pointer", width: "40%" }}
                   id="estimate_zip"
-                  type="text"
+                  type="number"
                   variant="standard"
                   name="estimate_zip"
                   value={estimateData.estimate_zip}
                   onChange={(e) => handleInputChange(undefined, e)}
                 />
               </div>
-              <div className="col-md-5" style={{ display: "flex" }}>
-                <p>Phone</p>&nbsp;&nbsp;&nbsp;
-                <TextField
-                  style={{ cursor: "pointer", width: "100%" }}
-                  id="estimate_phone"
-                  type="number"
-                  variant="standard"
-                  name="estimate_phone"
-                  value={estimateData.estimate_phone}
-                  onChange={(e) => handleInputChange(undefined, e)}
-                />
-              </div>
+
             </div>
           </div>
 
@@ -421,17 +450,17 @@ function HomeForm() {
             </div>
             <div className="line"></div>
             <div className="row item_details_div px-2">
-              <div className="col-md-1">
+              <div className="col-md-2">
                 <span className="plus-icon" onClick={handleAddItem}>
                   <i className="fas fa-plus-circle fa-xl"></i>
                   &nbsp;<span className="items-span">Item</span>
                 </span>
               </div>
-              <div className="col-md-7">
+              <div className="col-md-6" style={{ marginLeft: "-7.5%" }}>
                 {" "}
                 <p>Description</p>
               </div>
-              <div className="col-md-1" style={{ marginLeft: "-1.7%" }}>
+              <div className="col-md-1" style={{ marginLeft: "6%" }}>
                 <p>Quantity</p>
               </div>
               <div className="col-md-1" style={{ marginLeft: "0.5%" }}>

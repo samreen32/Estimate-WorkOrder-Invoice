@@ -240,6 +240,31 @@ function EditInvoice() {
     navigate("/estimate_report");
   };
 
+  function formatPhoneNumber(value) {
+    if (!value) return value;
+
+    const phoneNumber = value.replace(/[^\d]/g, '');
+    const phoneNumberLength = phoneNumber.length;
+
+    if (phoneNumberLength < 4) return phoneNumber;
+
+    if (phoneNumberLength < 7) {
+      return `${phoneNumber.slice(0, 3)}-${phoneNumber.slice(3)}`;
+    }
+
+    return `${phoneNumber.slice(0, 3)}-${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6, 10)}`;
+  }
+
+  const handlePhoneChange = (e) => {
+    const { name, value } = e.target;
+    const formattedPhoneNumber = formatPhoneNumber(value);
+    setEstimateUpdateData((prevData) => ({
+      ...prevData,
+      [name]: formattedPhoneNumber,
+    }));
+  };
+
+
   return (
     <div id="invoice-generated mt-5">
       <div
@@ -307,19 +332,19 @@ function EditInvoice() {
           <form>
             <div className="report-border">
               <div className="row estimate_address_div px-2">
-                <div className="col-md-6" style={{ display: "flex" }}>
-                  <p>Customer Email</p>
+                <div className="col-md-7" style={{ display: "flex" }}>
+                  <p>Customer Name</p>&nbsp;&nbsp;&nbsp;
                   <TextField
-                    style={{ cursor: "pointer", width: "100%" }}
-                    id="estimate_custEmail"
+                    style={{ cursor: "pointer", width: "50%" }}
+                    id="estimate_name"
                     type="email"
                     variant="standard"
-                    name="estimate_custEmail"
-                    value={estimateUpdateData.estimate_custEmail}
+                    name="estimate_name"
+                    value={estimateUpdateData.estimate_name}
                     onChange={(e) => handleInputChange(undefined, e)}
                   />
                 </div>
-                <div className="col-md-6" style={{ display: "flex" }}>
+                <div className="col-md-5" style={{ display: "flex" }}>
                   <p>
                     Contractor </p>&nbsp;&nbsp;&nbsp;
                   {[1, 2, 3].map(
@@ -331,7 +356,7 @@ function EditInvoice() {
                             type="text"
                             variant="standard"
                             name={`estimate_contractor_${fieldIndex}`}
-                            style={{ width: "100%" }}
+                            style={{ width: "70%" }}
                             value={
                               estimateUpdateData.estimate_contractor[fieldIndex - 1] || ""
                             }
@@ -346,20 +371,9 @@ function EditInvoice() {
                   )}
                 </div>
               </div>
+
               <div className="row estimate_address_div px-2">
-                <div className="col-md-6" style={{ display: "flex" }}>
-                  <p>Name</p>&nbsp;&nbsp;&nbsp;
-                  <TextField
-                    style={{ cursor: "pointer", width: "100%" }}
-                    id="estimate_name"
-                    type="email"
-                    variant="standard"
-                    name="estimate_name"
-                    value={estimateUpdateData.estimate_name}
-                    onChange={(e) => handleInputChange(undefined, e)}
-                  />
-                </div>
-                <div className="col-md-6" style={{ display: "flex" }}>
+                <div className="col-md-7" style={{ display: "flex" }}>
                   <p>Address</p>&nbsp;&nbsp;&nbsp;
                   {[1].map((fieldIndex) => (
                     fieldIndex <= visibleAddressFields && (
@@ -374,23 +388,48 @@ function EditInvoice() {
                           onKeyDown={(e) => handleAddressEnterKey(e, fieldIndex)}
                           style={{ width: "100%" }}
                         />
-
                       </React.Fragment>
                     )
                   ))}
                 </div>
+                <div className="col-md-5" style={{ display: "flex" }}>
+                  <p>Email</p>
+                  <TextField
+                    style={{ cursor: "pointer", width: "75%", marginLeft: "60px" }}
+                    id="estimate_custEmail"
+                    type="email"
+                    variant="standard"
+                    name="estimate_custEmail"
+                    value={estimateUpdateData.estimate_custEmail}
+                    onChange={(e) => handleInputChange(undefined, e)}
+                  />
+                </div>
+
               </div>
+
               <div className="row estimate_address_div px-2">
+                <div className="col-md-5" style={{ display: "flex" }}>
+                  <p>Phone</p>&nbsp;&nbsp;&nbsp;
+                  <TextField
+                    style={{ cursor: "pointer", width: "55%" }}
+                    id="estimate_phone"
+                    type="text"
+                    variant="standard"
+                    name="estimate_phone"
+                    value={estimateUpdateData.estimate_phone}
+                    onChange={handlePhoneChange}
+
+                  />
+                </div>
                 <div className="col-md-4" style={{ display: "flex" }}>
                   <p>City</p>&nbsp;&nbsp;&nbsp;
                   <TextField
-                    style={{ cursor: "pointer", width: "70%" }}
+                    style={{ cursor: "pointer", width: "50%" }}
                     id="estimate_city"
                     type="text"
                     variant="standard"
                     name="estimate_city"
                     value={estimateUpdateData.estimate_city}
-
                     onChange={(e) => handleInputChange(undefined, e)}
                   />
                 </div>
@@ -398,27 +437,16 @@ function EditInvoice() {
                 <div className="col-md-3" style={{ display: "flex" }}>
                   <p>Zip</p>&nbsp;&nbsp;&nbsp;
                   <TextField
-                    style={{ cursor: "pointer", width: "60%" }}
+                    style={{ cursor: "pointer", width: "40%" }}
                     id="estimate_zip"
-                    type="text"
+                    type="number"
                     variant="standard"
                     name="estimate_zip"
                     value={estimateUpdateData.estimate_zip}
                     onChange={(e) => handleInputChange(undefined, e)}
                   />
                 </div>
-                <div className="col-md-5" style={{ display: "flex" }}>
-                  <p>Phone</p>&nbsp;&nbsp;&nbsp;
-                  <TextField
-                    style={{ cursor: "pointer", width: "100%" }}
-                    id="estimate_phone"
-                    type="number"
-                    variant="standard"
-                    name="estimate_phone"
-                    value={estimateUpdateData.estimate_phone}
-                    onChange={(e) => handleInputChange(undefined, e)}
-                  />
-                </div>
+
               </div>
             </div>
 
@@ -478,17 +506,17 @@ function EditInvoice() {
               <div className="line"></div>
 
               <div className="row item_details_div px-2">
-                <div className="col-md-1">
+                <div className="col-md-2">
                   <span className="plus-icon" onClick={handleAddItem}>
                     <i className="fas fa-plus-circle fa-xl"></i>
                     &nbsp;<span className="items-span">Item</span>
                   </span>
                 </div>
-                <div className="col-md-7">
+                <div className="col-md-6" style={{ marginLeft: "-7.5%" }}>
                   {" "}
                   <p>Description</p>
                 </div>
-                <div className="col-md-1" style={{ marginLeft: "-3%" }}>
+                <div className="col-md-1" style={{ marginLeft: "6%" }}>
                   <p>Quantity</p>
                 </div>
                 <div className="col-md-1" style={{ marginLeft: "1%" }}>
@@ -512,7 +540,7 @@ function EditInvoice() {
                             name="estimate_item"
                             value={item.estimate_item}
                             onChange={(e) => handleInputChange(index, e)}
-                             style={{ width: "100%", marginTop: index === 0 ? "5px" : "26px" }}
+                            style={{ width: "100%", marginTop: index === 0 ? "5px" : "26px" }}
                           />
                         </div>
                         <div className="col-md-7">
@@ -523,7 +551,7 @@ function EditInvoice() {
                             name="estimate_description"
                             value={item.estimate_description}
                             onChange={(e) => handleInputChange(index, e)}
-                             style={{ width: "100%", marginTop: index === 0 ? "5px" : "26px" }}
+                            style={{ width: "100%", marginTop: index === 0 ? "5px" : "26px" }}
                           />
                         </div>
                         <div className="col-md-1">
@@ -534,7 +562,7 @@ function EditInvoice() {
                             name="estimate_quantity"
                             value={item.estimate_quantity}
                             onChange={(e) => handleInputChange(index, e)}
-                             style={{ width: "100%", marginTop: index === 0 ? "5px" : "26px" }}
+                            style={{ width: "100%", marginTop: index === 0 ? "5px" : "26px" }}
                           />
                         </div>
                         <div className="col-md-1">
@@ -545,7 +573,7 @@ function EditInvoice() {
                             name="estimate_cost"
                             value={item.estimate_cost}
                             onChange={(e) => handleInputChange(index, e)}
-                             style={{ width: "100%", marginTop: index === 0 ? "5px" : "26px" }}
+                            style={{ width: "100%", marginTop: index === 0 ? "5px" : "26px" }}
                           />
                         </div>
                         <div className="col-md-2">
@@ -554,7 +582,7 @@ function EditInvoice() {
                             variant="standard"
                             type="text"
                             InputProps={{ disableUnderline: true }}
-                             style={{ width: "100%", marginTop: index === 0 ? "5px" : "26px" }}
+                            style={{ width: "100%", marginTop: index === 0 ? "5px" : "26px" }}
                             readonly
                             value={`${" "}$ ${(item.estimate_quantity || 0) * (item.estimate_cost || 0)}`}
                           />

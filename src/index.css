@@ -154,6 +154,14 @@ h3 {
   /* font-weight: 550; */
 }
 
+.css-zrqpq1 {
+  border-bottom: 1px solid black !important;
+}
+
+.css-zrqpq1:hover:not(.Mui-disabled, .Mui-error)::before {
+  border-bottom: 1px solid black !important;
+}
+
 .css-1x51dt5-MuiInputBase-input-MuiInput-input,
 .css-mnn31 {
   font-size: 1.3rem !important;
@@ -174,8 +182,12 @@ h3 {
   margin-top: 2%;
 }
 
+form {
+  margin-left: 25px !important;
+}
+
 .invoice-last-div {
-  margin-top: 10%;
+  margin-top: 15%;
   font-size: 24px;
 }
 
@@ -243,7 +255,7 @@ h3 {
   background-color: #673ab7;
   color: white;
   padding: 12px;
-  font-size: 20px;
+  font-size: 14px;
 }
 
 .css-mnn31 {
