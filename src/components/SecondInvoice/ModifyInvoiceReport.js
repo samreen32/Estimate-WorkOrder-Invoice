@@ -5,12 +5,13 @@ import TextField from "@mui/material/TextField";
 import { useLocation, useNavigate } from "react-router";
 import axios from "axios";
 import Swal from "sweetalert2";
-import { GET_ESTIMATE_INVOICE, UPDATE_ESTIMATE_INVOICE } from "../../Auth_API";
+import { GET_ESTIMATE_INVOICE, SEND_INVOICE_MAIL, UPDATE_ESTIMATE_INVOICE } from "../../Auth_API";
 import generatePDF from "react-to-pdf";
+import AppLoader from "../Loader/AppLoader";
 
 function ModifyInvoiceReport() {
   let navigate = useNavigate();
-  const { estimateUpdateData, setEstimateUpdateData } = UserLogin();
+  const { estimateUpdateData, setEstimateUpdateData, isLoading, setIsLoading } = UserLogin();
   const [visibleAddressFields, setVisibleAddressFields] = useState(1);
   const [visibleContractorFields, setVisibleContractorFields] = useState(1);
   const [focusedField, setFocusedField] = useState(null);
@@ -265,6 +266,47 @@ function ModifyInvoiceReport() {
     }));
   };
 
+  const [pdfFile, setPdfFile] = useState(null);
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const handleFileChange = (event) => {
+    setPdfFile(event.target.files[0]);
+  };
+  const toggleModal = () => {
+    setModalOpen(!modalOpen);
+  };
+
+  console.log(estimateUpdateData.estimate_custEmail, "estimateUpdateData.estimate_custEmail")
+
+  // Mail send endpoint
+  const handleSendMail = async (e) => {
+    try {
+      setIsLoading(true);
+      const formData = new FormData();
+      formData.append("estimate_custEmail", estimateUpdateData.estimate_custEmail);
+      formData.append("pdfFile", pdfFile);
+
+      const response = await axios.post(`${SEND_INVOICE_MAIL}`, formData);
+      console.log(response.data);
+      setIsLoading(false);
+      Swal.fire({
+        icon: "success",
+        title: "Success...",
+        text: "Invoice has been mailed to customer.",
+      });
+
+      setModalOpen(false);
+      // navigate("/customer_report");
+    } catch (error) {
+      console.error("Error sending email:", error.response.data.error);
+      setIsLoading(false);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Failed to send mail. Please try again later.",
+      });
+    }
+  };
 
   return (
     <div id="invoice-generated mt-5">
@@ -283,6 +325,14 @@ function ModifyInvoiceReport() {
         <div style={{ display: "flex" }}>
           <span onClick={handleUpdateInvoice} className="new-invoice-btn mx-3">
             Update Invoice
+          </span>
+          <span onClick={() => {
+            generatePDF(targetRef, { filename: "invoice.pdf" });
+            toggleModal();
+          }}
+            className="new-invoice-btn mx-3" style={{ background: "green" }}
+          >
+            Send Invoice
           </span>
           <span
             onClick={() => generatePDF(targetRef, { filename: "invoice.pdf" })}
@@ -596,7 +646,7 @@ function ModifyInvoiceReport() {
                 </div>
               </div>
 
-              <div className="invoice-last-div">
+              <div className="invoice-last-div" style={{ marginTop: "23%" }}>
                 <div className="row">
                   <div className="col-md-9">
                     {/* <span>All jobs are completely guaranteed</span> */}
@@ -636,6 +686,84 @@ function ModifyInvoiceReport() {
           </form>
         </>
       </div>
+
+      {/* Modal */}
+      <div
+        className={`modal fade ${modalOpen ? "show" : ""}`}
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden={!modalOpen}
+        style={{
+          display: modalOpen ? "block" : "none",
+          backgroundColor: "rgba(0, 0, 0, 0.5)",
+        }}
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">
+                Send Invoice To Your Customer
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+                onClick={toggleModal}
+              ></button>
+            </div>
+            <div class="modal-body">
+              <div className="row mt-4">
+                <div className="col-md-12">
+                  <label htmlFor="email">Email:</label>
+                  <TextField
+                    id="email"
+                    type="text"
+                    class="mt-2"
+                    variant="outlined"
+                    name="email"
+                    style={{ width: "100%" }}
+                    value={estimateUpdateData.estimate_custEmail}
+                    disabled
+                  />
+                </div>
+              </div>
+              <div className="row mt-4">
+                <div className="col-md-12">
+                  Upload Invoice:
+                  <br />
+                  <input
+                    type="file"
+                    accept=".pdf"
+                    onChange={handleFileChange}
+                    className="mt-3"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                style={{ background: "#1bac91", border: "none" }}
+                onClick={handleSendMail}
+              >
+                Send Mail
+              </button>
+            </div>
+          </div>
+        </div>
+        {isLoading ? <AppLoader /> : null}
+      </div>
+
     </div>
   );
 }

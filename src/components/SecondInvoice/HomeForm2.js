@@ -11,8 +11,7 @@ import axios from "axios";
 import { Button, Toolbar } from "@mui/material";
 import { useNavigate } from "react-router";
 import { UserLogin } from "../../context/AuthContext";
-import { DELETE_SPECIFIC_INVOICE, GET_All_INVOICES, SEND_ESTIMATE_MAIL } from "../../Auth_API";
-import Swal from "sweetalert2";
+import { DELETE_SPECIFIC_INVOICE, GET_All_INVOICES } from "../../Auth_API";
 
 export default function HomeForm2() {
   let navigate = useNavigate();
@@ -82,12 +81,10 @@ export default function HomeForm2() {
     { id: "estimate_no", label: "Invoice No", minWidth: 100 },
     { id: "estimate_project", label: "Project", minWidth: 100 },
     { id: "estimate_project_manager", label: "Project Manager", minWidth: 100 },
-    // { id: "estimate_custEmail", label: "Customer Email", minWidth: 100 },
     { id: "estimate_address", label: "Address", minWidth: 100 },
     { id: "invoice_date", label: "Invoice Date", minWidth: 100 },
     { id: "estimate_total", label: "Total", minWidth: 100 },
     { id: "edit", label: "Generate Invoice", minWidth: 100 },
-    { id: "send", label: "Send Mail", minWidth: 100 },
     { id: "delete", label: "Delete", minWidth: 100 },
   ];
 
@@ -126,48 +123,6 @@ export default function HomeForm2() {
     setInvoices(filteredInvoices);
   };
 
-  // Mail send endpoint
-  const handleSendMail = async (email_cust) => {
-    try {
-      const response = await axios.post(`${SEND_ESTIMATE_MAIL}`, {
-        estimate_custEmail: email_cust
-      });
-
-      if (response.status === 200) {
-        console.log("Email sent successfully.");
-        {
-          Swal.fire({
-            icon: "success",
-            title: "Success...",
-            text: "Invoice sent at customer mail.",
-          });
-          return;
-        }
-      } else {
-        console.error("Failed to send email.");
-        {
-          Swal.fire({
-            icon: "error",
-            title: "Error...",
-            text: "Invoice not send at customer mail.",
-          });
-          return;
-        }
-      }
-    } catch (error) {
-      console.error("Error sending email:", error.message);
-      {
-        Swal.fire({
-          icon: "error",
-          title: "Error...",
-          text: "Invoice not send at customer mail.",
-        });
-        return;
-      }
-    }
-  };
-
-  
   return (
     <div style={{ marginTop: "2%" }}>
       <div id="invoice-generated">
@@ -250,7 +205,7 @@ export default function HomeForm2() {
                           style={{ cursor: "pointer" }}
                         >
                           <TableCell align="left">{index + 1}</TableCell>
-                          {columns.slice(1, -3).map((column) => (
+                          {columns.slice(1, -2).map((column) => (
                             <TableCell key={column.id} align="left">
                               {column.id === "invoice_date" &&
                                 invoice[column.id]
@@ -263,7 +218,6 @@ export default function HomeForm2() {
                               {column.id === "estimate_total" && `$`}
                             </TableCell>
                           ))}
-
                           <TableCell align="left" style={{ display: "" }}>
                             <Button
                               variant="contained"
@@ -274,16 +228,7 @@ export default function HomeForm2() {
                               Generate
                             </Button>
                           </TableCell>
-                          <TableCell align="left" style={{ display: "" }}>
-                            <Button
-                              variant="contained"
-                              color="primary"
-                              onClick={() => handleSendMail(invoice.estimate_custEmail)}
-                              style={{ cursor: "pointer" }}
-                            >
-                              Send
-                            </Button>
-                          </TableCell>
+
                           <TableCell align="left">
                             <Button
                               variant="contained"

@@ -4,6 +4,7 @@ const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const [invoiceDetails, setInvoiceDetails] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [estimateData, setEstimateData] = useState({
     estimate_no: "",
     estimate_address: [""],
@@ -155,6 +156,7 @@ const AuthProvider = ({ children }) => {
   return (
     <AuthContext.Provider
       value={{
+        isLoading, setIsLoading,
         handleCheckChange,
         checkData,
         setCheckData,
